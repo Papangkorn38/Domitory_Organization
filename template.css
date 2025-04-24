@@ -108,12 +108,6 @@
   background-color: #21262c;
 }
 
-.sideBarLinksContainer li i {
-  cursor: pointer;
-  color: #ffffff;
-  font-size: var(--Big-font);
-}
-
 .sideBarLinksContainer li a {
   /* flex-shrink: 0; */
   font-weight: 500;
@@ -123,6 +117,9 @@
   color: #ffffff;
   font-size: var(--Normal-font);
   transition: opacity 0.4s ease;
+}
+.sideBarLinksContainer li img {
+  height: 20px;
 }
 
 .sideBar.collapsed .sideBarLinksContainer li a {
