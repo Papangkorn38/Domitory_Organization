@@ -61,6 +61,22 @@ app.post('/api/insert/room',(req,res) => {
     })
 })
 
+//insert admin
+app.post('/api/insert/admin',(req,res) => {
+    const { AID , AFname ,ALname ,AEmail ,APhone ,Username ,Password } = req.body;
+    const query = "INSERT INTO admin(AID , AFname ,ALname ,AEmail ,APhone ,Username ,Password) VALUES(?,?,?,?,?,?,?)";
+    connection.query(query,[AID , AFname ,ALname ,AEmail ,APhone ,Username ,Password],(error,result) => {
+        if(error){
+            console.error("Error to inserting data ",error);
+            res.status(500).json({error: "Internal server error"});
+        }
+        res.json({
+            msg: "Data inserted successfully",
+            insertedID: result.insertId
+        })
+    })
+})
+
 //อ่านข้อมูล client ทุกคน
 app.get('/read',async(req,res) => {
     try{
@@ -82,6 +98,89 @@ app.get('/read/single/:CID',async(req,res) => {
     const ID = req.params.CID;
     try{
         connection.query("SELECT * FROM client WHERE CID = ?", [ID], (error,results,fields)=>{
+            if(error){
+                console.log(error);
+                return res.status(400).send();
+            }
+            res.status(200).json(results)
+        })
+    }catch(error){
+        console.log(error);
+        return res.status(500).send();
+    }
+})
+
+//รายละเอียดลูกบ้าน
+app.get('/client/single/:RoomID',async(req,res) => {
+    const roomID = req.params.RoomID;
+    try{
+        connection.query("SELECT * FROM client WHERE RoomID = ?", [roomID], (error,results,fields)=>{
+            if(error){
+                console.log(error);
+                return res.status(400).send();
+            }
+            res.status(200).json(results)
+        })
+    }catch(error){
+        console.log(error);
+        return res.status(500).send();
+    }
+})
+
+//รายการบิลลูกบ้านทั้งหมด
+app.get('/bill',async(req,res) => {
+    try{
+        connection.query("SELECT * FROM bills", (error,results,fields)=>{
+            if(error){
+                console.log(error);
+                return res.status(400).send();
+            }
+            res.status(200).json(results)
+        })
+    }catch(error){
+        console.log(error);
+        return res.status(500).send();
+    }
+})
+
+//เพิ่มbillsเข้าระบบ
+app.post('/api/insert/bill',(req,res) => {
+    const { RoomID , AID , RoomCharge , TotalCharge , WaterBill , ElecticBill } = req.body;
+    const query = "INSERT INTO bills(RoomID , AID , RoomCharge , TotalCharge , WaterBill , ElecticBill) VALUES(?,?,?,?,?,?)";
+    connection.query(query,[RoomID , AID , RoomCharge , TotalCharge , WaterBill , ElecticBill],(error,result) => {
+        if(error){
+            console.error("Error to inserting data ",error);
+            res.status(500).json({error: "Internal server error"});
+        }
+        res.json({
+            msg: "Data inserted successfully",
+            insertedID: result.insertId
+        })
+    })
+})
+
+//ฟอร์มแจ้งบิลค่าใช้จ่ายจากRoomID
+app.get('/bill/single/:RoomID',async(req,res) => {
+    const roomID = req.params.RoomID;
+    try{
+        connection.query("SELECT * FROM bills WHERE RoomID = ?", [roomID], (error,results,fields)=>{
+            if(error){
+                console.log(error);
+                return res.status(400).send();
+            }
+            res.status(200).json(results)
+        })
+    }catch(error){
+        console.log(error);
+        return res.status(500).send();
+    }
+})
+
+//ฟอร์มแจ้งข้อมูลพัสดุ
+app.get('/parcel/single/:RoomID',async(req,res) => {
+    const roomID = req.params.RoomID;
+    try{
+        connection.query("SELECT * FROM parcel WHERE RoomID = ?", [roomID], (error,results,fields)=>{
             if(error){
                 console.log(error);
                 return res.status(400).send();
