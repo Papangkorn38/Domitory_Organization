@@ -94,6 +94,136 @@ app.get('/read/single/:CID',async(req,res) => {
     }
 })
 
+//ข้อมูลพัสดุผู้เช่า
+app.get('/read/parcel' ,async(req,res) => {
+    try{
+        connection.query("SELECT * FROM parcel", (error,results,fields)=>{
+            if(error){
+                console.log(error);
+                return res.status(400).send();
+            }
+            res.status(200).json(results)
+        })
+    }catch(error){
+        console.log(error);
+        return res.status(500).send();
+    }
+})
+
+//ข้อมูลผู้เช่า
+app.get('/read/client_info/:CID',async(req,res) => {
+    const ID = req.params.CID;
+    try{
+        connection.query("SELECT * FROM client WHERE CID = ?", [ID], (error,results,fields)=>{
+            if(error){
+                console.log(error);
+                return res.status(400).send();
+            }
+            if (results.length === 0) {
+                return res.status(404).json({ message: `Client with ID ${ID} not found` }); //ถ้าไม่เจอใครเลยพิมพ์ 400
+            }
+            res.status(200).json(results)
+        })
+    }catch(error){
+        console.log(error);
+        return res.status(500).send();
+    }
+})
+
+//แสดงบิลผู้เช่า
+app.get('/read/bill_info/:BID',async(req,res) => {
+    const ID = req.params.BID;
+    try{
+        connection.query("SELECT * FROM bills WHERE BID = ?", [ID], (error,results,fields)=>{
+            if(error){
+                console.log(error);
+                return res.status(400).send();
+            }
+            if (results.length === 0) {
+                return res.status(404).json({ message: `Bills with ID ${ID} not found` }); //ถ้าไม่เจอบืลพิมพ์ 400
+            }
+            res.status(200).json(results)
+        })
+    }catch(error){
+        console.log(error);
+        return res.status(500).send();
+    }
+})
+   
+//แสดง history bill
+app.get('/read/bill_his/:BID',async(req,res) => {
+    const ID = req.params.BID;
+    try{
+        connection.query("SELECT * FROM bills_history WHERE BID = ?", [ID], (error,results,fields)=>{
+            if(error){
+                console.log(error);
+                return res.status(400).send();
+            }
+            if (results.length === 0) {
+                return res.status(404).json({ message: `Bills with ID ${ID} not found` }); //ถ้าไม่เจอบืลพิมพ์ 400
+            }
+            res.status(200).json(results)
+        })
+    }catch(error){
+        console.log(error);
+        return res.status(500).send();
+    }
+})
+
+//แจ้งซ่อม
+app.post('/api/insert_repair',async(req,res) =>{
+    console.log('>>> req.body =', req.body);
+    const{ CID , AID , Topic ,Description ,R_date , Status , IMG} = req.body
+    const query = "Insert into request (CID , AID , Topic ,Description ,R_date , Status , IMG) VALUES(?,?,?,?,?,?,?)";
+    connection.query(query,[CID , AID , Topic ,Description ,R_date , Status , IMG],(error,result) => {
+        if(error){
+            console.error("Error to inserting data ",error);
+            return res.status(500).json({error: "Internal server error"});
+        }
+        res.json({
+            msg: "Data inserted successfully",
+            insertedID: result.insertId
+        })
+    })
+})
+
+//แสดง history request
+app.get('/read/req_his/:AID',async(req,res) => {
+    const ID = req.params.AID;
+    try{
+        connection.query("SELECT * FROM request WHERE AID = ?", [ID], (error,results,fields)=>{
+            if(error){
+                console.log(error);
+                return res.status(400).send();
+            }
+            if (results.length === 0) {
+                return res.status(404).json({ message: `Request with ID ${ID} not found` }); //ถ้าไม่เจอบืลพิมพ์ 400
+            }
+            res.status(200).json(results)
+        })
+    }catch(error){
+        console.log(error);
+        return res.status(500).send();
+    }
+})
+
+//ชำระค่าเช่า
+app.post('/api/insert_slip',async(req,res) =>{
+    console.log('>>> req.body =', req.body);
+    const{ SID , RoomID , IMG} = req.body
+    const query = "Insert into slip (SID , RoomID , IMG) VALUES(?,?,?)";
+    connection.query(query,[SID , RoomID , IMG],(error,result) => {
+        if(error){
+            console.error("Error to inserting data ",error);
+            return res.status(500).json({error: "Internal server error"});
+        }
+        res.json({
+            msg: "Data inserted successfully",
+            insertedID: result.insertId
+        })
+    })
+})
+
 //มันจะแสดงต้องเปิดserver
 app.listen(port, () => {
     console.log(`Server is running on port : ${port}`);
