@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../admin_css/parcelDetail.css" />
+  <link
+  href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+  rel="stylesheet"
+/>
+  <title>Parcel Detail</title>
+</head>
+
+<body>
+  <div class="template">
+    <div class="sideBar collapsed">
+      <div class="closeOpenContainer">
+        <i class="bx bx-menu menuBtn"></i>
+        <i class="bx bx-x closeBtn hidden"></i>
+      </div>
+
+      <img src="../assets/dormLogo.png" alt="Dormitory Logo" class="sideBarDormLogo" />
+
+      <ul class="sideBarLinksContainer">
+        <li><i class="bx bxs-building"></i><a href="#">สถานะห้องพักรายเดือน</a></li>
+        <li><i class="bx bxs-folder"></i><a href="#">รายการบิลผู้เช่า</a></li>
+        <li><i class="bx bxs-spreadsheet"></i><a href="#">ฟอร์มแจ้งบิลค่าใช้จ่าย</a></li>
+        <li><i class="bx bxs-package"></i><a href="#">ฟอร์มแจ้งข้อมูลพัสดุ</a></li>
+        <li><i class="bx bx-history"></i><a href="#">ประวัติพัสดุผู้เช่า</a></li>
+        <li><i class="bx bxs-wrench"></i><a href="#">รายการแจ้งซ่อม</a></li>
+        <li><i class="bx bxs-receipt"></i><a href="#">ตรวจสอบสลิปผู้เช่า</a></li>
+      </ul>
+
+      <button class="logoutBtn hidden">Log Out</button>
+    </div>
+
+    <div class="contents">
+      <div class="header">
+        <img
+          src="../assets/dormLogo.png"
+          alt="Dormitory Logo"
+          class="headerDormLogo"
+        />
+        <div class="profile">
+          <img
+            src="../assets/Male User.png"
+            alt="Profile Image"
+            class="profileImg"
+          />
+          <p class="profileText">WELCOME BACK! <br />K. POMTHONG YAHUU</p>
+        </div>
+      </div>
+
+      <div class="titleContainer">
+        <img src="../img/Cardboard%20Box_reverse.png" alt="Box Reverse Icon" class="titleIcon">
+        <p class="title">รายการแจ้งข้อมูลพัสดุ</p>
+      </div>
+
+      <div class="mainContent">
+        <div class="parcelDetailContainer">
+          <div class="parcelDetailBody">
+            <div class="profileSection">
+              <img src="../assets/profile.png" alt="Profile" class="profileAvatar" />
+              <p class="profileRoom">A0002</p>
+            </div>
+
+            <div class="infoCard">
+              <div class="infoItem">
+                <label class="infoLabel">เลขห้อง</label>
+                <input class="infoInputGray" type="text" value="A0002" disabled />
+              </div>
+
+              <div class="infoItem">
+                <label class="infoLabel">วันรับพัสดุ</label>
+                <input class="infoInputWhite" type="text" value="29/04/2568" disabled />
+              </div>
+
+              <div class="infoItem">
+                <label class="infoLabel">รายละเอียดดูรูปภาพ</label>
+                <img src="../assets/parcel.png" alt="Parcel" class="parcelImage" />
+              </div>
+            </div>
+          </div>
+
+          <div class="backButtonContainer">
+            <a href="#" class="backButton">
+              <i class="bx bx-arrow-back"></i> ย้อนกลับ
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../javascript/template.js"></script>
+</body>
+</html>
