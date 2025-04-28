@@ -27,7 +27,6 @@
   flex-direction: column;
   align-items: center;
   transition: 0.4s ease;
-  /* border: 1px solid red; */
 }
 
 .sideBar.collapsed {
@@ -35,7 +34,6 @@
 }
 
 .closeOpenContainer {
-  /* border: 1px solid #ffffff; */
   display: flex;
   align-items: center;
   justify-content: end;
@@ -74,7 +72,6 @@
   width: 120px;
   margin-bottom: 40px;
   transition: opacity 0.4s ease;
-  /* border: 1px solid #ffffff; */
 }
 
 .sideBar.collapsed .sideBarDormLogo {
@@ -82,7 +79,6 @@
 }
 
 .sideBarLinksContainer {
-  /* border: 1px solid #ffffff; */
   display: flex;
   flex-direction: column;
   list-style: none;
@@ -101,7 +97,6 @@
   padding: 8px;
   width: 100%;
   transition: background-color 0.5s ease;
-  /* border: 1px solid #ffffff; */
 }
 
 .sideBarLinksContainer li:hover {
@@ -115,7 +110,6 @@
 }
 
 .sideBarLinksContainer li a {
-  /* flex-shrink: 0; */
   font-weight: 500;
   white-space: nowrap;
   overflow: hidden;
@@ -160,12 +154,14 @@
   justify-content: space-between;
   align-items: center;
   padding: 20px 30px;
-  /* border: 1px solid red; */
+  /* เพิ่ม height จากตอนแรกที่ไม่มี*/
+  height: 20vh;
 }
 
 .headerDormLogo {
-  width: 8%;
-  height: 8%;
+  /* แก้จาก width(8%) กับ height(8%) เป็น width(110px) กับ height(96px)*/
+  width: 110px;
+  height: 96px;
 }
 
 .profile {
@@ -194,7 +190,8 @@
   gap: 15px;
   padding: 0 30px;
   width: 100%;
-  height: 9%;
+  /* แก้จาก 9% เป็น 10vh */
+  height: 10vh;
   background-color: #f1f1f1;
 }
 
