@@ -195,18 +195,127 @@
   background-color: #f1f1f1;
 }
 
-
 .titleContainer i {
   font-size: var(--Huge-font);
 }
 
 .title {
   font-size: var(--Big-font);
-  color :rgba(9, 30, 66, 0.25) ;
+}
+
+/* User_Parcel information_notification_form.css start */
+
+.userSection {
+  display: flex;
+  gap: 20px;
+  padding: 30px;
+  flex-wrap: wrap;
+  align-items: flex;
+}
+
+.Userimg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 180px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  margin-right: 100px;
+}
+
+.user-id-box {
+  margin-top: -50px;
+  margin-left: 50px;
+  font-size: 25px;
+  font-weight: normal;
+  color: #274663;
+  text-align: center;
+  border-radius: 6px;
+}
+
+.A002UserImg {
+  width: 130px;
+  height: 1300px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin: 0% 50px 75px 100px;
+}
+
+.userFormContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background: #f0f0f0;
+    padding: 30px;
+    border-radius: 10px;
+    font-size: 15px;
+    width: 100%;
+    max-width: 1200px; 
+  }
+
+.user-id {
+  font-size: 18px;
+  font-weight: bold;
+  color: #1c2e4a;
+}
+
+.userFormContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.formGroup {
+  display: flex;
+  align-items: center; 
+  gap: 30px;
+}
+
+.formGroup label {
+  min-width: 150px;
+  font-weight: normal;
+  margin-bottom: 3px;
+  align-items: flex-start;
+}
+
+input[type="text"] {
+  padding: 10px;
+  border-radius: 6px;
+  border: 0px solid #ccc;
+  background-color: #fff;
+}
+
+.upload-box {
+  width: 500px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border: 2px dashed #aaa;
+  text-align: center;
+  border-radius: 6px;
+  color: #888;
+  font-size: px;
+}
+
+.submit-btn {
+  margin-top: 20px;
+  margin-left: 250px;
+  padding: 12px 24px;
+  background-color: #1c2e4a;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  align-self: flex-start;
+}
+
+.submit-btn:hover {
+  background-color: #314a75;
 }
 
 
-.userFormContainer{
-  width: 1133;
-  height: 738;
-}
