@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/User_bill_history.css" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <title>Bill History</title>
+  </head>
+  <body>
+    <div class="template">
+      <div class="sideBar collapsed">
+        <div class="closeOpenContainer">
+          <i class="bx bx-menu menuBtn"></i>
+          <i class="bx bx-x closeBtn hidden"></i>
+        </div>
+
+        <img
+          src="../assets/dormLogo.png"
+          alt="Dormitory Logo"
+          class="sideBarDormLogo"
+        />
+        <!--แถบสีฟ้าซ้ายมือ-->
+        <ul class="sideBarLinksContainer">
+          <li>
+            <img src="../img/Building.png" alt=""><a href="#">สถานะห้องพักรายเดือน</a>
+          </li>
+          <li><img src="../img/Folder.png" alt=""><a href="#">รายการบิลผู้เช่า</a></li>
+          <li>
+            <img src="../img/Bill.png" alt=""><a href="#">ฟอร์มเเจ้งบิลค่าใช้จ่าย</a>
+          </li>
+          <li>
+            <img src="../img/Cardboard Box.png" alt=""hei><a href="#">ฟอร์มเเจ้งข้อมูลพัสดุ</a>
+          </li>
+          <li>
+            <img src="../img/file-tray-sharp.png" alt=""><a href="#">ประวิติพัสดุผู้เช่า</a>
+          </li>
+          <li><img src="../img/Maintenance.png" alt=""><a href="#">รายการแจ้งซ่อม</a></li>
+          <li>
+            <img src="../img/Vector.png" alt=""><a href="#">ตรวจสอบสลิปผู้เช่า</a>
+          </li>
+        </ul>
+
+        <button class="logoutBtn hidden">Log Out</button>
+      </div>
+
+      <div class="contents">
+        <div class="header">
+          <img
+            src="../assets/dormLogo.png"
+            alt="Dormitory Logo"
+            class="headerDormLogo"
+          />
+          <div class="profile">
+            <img
+              src="../assets/Male User.png"
+              alt="Profile Image"
+              class="profileImg"
+            />
+            <p class="profileText">WELCOME BACK! <br />K. SOMPONG LUMKEN</p>
+          </div>
+        </div>
+        <div class="titleContainer">
+          <!--โลโก้ของแต่ละหัวข้อ-->
+          <img src="../img/Folder_reverse.png" alt=""><!--โลโก้สีกรมจะมีชื่อว่า reverse ต่อท้ายนะ-->
+          <p class="title">ประวัติบิลค่าใช้จ่าย</p>
+        </div>
+        <!--เพิ่มเนื้อหาตรงนี้นะ(mainContent)-->
+      <div class="mainContent">
+        <div class="topSection">
+          <div class="profileSection">
+            <img src="../assets/profile.png" alt="Profile" class="profileAvatar" />
+            <p class="profileRoom">A0002</p>
+          </div>
+        
+          <div class="bill-control-section">
+            <label for="itemsPerPage">แสดง</label>
+            <select id="itemsPerPage">
+              <option value="2">2</option>
+            </select>
+            <label>รายการ</label>
+          </div>
+        
+          <div class="bill-table-section">
+            <table class="bill-table">
+              <thead>
+                <tr>
+                  <th>เลขห้อง</th>
+                  <th>รอบบิล</th>
+                  <th>ค่าเช่า</th>
+                  <th>ค่าน้ำ</th>
+                  <th>ค่าไฟ</th>
+                  <th>รวม</th>
+                  <th>สถานะ</th>
+                  <th>วันที่ชำระ</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>A0002</td>
+                  <td>27-02-2025</td>
+                  <td>6500</td>
+                  <td>220</td>
+                  <td>1350</td>
+                  <td>8070</td>
+                  <td>ชำระแล้ว</td>
+                  <td>28/02/2025</td>
+                </tr>
+                <tr>
+                  <td>A0002</td>
+                  <td>27-01-2025</td>
+                  <td>6500</td>
+                  <td>120</td>
+                  <td>1200</td>
+                  <td>7820</td>
+                  <td>ชำระแล้ว</td>
+                  <td>30/01/2025</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="back-button">
+             <a href="#" class="back-link">
+               <img src="../img/Back_To_reverse.png" alt="ย้อนกลับ" class="back-icon" />
+               ย้อนกลับ
+             </a>
+           </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../javascript/template.js"></script>
+</body>
+</html>
