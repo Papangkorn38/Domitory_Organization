@@ -46,14 +46,14 @@ app.post('/request', upload.single('IMG'), (req, res) => {
         console.log("no file upload");
         return res.status(400).send("No file uploaded");
     } else {
-        const {CID,AID,Topic,Description} = req.body;
+        const {RoomID,AID,Topic,Description} = req.body;
         // ดึงชื่อไฟล์จาก req.file.filename (หรือ req.file.path ตามการตั้งค่า multer)
         const uploadedFileName = req.file.filename;
         // หรือ const uploadedFilePath = req.file.path;
 
-        const inserDATA = "INSERT INTO request(CID,AID,Topic,Description,IMG) VALUES(?,?,?,?,?)";
+        const inserDATA = "INSERT INTO request(RoomID,AID,Topic,Description,IMG) VALUES(?,?,?,?,?)";
         // ใช้ uploadedFileName (หรือ uploadedFilePath) แทน req.body.IMG
-        connection.query(inserDATA, [CID,AID,Topic,Description,uploadedFileName], (error, result) => {
+        connection.query(inserDATA, [RoomID,AID,Topic,Description,uploadedFileName], (error, result) => {
             if (error) {
                 console.error(error);
                 res.status(500).send("Database error");
@@ -442,6 +442,24 @@ app.get('/api/read/parcel/:RoomID',async(req,res) => {
     }
 })
 
+//อ่านข้อมูล parcel 1 คนดูจาก Status
+app.get('/api/read/parcel/:RoomID/:Status',async(req,res) => {
+    const status = req.params.Status;
+    const roomID = req.params.RoomID;
+    try{
+        connection.query("SELECT * FROM parcel WHERE Status = ? AND RoomID = ? ", [status,roomID], (error,results,fields)=>{
+            if(error){
+                console.log(error);
+                return res.status(400).send();
+            }
+            res.status(200).json(results)
+        })
+    }catch(error){
+        console.log(error);
+        return res.status(500).send();
+    }
+})
+
 //อ่านข้อมูล slip ทุกคน
 app.get('/api/read/slip',async(req,res) => {
     try{
@@ -571,6 +589,44 @@ app.post('/api/login/admin',async(req,res) => {
                 return res.json({status:'error',message:'error to login'})
             }
             //res.status(200).json(results)
+        })
+    }catch(error){
+        console.log(error);
+        return res.status(500).send();
+    }
+})
+
+//อัปเดต Status ของ request
+app.patch('/api/update/request/:roomid',async(req,res) => {
+    const roomID = req.params.roomid;
+    const { Status } = req.body;
+    const query = "UPDATE request SET Status = ? WHERE RoomID = ?"
+    try{
+        connection.query(query, [Status,roomID], (error,results,fields)=>{
+            if(error){
+                console.log(error);
+                return res.status(400).send();
+            }
+            res.status(200).json(results)
+        })
+    }catch(error){
+        console.log(error);
+        return res.status(500).send();
+    }
+})
+
+//อัปเดต Status ของ parcel
+app.patch('/api/update/parcel/:roomid',async(req,res) => {
+    const roomID = req.params.roomid;
+    const { Status } = req.body;
+    const query = "UPDATE parcel SET Status = ? WHERE RoomID = ?"
+    try{
+        connection.query(query, [Status,roomID], (error,results,fields)=>{
+            if(error){
+                console.log(error);
+                return res.status(400).send();
+            }
+            res.status(200).json(results)
         })
     }catch(error){
         console.log(error);
