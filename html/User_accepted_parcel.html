@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/User_parcel.css" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <title>Parcel Receiving</title>
+  </head>
+  <body>
+    <div class="template">
+      <div class="sideBar collapsed">
+        <div class="closeOpenContainer">
+          <i class="bx bx-menu menuBtn"></i>
+          <i class="bx bx-x closeBtn hidden"></i>
+        </div>
+
+        <img
+          src="../assets/dormLogo.png"
+          alt="Dormitory Logo"
+          class="sideBarDormLogo"
+        />
+        <!--แถบสีฟ้าซ้ายมือ-->
+        <ul class="sideBarLinksContainer">
+          <li>
+            <img src="../img/Building.png" alt=""><a href="#">สถานะห้องพักรายเดือน</a>
+          </li>
+          <li><img src="../img/Folder.png" alt=""><a href="#">รายการบิลผู้เช่า</a></li>
+          <li>
+            <img src="../img/Bill.png" alt=""><a href="#">ฟอร์มเเจ้งบิลค่าใช้จ่าย</a>
+          </li>
+          <li>
+            <img src="../img/Cardboard Box.png" alt=""hei><a href="#">ฟอร์มเเจ้งข้อมูลพัสดุ</a>
+          </li>
+          <li>
+            <img src="../img/file-tray-sharp.png" alt=""><a href="#">ประวิติพัสดุผู้เช่า</a>
+          </li>
+          <li><img src="../img/Maintenance.png" alt=""><a href="#">รายการแจ้งซ่อม</a></li>
+          <li>
+            <img src="../img/Vector.png" alt=""><a href="#">ตรวจสอบสลิปผู้เช่า</a>
+          </li>
+        </ul>
+
+        <button class="logoutBtn hidden">Log Out</button>
+      </div>
+
+      <div class="contents">
+        <div class="header">
+          <img
+            src="../assets/dormLogo.png"
+            alt="Dormitory Logo"
+            class="headerDormLogo"
+          />
+          <div class="profile">
+            <img
+              src="../assets/profile2.jpeg"
+              alt="Profile Image"
+              class="profileImg"
+            />
+            <p class="profileText">Welcome Back! <br />Plakaow</p>
+          </div>
+        </div>
+        <div class="titleContainer">
+          <!--โลโก้ของแต่ละหัวข้อ-->
+          <img src="../img/Bill_reverse.png" alt=""><!--โลโก้สีกรมจะมีชื่อว่า reverse ต่อท้ายนะ-->
+          <p class="title">รายการแจ้งข้อมูลพัสดุ</p>
+        </div>
+        <!--เพิ่มเนื้อหาตรงนี้นะ(mainContent)-->
+        <div class="mainContent">
+            <div class="parcelLayout">
+                <!-- Left Profile -->
+                <div class="parcelProfile">
+                  <img src="../img/profile.png" alt="Profile" class="parcelAvatar" />
+                  <div class="parcelRoomID">A0002</div>
+                  <button class="btn-outline">พัสดุยังไม่ได้รับ</button>
+                  <button class="btn-solid">ได้รับพัสดุ</button>
+                </div>
+              
+                <!-- Right Parcel List -->
+                <div class="parcelList">
+                  <div class="parcelItem">
+                    <img src="../img/parcel1.jpg" alt="Parcel 1" class="parcelImage" />
+                    <div class="parcelDetail">
+                      <div><strong>A0002</strong></div>
+                      <div>20/04/2568</div>
+                      <div>14:00 AM</div>
+                    </div>
+                  </div>
+              
+                  <div class="parcelItem">
+                    <img src="../img/parcel2.jpg" alt="Parcel 2" class="parcelImage" />
+                    <div class="parcelDetail">
+                      <div><strong>A0002</strong></div>
+                      <div>19/04/2568</div>
+                      <div>13:00 AM</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+        </div>
+    </div>
+    <script src="../javascript/template.js"></script>
+  </body>
+</html>
+<!-- TEst -->
