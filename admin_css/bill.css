@@ -150,6 +150,8 @@
 .contents {
   width: 100%;
   height: 100vh;
+  /* add overflow-y */
+  overflow-y: scroll;
 }
 
 .header {
@@ -157,7 +159,8 @@
   justify-content: space-between;
   align-items: center;
   padding: 20px 30px;
-  height: 20vh;
+  /* remove height */
+  /* height: 20vh; */
 }
 
 .headerDormLogo {
@@ -189,9 +192,9 @@
   display: flex;
   align-items: center;
   gap: 15px;
-  padding: 0 30px;
+  /* Change Padding */
+  padding: 10px 30px;
   width: 100%;
-  height: 10vh;
   background-color: #f1f1f1;
 }
 
@@ -203,10 +206,11 @@
   font-size: var(--Big-font);
 }
 
-.mainContent {
+/* Remove mainContent */
+/* .mainContent {
   height: 70vh;
   overflow-y: scroll;
-}
+} */
 
 /* Css Bill*/
 .billTable {
