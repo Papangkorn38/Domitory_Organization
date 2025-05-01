@@ -526,6 +526,58 @@ app.get('/api/read/request/:RoomID/:Status',async(req,res) => {
     }
 })
 
+//login client
+app.post('/api/login/client',async(req,res) => {
+    const {Username,Password} = req.body;
+    try{
+        connection.query("SELECT * FROM client WHERE Username = ?", [Username], (error,results,fields)=>{
+            if(error){
+                console.log(error);
+                return res.status(400).send();
+            }
+            //ถ้าไม่เจอ user
+            if(results.length == 0){
+                return res.json({status:'error',message:'user not found'})
+            }
+            //ถ้าเจอและรหัสถูก
+            if(Password == results[0].Password){
+                return res.json({status:'ok',message:'login success'})
+            }else{
+                return res.json({status:'error',message:'error to login'})
+            }
+            //res.status(200).json(results)
+        })
+    }catch(error){
+        console.log(error);
+        return res.status(500).send();
+    }
+})
+
+//login admin
+app.post('/api/login/admin',async(req,res) => {
+    const {Username,Password} = req.body;
+    try{
+        connection.query("SELECT * FROM admin WHERE Username = ?", [Username], (error,results,fields)=>{
+            if(error){
+                console.log(error);
+                return res.status(400).send();
+            }
+            if(results.length == 0){
+                return res.json({status:'error',message:'user not found'})
+            }
+            if(Password == results[0].Password){
+                return res.json({status:'ok',message:'login success'})
+            }else{
+                return res.json({status:'error',message:'error to login'})
+            }
+            //res.status(200).json(results)
+        })
+    }catch(error){
+        console.log(error);
+        return res.status(500).send();
+    }
+})
+
 //มันจะแสดงต้องเปิดserver
 app.listen(port, () => {
     console.log(`Server is running on port : ${port}`);
