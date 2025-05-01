@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/User_maintenanceCreate.css" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <title>Maintenance Sent Requests</title>
+  </head>
+  <body>
+    <div class="template">
+      <div class="sideBar collapsed">
+        <div class="closeOpenContainer">
+          <i class="bx bx-menu menuBtn"></i>
+          <i class="bx bx-x closeBtn hidden"></i>
+        </div>
+
+        <img
+          src="../assets/dormLogo.png"
+          alt="Dormitory Logo"
+          class="sideBarDormLogo"
+        />
+        <!--แถบสีฟ้าซ้ายมือ-->
+        <ul class="sideBarLinksContainer">
+          <li>
+            <img src="../img/Building.png" alt=""><a href="#">สถานะห้องพักรายเดือน</a>
+          </li>
+          <li><img src="../img/Folder.png" alt=""><a href="#">รายการบิลผู้เช่า</a></li>
+          <li>
+            <img src="../img/Bill.png" alt=""><a href="#">ฟอร์มแจ้งบิลค่าใช้จ่าย</a>
+          </li>
+          <li>
+            <img src="../img/Cardboard Box.png" alt=""><a href="#">ฟอร์มแจ้งข้อมูลพัสดุ</a>
+          </li>
+          <li>
+            <img src="../img/file-tray-sharp.png" alt=""><a href="#">ประวัติพัสดุผู้เช่า</a>
+          </li>
+          <li><img src="../img/Maintenance.png" alt=""><a href="#">รายการแจ้งซ่อม</a></li>
+          <li>
+            <img src="../img/Vector.png" alt=""><a href="#">ตรวจสอบสลิปผู้เช่า</a>
+          </li>
+        </ul>
+
+        <button class="logoutBtn hidden">Log Out</button>
+      </div>
+
+      <div class="contents">
+        <div class="header">
+          <img
+            src="../assets/dormLogo.png"
+            alt="Dormitory Logo"
+            class="headerDormLogo"
+          />
+          <div class="profile">
+            <img
+              src="../assets/Male User.png"
+              alt="Profile Image"
+              class="profileImg"
+            />
+            <p class="profileText">WELCOME BACK! <br />K. SOMPONG LUMKEN</p>
+          </div>
+        </div>
+        <div class="titleContainer">
+          <!--โลโก้ของแต่ละหัวข้อ-->
+          <img src="../img/Maintenance_reverse.png" alt="" />
+          <p class="title">แจ้งซ่อม</p>
+        </div>
+        <div class="mainContent">
+          <div class="maintenance-content">
+            <div class="Userimg">
+              <img src="../assets/profile.png" class="A002UserImg" alt="Avatar" />
+              <div class="user-id-box">A0002</div>
+            </div>
+  
+            <!-- ใช้ wrapper ครอบ card + ปุ่ม -->
+            <div class="card-wrapper">
+              <div class="maintenance-card">
+                <div class="userFormContainer">
+                  <div class="formGroup">
+                    <label>หัวข้อ</label>
+                    <input type="text" placeholder="พิมพ์หัวข้อ" />
+                  </div>
+                  <div class="formGroup message-group">
+                    <label>ข้อความ</label>
+                    <textarea placeholder="พิมพ์ข้อความ"></textarea>
+                  </div>
+                  <div class="formGroup image-group">
+                    <label>รูปภาพ</label>
+                    <div class="upload-wrapper">
+                      <span>อัพโหลดรูป .png/.jpg</span>
+                      <input type="file" accept=".png,.jpg" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="action-container">
+                <button class="action-btn">ยืนยัน</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <script src="../javascript/template.js"></script>
+  </body>
+</html>
