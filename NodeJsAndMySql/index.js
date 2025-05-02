@@ -3,6 +3,7 @@ const express = require('express'); //ดึง express มาใช้
 const mysql = require('mysql2'); // ดึง mysql2 มาใช้
 const cors = require('cors');// ดึง cors มาใช้
 const multer  = require('multer') // ดึง multer มาใช้เพื่ออัพโหลดรูปภาพ
+const bcrypt = require('bcrypt');
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null, 'uploads')
@@ -262,21 +263,44 @@ app.get('/api/read/room/:RoomID',async(req,res) => {
     }
 })
 
-//อ่านข้อมูล room dashboard
-app.get('/api/read/count/room',async(req,res) => {
-    try{
-        connection.query("SELECT COUNT(*) FROM room GROUP BY Status", (error,results,fields)=>{
-            if(error){
-                console.log(error);
+// อ่านข้อมูล room พร้อม summary
+app.get('/api/read/count/room', async (req, res) => {
+    try {
+        // ดึงข้อมูลทั้งหมด
+        connection.query("SELECT * FROM room", (err1, roomResults) => {
+            if (err1) {
+                console.log(err1);
                 return res.status(400).send();
             }
-            res.status(200).json(results)
-        })
-    }catch(error){
+
+            // ดึงข้อมูลสรุปสถานะ
+            connection.query(`
+                SELECT
+                    COUNT(*) AS total,
+                    SUM(CASE WHEN status = 'Unoccupied' THEN 1 ELSE 0 END) AS do_count,
+                    SUM(CASE WHEN status = 'Unpaid' THEN 1 ELSE 0 END) AS doing_count,
+                    SUM(CASE WHEN status = 'Paid' THEN 1 ELSE 0 END) AS done_count
+                FROM room
+            `, (err2, summaryResults) => {
+                if (err2) {
+                    console.log(err2);
+                    return res.status(400).send();
+                }
+
+                // ตอบกลับด้วยข้อมูลทั้งหมด + สรุป
+                res.status(200).json({
+                    data: roomResults,
+                    summary: summaryResults[0]
+                });
+            });
+        });
+
+    } catch (error) {
         console.log(error);
         return res.status(500).send();
     }
-})
+});
+
 
 //insert admin
 app.post('/api/insert/admin',(req,res) => {
@@ -545,50 +569,43 @@ app.get('/api/read/request/:RoomID/:Status',async(req,res) => {
 })
 
 //login client
-app.post('/api/login/client',async(req,res) => {
+app.post('/api/login',async(req,res) => {
     const {Username,Password} = req.body;
     try{
-        connection.query("SELECT * FROM client WHERE Username = ?", [Username], (error,results,fields)=>{
+        connection.query("SELECT * FROM client WHERE Username = ?", [Username], (error,ClientResults,fields)=>{
             if(error){
                 console.log(error);
                 return res.status(400).send();
             }
             //ถ้าไม่เจอ user
-            if(results.length == 0){
-                return res.json({status:'error',message:'user not found'})
+            if(ClientResults.length > 0){
+                //ถ้าเจอและรหัสถูก
+                if(Password == ClientResults[0].Password){
+                    return res.json({status:'ok', role: "client",message:'login success'})
+                }else{
+                    return res.json({status:'error', role: "client",message:'wrong password'})
+                }
             }
-            //ถ้าเจอและรหัสถูก
-            if(Password == results[0].Password){
-                return res.json({status:'ok',message:'login success'})
-            }else{
-                return res.json({status:'error',message:'error to login'})
-            }
+            
             //res.status(200).json(results)
-        })
-    }catch(error){
-        console.log(error);
-        return res.status(500).send();
-    }
-})
-
-//login admin
-app.post('/api/login/admin',async(req,res) => {
-    const {Username,Password} = req.body;
-    try{
-        connection.query("SELECT * FROM admin WHERE Username = ?", [Username], (error,results,fields)=>{
-            if(error){
-                console.log(error);
-                return res.status(400).send();
-            }
-            if(results.length == 0){
-                return res.json({status:'error',message:'user not found'})
-            }
-            if(Password == results[0].Password){
-                return res.json({status:'ok',message:'login success'})
-            }else{
-                return res.json({status:'error',message:'error to login'})
-            }
-            //res.status(200).json(results)
+            connection.query("SELECT * FROM admin WHERE Username = ?", [Username], (error2,AdminResults,fields)=>{
+                if(error2){
+                    console.log(error2);
+                    return res.status(400).send();
+                }
+                //ถ้าไม่เจอ user
+                if(AdminResults.length > 0){
+                    //ถ้าเจอและรหัสถูก
+                    if(Password == AdminResults[0].Password){
+                        return res.json({status:'ok', role: "admin",message:'login success'})
+                    }else{
+                        return res.json({status:'error', role: "admin",message:'wrong password'})
+                    }
+                }
+                else{
+                    return res.json({status:'error',message:'user not found'})
+                }
+            })
         })
     }catch(error){
         console.log(error);
