@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <link href="../css/login.css"rel="stylesheet"type="text/css"/>
+    </head>
+    <body>
+        <!--ส่วนของเนื้อหาหลัก ไม่รวม footer-->
+        <div class="content">
+            <div class="container">
+                <!--container ที่เป็นรูปหอพัก-->
+                <div class="left-container"></div>
+                <!--container ที่เป็น field ไว้ใส่ข้อมูล login-->
+                <div class="right-container">
+                    <img src="../img/logo.png" class="logo" alt="logo">
+                    <!--แบบฟอร์มใช้กรอก Username-->
+                    <div class="form-group">
+                        <label for="username">USERNAME</label>
+                        <img src="../img/user.png" class="icon">
+                        <input type="text" id="username" placeholder="กรุณากรอกชื่อผู้ใช้/Username">
+                    </div>
+                    <!--แบบฟอร์มใช้กรอก Password-->
+                    <div class="form-group">
+                        <label for="password">PASSWORD</label>
+                        <img src="../img/password.png" class="icon">
+                        <input type="password" id="password" placeholder="กรุณากรอกรหัสผ่าน/Password">
+                    </div>
+                    <!--ปุ่มกด login-->
+                    <button type="login" onclick="login()">เข้าสู่ระบบ</button>
+                </div>
+            </div>
+        </div>
+        <!--footer ด้านล่าง-->
+        <footer class="footer">
+            <p>© 2025 Dormitory Organization | Developed by CS251 Database 1 Group 14</p>
+        </footer>
+    </body>
+    <script src="../javascript/login.js"></script>
+</html>

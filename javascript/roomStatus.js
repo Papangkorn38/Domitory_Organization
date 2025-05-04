@@ -23,18 +23,18 @@ var read_room = function(){
 
             for(let test of result.data){
                 var row = `
-                  <div class="room_box_flex_box" id="room_${test.RoomID}">${test.RoomID}</div>
+                  <a href="../html/U_User_Info.html?id=`+test.RoomID+`"><div class="room_box_flex_box" id="room_${test.RoomID}">${test.RoomID}</div></a>
                 `;
                 test_container.insertAdjacentHTML("beforeend",row);
                 var roomElement = document.getElementById(`room_${test.RoomID}`);
 
                 // ตรวจสอบว่า Status ของห้องคือ "Paid" หรือไม่
                 if (test.Status == 'Paid') {
-                    roomElement.style.backgroundColor = 'green'; // เปลี่ยนสีพื้นหลัง
+                    roomElement.style.backgroundColor = '#164D37'; // เปลี่ยนสีพื้นหลัง
                 }else if(test.Status == 'Unpaid'){
-                    roomElement.style.backgroundColor = 'red';
+                    roomElement.style.backgroundColor = '#800020';
                 }else{
-                    roomElement.style.backgroundColor = 'gray';
+                    roomElement.style.backgroundColor = '#979797';
                 }
               }
         })

@@ -457,7 +457,7 @@ app.get("/api/read/client/:RoomID", async (req, res) => {
   const roomID = req.params.RoomID;
   try {
     connection.query(
-      "SELECT * FROM client WHERE RoomID = ?",
+      "SELECT *,TIMESTAMPDIFF(YEAR, BirthDate, CURDATE()) AS age FROM client JOIN room ON client.RoomID = room.RoomID WHERE client.RoomID = ?",
       [roomID],
       (error, results, fields) => {
         if (error) {
@@ -722,7 +722,7 @@ app.post('/api/login',async(req,res) => {
                     }
                 }
                 else{
-                    return res.json({status:'error',message:'user not found'})
+                    return res.json({status:'user not found',message:'user not found'})
                 }
             })
         })
