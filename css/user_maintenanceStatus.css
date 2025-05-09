@@ -158,7 +158,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 20px 30px;
-
+  /* border: 1px solid red; */
 }
 
 .headerDormLogo {
@@ -184,17 +184,16 @@
   border-radius: 50%;
   width: 50px;
 }
+
 .titleContainer {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  background-color: #f1f1f1;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 5px -2px;
   display: flex;
   align-items: center;
   gap: 15px;
-  padding: 10px 30px;
+  padding: 0 30px;
   width: 100%;
-  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 5px -2px;
+  height: 9%;
+  background-color: #f1f1f1;
 }
 
 .titleContainer i {
@@ -203,168 +202,168 @@
 
 .title {
   font-size: var(--Big-font);
-  color: #223953;
 }
 
-/* .mainContent{
-  height: 70vh; 
-   overflow-y: scroll; 
-} */
-
-/* จัดเลย์เอาต์ avatar + form ให้อยู่ในแถวเดียว และชิดซ้าย */
-.maintenance-content {
-  display: flex;
-  align-items: flex-start;
-  gap: 40px;
-  max-width: 1140px;
-  margin: 20px 0 0 0;
-  padding: 0 30px;
-}
-
-/* Avatar และ ID */
-.Userimg {
-  flex: 0 0 200px;
+.mainContent {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  padding: 50px 0;
+  margin-bottom: 10px;
+  /* border: 1px solid #000000; */
 }
-.A002UserImg {
-  width: 130px;
-  height: 130px;
-  object-fit: cover;
-  border-radius: 10px;
-  background-color: #ddd;
+
+.maintenanceStatusContainer {
+  width: 80%;
+  padding: 20px;
+  background-color: #f1f1f1;
+  margin-bottom: 60px;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 5px -2px;
+  /* border: 1px solid red; */
 }
-.user-id-box {
-  font-size: var(--Big-font);
-  font-weight: bold;
-  color: #274663;
+
+.headerContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 10px;
+  /* border: 2px solid green; */
+}
+
+.statusHeader {
+  display: flex;
+  width: 100%;
+  padding-bottom: 20px;
+  /* border: 1px solid red; */
+}
+
+.pendingStatus,
+.successStatus {
+  width: 50%;
+  font-size: 20px;
   text-align: center;
+  cursor: pointer;
+  /* border: 1px solid blue; */
 }
 
-/* กรอบฟอร์ม (สีเทา) */
-.maintenance-card {
-  flex: 1;
-  background-color: #F5F5F5;
-  border-radius: 10px;
-  padding: 48px 32px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  margin: 0;
+.line1 {
+  width: 100%;
+  height: 4px;
+  background-color: #d9d9d9;
 }
 
-/* ฟอร์มภายใน card */
-.userFormContainer {
+.line2 {
+  width: 50%;
+  height: 4px;
+  background-color: #274663;
+}
+
+.allRequestContainer {
+  display: flex;
+  width: 100%;
+  /* border: 1px solid violet; */
+}
+
+.pendingRequestContainer,
+.successRequestContainer {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  align-items: center;
+  gap: 5px;
+  flex: 1;
+  height: 100%;
+  /* border: 1px solid #000000; */
 }
 
-/* แต่ละบรรทัด label + input/textarea */
-.formGroup {
+.pendingRequest,
+.successRequest {
+  width: 90%;
   display: flex;
   align-items: center;
-  gap: 16px;
+  /* padding: 5px 5px 0 5px; */
+  padding: 5px;
+  gap: 10px;
+  border-radius: 3px;
+  background-color: #d9d9d9;
+  /* border: 1px solid purple; */
 }
 
-.formGroup label {
-  flex: 0 0 80px;
-  font-weight: 500;
-  color: #000;
+.pendingImgContainer,
+.successImgContainer {
+  /* width: 30%; */
+  width: 100px;
+  height: 100px;
+  /* border: 1px solid red; */
 }
 
-.formGroup input {
-  flex: 1;
-  max-width: 300px;
-  padding: 10px 12px;
-  border: none;
-  border-radius: 6px;
-  background-color: #E0E0E0;
-  color: #666;
-}
-
-.formGroup textarea {
-  flex: 1;
-  height: 120px;
-  padding: 12px;
-  border: none;
-  border-radius: 6px;
-  background-color: #E0E0E0;
-  color: #666;
-  resize: none;
-}
-
-/* textarea / รูปภาพ */
-.formGroup.image-group {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.formGroup.image-group label {
-  flex: 0 0 80px;
-  color: #000;
-}
-
-.image-wrapper {
-  flex: 0 0 120px;
-  height: 120px;
-  background-color: #E0E0E0;
-  border-radius: 6px;
-  overflow: hidden;
-  box-sizing: border-box;
-  padding: 4px;
-}
-
-.image-wrapper img {
+.requestImg {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  border-radius: 4px;
+  /* border: 1px solid orange; */
 }
 
-/* ปุ่มย้อนกลับ อยู่ใต้ card */
-.back-button {
-  margin: 100px 0 40px 100px;
+.pendingDescriptionContainer,
+.successDescriptionContainer {
+  width: 70%;
+  /* border: 1px solid red; */
 }
 
-.back-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  color: #223953;
-  font-size: var(--Normal-font);
+.pendingDate,
+.pendingTopic,
+.pendingDescription,
+.successDate,
+.successDescription,
+.successTopic {
+  font-size: 14px;
+  /* border: 1px solid blue; */
 }
 
-.back-icon {
-  width: 24px;
-  height: 24px;
-}
-
-.back-link:hover {
-  text-decoration: underline;
-}
-
-.action-container {
-  margin-top: 24px; 
+.addRequest {
+  width: 25%;
   display: flex;
-  justify-content: flex-start; 
+  align-items: center;
+  justify-content: center;
+  background-color: #1c2c42;
+  border-radius: 8px;
+  gap: 10px;
+  padding: 8px 0;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 5px -2px;
+  cursor: pointer;
+  /* border: 1px solid #000000; */
 }
-  
-  .action-btn {
-    background-color: #223953;
-    color: #fff;
-    border: none;
-    border-radius: 6px;
-    padding: 7px 15px;
-    font-size: var(--Normal-font);
-    cursor: pointer;
-  }
-  .action-btn:hover {
-    background-color: #1a2f48;
-  }
-  .card-wrapper {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
+
+.addRequest p {
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.addRequest i {
+  padding: 1px;
+  border: none;
+  border-radius: 50%;
+  color: #1c2c42;
+  background-color: #ffffff;
+}
+
+.goBackBtn {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  text-decoration: none;
+  gap: 8px;
+  margin: 0 0 20px 30px;
+  /* border: 1px solid red; */
+}
+
+.goBackBtn i {
+  background-color: #1c2c42;
+  color: #ffffff;
+  padding: 2px;
+  border-radius: 50%;
+}
+
+.goBackBtn p {
+  color: #1c2c42;
+  font-size: 14px;
+}

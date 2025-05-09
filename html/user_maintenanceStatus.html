@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/user_maintenanceStatus.css" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <title>Maintenance Status</title>
+  </head>
+  <body>
+    <div class="template">
+      <div class="sideBar collapsed">
+        <div class="closeOpenContainer">
+          <i class="bx bx-menu menuBtn"></i>
+          <i class="bx bx-x closeBtn hidden"></i>
+        </div>
+
+        <img
+          src="../assets/dormLogo.png"
+          alt="Dormitory Logo"
+          class="sideBarDormLogo"
+        />
+        <!--แถบสีฟ้าซ้ายมือ-->
+        <ul class="sideBarLinksContainer">
+          <li>
+            <img src="../img/Building.png" alt="" /><a href="#"
+              >สถานะห้องพักรายเดือน</a
+            >
+          </li>
+          <li>
+            <img src="../img/Folder.png" alt="" /><a href="#"
+              >รายการบิลผู้เช่า</a
+            >
+          </li>
+          <li>
+            <img src="../img/Bill.png" alt="" /><a href="#"
+              >ฟอร์มเเจ้งบิลค่าใช้จ่าย</a
+            >
+          </li>
+          <li>
+            <img src="../img/Cardboard Box.png" alt="" hei /><a href="#"
+              >ฟอร์มเเจ้งข้อมูลพัสดุ</a
+            >
+          </li>
+          <li>
+            <img src="../img/file-tray-sharp.png" alt="" /><a href="#"
+              >ประวิติพัสดุผู้เช่า</a
+            >
+          </li>
+          <li>
+            <img src="../img/Maintenance.png" alt="" /><a href="#"
+              >รายการแจ้งซ่อม</a
+            >
+          </li>
+          <li>
+            <img src="../img/Vector.png" alt="" /><a href="#"
+              >ตรวจสอบสลิปผู้เช่า</a
+            >
+          </li>
+        </ul>
+
+        <button class="logoutBtn hidden">Log Out</button>
+      </div>
+
+      <div class="contents">
+        <div class="header">
+          <img
+            src="../assets/dormLogo.png"
+            alt="Dormitory Logo"
+            class="headerDormLogo"
+          />
+          <div class="profile">
+            <img
+              src="../img/Male_User.png"
+              alt="Profile Image"
+              class="profileImg"
+            />
+            <p class="profileText">Welcome Back! <br />Plakaow</p>
+          </div>
+        </div>
+        <div class="titleContainer">
+          <!--โลโก้ของแต่ละหัวข้อ-->
+          <img
+            src="../img/Maintenance_reverse.png"
+            alt=""
+          /><!--โลโก้สีกรมจะมีชื่อว่า reverse ต่อท้ายนะ-->
+          <p class="title">รายการเเจ้งซ่อม</p>
+        </div>
+        <!--เพิ่มเนื้อหาตรงนี้นะ(mainContent)-->
+        <div class="mainContent">
+          <div class="maintenanceStatusContainer">
+            <div class="headerContainer">
+              <div class="statusHeader">
+                <p class="pendingStatus">อยู่ระหว่างดำเนินการ</p>
+                <p class="successStatus">รายการที่สำเร็จ</p>
+              </div>
+              <div class="line1"></div>
+              <div class="line2"></div>
+            </div>
+            <div class="allRequestContainer">
+              <div class="pendingRequestContainer">
+                <div class="pendingRequest">
+                  <div class="pendingImgContainer">
+                    <img
+                      src="../img/brokenCeilingLamp.jpg"
+                      alt="Broken Ceiling Lamp"
+                      class="requestImg"
+                    />
+                  </div>
+                  <div class="pendingDescriptionContainer">
+                    <p class="pendingTopic">Topic : <span>ไฟเพดานเสีย</span></p>
+                    <p class="pendingDescription">
+                      Description : <span>หลอดไฟบริเวณห้องครัวเสีย</span>
+                    </p>
+                    <p class="pendingDate">
+                      Date : <span>30-03-2568 14:50:00</span>
+                    </p>
+                  </div>
+                </div>
+
+                <div class="pendingRequest">
+                  <div class="pendingImgContainer">
+                    <img
+                      src="../img/brokenCeilingLamp.jpg"
+                      alt="Broken Ceiling Lamp"
+                      class="requestImg"
+                    />
+                  </div>
+                  <div class="pendingDescriptionContainer">
+                    <p class="pendingTopic">Topic : <span>ไฟเพดานเสีย</span></p>
+                    <p class="pendingDescription">
+                      Description : <span>หลอดไฟบริเวณห้องครัวเสีย</span>
+                    </p>
+                    <p class="pendingDate">
+                      Date : <span>30-03-2568 14:50:00</span>
+                    </p>
+                  </div>
+                </div>
+
+                <div class="pendingRequest">
+                  <div class="pendingImgContainer">
+                    <img
+                      src="../img/brokenCeilingLamp.jpg"
+                      alt="Broken Ceiling Lamp"
+                      class="requestImg"
+                    />
+                  </div>
+                  <div class="pendingDescriptionContainer">
+                    <p class="pendingTopic">Topic : <span>ไฟเพดานเสีย</span></p>
+                    <p class="pendingDescription">
+                      Description : <span>หลอดไฟบริเวณห้องครัวเสีย</span>
+                    </p>
+                    <p class="pendingDate">
+                      Date : <span>30-03-2568 14:50:00</span>
+                    </p>
+                  </div>
+                </div>
+
+                <div class="pendingRequest">
+                  <div class="pendingImgContainer">
+                    <img
+                      src="../img/brokenCeilingLamp.jpg"
+                      alt="Broken Ceiling Lamp"
+                      class="requestImg"
+                    />
+                  </div>
+                  <div class="pendingDescriptionContainer">
+                    <p class="pendingTopic">Topic : <span>ไฟเพดานเสีย</span></p>
+                    <p class="pendingDescription">
+                      Description : <span>หลอดไฟบริเวณห้องครัวเสีย</span>
+                    </p>
+                    <p class="pendingDate">
+                      Date : <span>30-03-2568 14:50:00</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="successRequestContainer">
+                <div class="successRequest">
+                  <div class="successImgContainer">
+                    <img
+                      src="../img/brokenCeilingLamp.jpg"
+                      alt="Broken Ceiling Lamp"
+                      class="requestImg"
+                    />
+                  </div>
+                  <div class="successDescriptionContainer">
+                    <p class="successTopic">Topic : <span>ไฟเพดานเสีย</span></p>
+                    <p class="successDescription">
+                      Description : <span>หลอดไฟบริเวณห้องครัวเสีย</span>
+                    </p>
+                    <p class="successDate">
+                      Date : <span>30-03-2568 14:50:00</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="addRequest">
+            <p>เพิ่มคำร้องใหม่</p>
+            <i class="bx bx-plus"></i>
+          </div>
+        </div>
+
+        <a href="#" class="goBackBtn">
+          <i class="bx bx-chevron-left"></i>
+          <p>ย้อนกลับ</p>
+        </a>
+      </div>
+    </div>
+    <script src="../javascript/user_maintenanceStatus.js"></script>
+  </body>
+</html>
