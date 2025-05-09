@@ -1,3 +1,5 @@
+// const { request } = require("http");
+
 const sideBar = document.querySelector(".sideBar");
 const closeBtn = document.querySelector(".closeBtn");
 const menuBtn = document.querySelector(".menuBtn");
@@ -14,6 +16,7 @@ const successRequestContainer = document.querySelector(
   ".successRequestContainer"
 );
 const successRequest = document.querySelector(".successRequest");
+const addRequestBtn = document.querySelector(".addRequest");
 
 //Open and close side-bar function
 const openCloseSidebar = function () {
@@ -74,5 +77,47 @@ const switchStatus = function () {
   });
 };
 
+addRequestBtn.addEventListener("click", function () {
+  window.location.href = "../html/User_maintenanceCreate.html";
+});
+
 switchStatus();
 openCloseSidebar();
+
+window.onload = async function () {
+  // Fetch getting pending request
+  const response = await fetch(`http://localhost:3000/api/read/request/`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  request = await response.json();
+  console.log(request);
+
+  // Add pending request
+  request.forEach(function (userPendingRequest) {
+    pendingRequestContainer.insertAdjacentHTML(
+      "afterbegin",
+      `<div class="pendingRequest">
+                  <div class="pendingImgContainer">
+                    <img
+                      src="../img/brokenCeilingLamp.jpg"
+                      alt="Broken Ceiling Lamp"
+                      class="requestImg"
+                    />
+                  </div>
+                  <div class="pendingDescriptionContainer">
+                    <p class="pendingTopic">Topic : <span>${userPendingRequest.Topic}</span></p>
+                    <p class="pendingDescription">
+                      Description : <span>${userPendingRequest.Description}</span>
+                    </p>
+                    <p class="pendingDate">
+                      Date : <span>30-03-2568 14:50:00</span>
+                    </p>
+                  </div>
+                </div>`
+    );
+  });
+};
