@@ -234,7 +234,7 @@
 .statusHeader {
   display: flex;
   width: 100%;
-  padding-bottom: 20px;
+  /* padding-bottom: 20px; */
   /* border: 1px solid red; */
 }
 
@@ -242,6 +242,7 @@
 .successStatus {
   width: 50%;
   font-size: 20px;
+  padding-bottom: 20px;
   text-align: center;
   cursor: pointer;
   /* border: 1px solid blue; */
@@ -257,6 +258,20 @@
   width: 50%;
   height: 4px;
   background-color: #274663;
+}
+
+.moveRight {
+  transition: all 0.3s ease;
+  transform: translateX(100%);
+}
+
+.moveLeft {
+  transition: all 0.3s ease;
+  transform: translateX(0%);
+}
+
+.hideRequest {
+  opacity: 0;
 }
 
 .allRequestContainer {
