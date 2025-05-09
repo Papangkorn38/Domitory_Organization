@@ -43,37 +43,34 @@ const openCloseSidebar = function () {
   });
 };
 
+const toggleAnimationLine = function (direction) {
+  if (!animationLine.classList.contains(direction)) {
+    animationLine.classList.remove(
+      direction === "moveRight" ? "moveLeft" : "moveRight"
+    );
+    animationLine.classList.add(direction);
+  }
+};
+
+const toggleVisibility = function (container, className, action) {
+  for (const element of container.children) {
+    element.classList[action](className);
+  }
+};
+
 // Switch Status function
 const switchStatus = function () {
   // const successRequestArray = pendingRequestContainer.children;
   successHeader.addEventListener("click", function () {
-    if (!animationLine.classList.contains("moveRight")) {
-      animationLine.classList.remove("moveLeft");
-      animationLine.classList.add("moveRight");
-    }
-
-    for (const successRequestElement of successRequestContainer.children) {
-      successRequestElement.classList.remove("hideRequest");
-    }
-
-    for (const pendingStatusElement of pendingRequestContainer.children) {
-      pendingStatusElement.classList.add("hideRequest");
-    }
+    toggleAnimationLine("moveRight");
+    toggleVisibility(successRequestContainer, "hideRequest", "remove");
+    toggleVisibility(pendingRequestContainer, "hideRequest", "add");
   });
 
   pendingHeader.addEventListener("click", function () {
-    if (!animationLine.classList.contains("moveLeft")) {
-      animationLine.classList.remove("moveRight");
-      animationLine.classList.add("moveLeft");
-    }
-
-    for (const pendingStatusElement of pendingRequestContainer.children) {
-      pendingStatusElement.classList.remove("hideRequest");
-    }
-
-    for (const successRequestElement of successRequestContainer.children) {
-      successRequestElement.classList.add("hideRequest");
-    }
+    toggleAnimationLine("moveLeft");
+    toggleVisibility(pendingRequestContainer, "hideRequest", "remove");
+    toggleVisibility(successRequestContainer, "hideRequest", "add");
   });
 };
 
