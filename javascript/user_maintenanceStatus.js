@@ -99,7 +99,7 @@ window.onload = async function () {
   // Add pending request
   request.forEach(function (userPendingRequest) {
     pendingRequestContainer.insertAdjacentHTML(
-      "afterbegin",
+      "beforeend",
       `<div class="pendingRequest">
                   <div class="pendingImgContainer">
                     <img
