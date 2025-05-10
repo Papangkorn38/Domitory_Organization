@@ -34,6 +34,49 @@ const openCloseSidebar = function () {
 
 openCloseSidebar();
 
+function updateItemsPerPage() {
+    const allRows = document.querySelectorAll('table tbody tr');
+    
+    const validRows = Array.from(allRows).filter(row => {
+        const cells = row.querySelectorAll('td');
+        
+        return !Array.from(cells).some(cell => {
+            const text = cell.textContent.trim();
+            return text === 'ไม่พบข้อมูลบิลสำหรับห้องนี้' || 
+                   text.includes('ไม่พบข้อมูล');
+        });
+    });
+    
+    const tableRows = validRows.length;
+    const itemsPerPageSelect = document.getElementById('itemsPerPage');
+    
+    itemsPerPageSelect.innerHTML = '';
+    
+    if (tableRows === 0) {
+        const option = document.createElement('option');
+        option.value = 0;
+        option.textContent = '0';
+        itemsPerPageSelect.appendChild(option);
+    } else {
+        // ถ้ามีแถว ให้แสดงตัวเลือก 1 ถึงจำนวนแถวที่มี
+        for (let i = 1; i <= tableRows; i++) {
+            const option = document.createElement('option');
+            option.value = i;
+            option.textContent = i;
+            itemsPerPageSelect.appendChild(option);
+        }
+    }
+    
+    itemsPerPageSelect.value = tableRows;
+}
+
+document.addEventListener('DOMContentLoaded', updateItemsPerPage);
+const tableBody = document.querySelector('table tbody');
+if (tableBody) {
+    const observer = new MutationObserver(updateItemsPerPage);
+    observer.observe(tableBody, { childList: true });
+}
+
 // กำหนด URL base สำหรับ API
 const API_BASE_URL = 'http://localhost:3000/api';
 
