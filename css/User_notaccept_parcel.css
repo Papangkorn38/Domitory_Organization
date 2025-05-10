@@ -156,14 +156,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 30px;
-  /* border: 1px solid red; */
+  padding: 10px 30px;
+  height: auto;
 }
 
 .headerDormLogo {
-    width: 110px;
-    height: 96px;
-  }
+  width: 110px;
+  height: 96px;
+}
 
 .profile {
   display: flex;
@@ -183,18 +183,19 @@
   border-radius: 50%;
   width: 50px;
 }
-
 .titleContainer {
-  box-shadow: rgba(9, 30, 66) 0px 4px 5px -2px;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background-color: #f1f1f1;
   display: flex;
   align-items: center;
   gap: 15px;
-  padding: 0 30px;
+  padding: 8px 30px;
   width: 100%;
-  height: 9%;
-  background-color: #f1f1f1;
+  height: auto;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 5px -2px;
 }
-
 
 .titleContainer i {
   font-size: var(--Huge-font);
@@ -202,10 +203,13 @@
 
 .title {
   font-size: var(--Big-font);
-  color :rgba(9, 30, 66,) ;
+  color: #223953;
 }
 
-
+.mainContent {
+  height: 70vh;
+  overflow-y: scroll;
+}
 .userFormContainer{
   width: 1133;
   height: 738;

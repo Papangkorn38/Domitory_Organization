@@ -150,14 +150,15 @@
 .contents {
   width: 100%;
   height: 100vh;
+  overflow-y: scroll;
 }
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 30px;
-  height: auto;
+  padding: 20px 30px;
+
 }
 
 .headerDormLogo {
@@ -191,9 +192,8 @@
   display: flex;
   align-items: center;
   gap: 15px;
-  padding: 8px 30px;
+  padding: 10px 30px;
   width: 100%;
-  height: auto;
   box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 5px -2px;
 }
 
@@ -206,114 +206,168 @@
   color: #223953;
 }
 
-.mainContent {
-  height: 70vh;
-  overflow-y: scroll;
-}
-.userFormContainer{
-  width: 1133;
-  height: 738;
+/* .mainContent{
+  height: 70vh; 
+   overflow-y: scroll; 
+} */
+
+/*Parcel_information.css start */
+
+.userSection {
+  display: flex;
+  gap: 20px;
+  padding: 30px;
+  flex-wrap: wrap;
+  align-items: flex;
 }
 
-.parcelLayout {
+.Userimg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 180px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  margin-right: 100px;
+}
+
+.user-id-box {
+  margin-top: -50px;
+  margin-left: 50px;
+  font-size: 25px;
+  font-weight: normal;
+  color: #274663;
+  text-align: center;
+  border-radius: 6px;
+}
+
+.parcelAvatarImg {
+  width: 130px;
+  height: 130px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin: 0% 50px 75px 100px;
+}
+
+.userFormContainer {
     display: flex;
-    gap: 40px;
+    flex-direction: column;
+    gap: 20px;
+    background: #f0f0f0;
     padding: 30px;
-    align-items: flex-start;
-  }
-  
-  .parcelProfile {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-    width: 200px;
-  }
-  
-  .parcelAvatar {
-    width: 120px;
-    height: 120px;
-    border-radius: 12px;
-    object-fit: cover;
-    background-color: #ddd;
-  }
-  
-  .parcelRoomID {
-    font-size: 18px;
-    font-weight: bold;
-    color: #223953;
-  }
-  
-  .btn-outline,
-  .btn-solid {
-    width: 100%;
-    padding: 10px 16px;
-    border-radius: 6px;
-    font-size: 14px;
-    cursor: pointer;
-    font-weight: 500;
-  }
-  
-  .btn-solid {
-    border: 2px solid #223953;
-    background-color: #223953;
-    color: #fff;
-  }
-  
-  .btn-outline {
-    border: 2px solid #223953;
-    background-color: #fff;
-    color: #223953;
-  }
-
-  .btn-outline:hover,
-.btn-solid:hover {
-  transform: scale(1.03); /* ขยายเล็กน้อย */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* เพิ่มเงา */
-}
-
-/* ✅ Animation เมื่อ click */
-.btn-outline:active,
-.btn-solid:active {
-  transform: scale(0.98);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-}
-  
-  .parcelList {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    flex: 1;
-  }
-  
-  .parcelItem {
-    display: flex;
-    gap: 20px;
-    width: 450px;
-    padding: 16px;
-    background-color: #f3f3f3;
     border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    font-size: 15px;
+    width: 100%;
+    max-width: 1200px; 
   }
-  
-  .parcelImage {
-    width: 100px;
-    height: 100px;
-    border-radius: 8px;
-    object-fit: cover;
+
+.user-id {
+  font-size: 18px;
+  font-weight: bold;
+  color: #1c2e4a;
+}
+
+.userFormContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.formGroup {
+  display: flex;
+  align-items: center; 
+  gap: 20px;
+}
+
+.formGroup label {
+  min-width: 150px;
+  font-weight: normal;
+  margin-bottom: 3px;
+  align-items: flex-start;
+}
+
+input[type="text"] {
+  padding: 10px;
+  border-radius: 6px;
+  border: 0px solid #ccc;
+  background-color: #fff;
+}
+
+.upload-box {
+  width: 500px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border: 2px dashed #aaa;
+  text-align: center;
+  border-radius: 6px;
+  color: #888;
+}
+
+.box{
+  color: #848484;
+  background-color: #DFDFDF;
+  text-align: left;
+  font-size: 15px;
+  padding: 8px; 
+  border-radius: 6px; 
+  border: 0px solid #c4c4c4;
+  font-size: normal; 
+  flex: 1; 
+  max-width: 185px
+}
+
+.parcel-box{
+  color: #000000;
+  background-color: #DFDFDF;
+  text-align: center;
+  font-size: 15px;
+  padding: 8px; 
+  border-radius: 6px; 
+  border: 0px solid #c4c4c4;
+  font-size: normal; 
+  flex: 1; 
+  max-width: 185px
+}
+
+.receive_parcel {
+  margin-top: 20px;
+  margin-left: 250px;
+  padding: 10px 70px;
+  background-color: #1c2e4a;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  align-self: flex-start;
+}
+
+.receive_parcel:hover {
+  background-color: #314a75;
+}
+
+.backBtn {
+  display: flex;
+  align-items: center;
+  color: #434343;
+  gap: 8px;
+  margin: 30px;
+  font-size: 15px;
+  cursor: pointer;
   }
-  
-  .parcelDetail {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    font-size: 14px;
-    color: #222;
-    gap: 4px;
+
+  .btn {
+    padding: 10px 30px;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
   }
-  .mainContent {
-    display: flex;
-    gap: 40px;
-    padding: 30px;
-    align-items: flex-start;
-  }  
+
+
+
