@@ -151,7 +151,6 @@ async function fetchRoomBills(roomId) {
     const sampleData = {
     };
 
-    // ถ้ามี A นำหน้า ให้ตัดออก
     const cleanRoomId = roomId.startsWith('A') ? roomId.substring(1) : roomId;
 
     // ถ้ามีข้อมูลตัวอย่างสำหรับห้องนี้ ให้ใช้ข้อมูลนั้น ถ้าไม่มีให้ใช้ข้อมูลของห้อง 101
