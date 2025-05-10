@@ -3,7 +3,7 @@ const express = require('express'); //ดึง express มาใช้
 const mysql = require('mysql2'); // ดึง mysql2 มาใช้
 const cors = require('cors');// ดึง cors มาใช้
 const multer  = require('multer') // ดึง multer มาใช้เพื่ออัพโหลดรูปภาพ
-const bcrypt = require('bcrypt');
+//const bcrypt = require('bcrypt');
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "uploads");

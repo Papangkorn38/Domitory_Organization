@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="test.css" />
+</head>
+<body onload="read()">
+    <table id="test">
+        <tr>
+          <th>Company</th>
+          <th>Contact</th>
+          <th>Country</th>
+        </tr>
+        <tr>
+          <td>Alfreds Futterkiste</td>
+          <td>Maria Anders</td>
+          <td>Germany</td>
+        </tr>
+        <tr>
+          <td>Centro comercial Moctezuma</td>
+          <td>Francisco Chang</td>
+          <td>Mexico</td>
+        </tr>
+      </table>
+      <script>
+        var read = function(){
+            const requestOptions = {
+        method: "GET",
+        redirect: "follow"
+        };
+    
+        var read_test = document.getElementById('test');
+        read_test.innerHTML = 'Fuck';
+        fetch("http://localhost:3000/api/read/client", requestOptions)
+        .then((response) => response.text())
+        .then((result) => {
+          read_test.innerHTML = '';
+          var JsonObj = JSON.parse(result);
+          for(let test of JsonObj){
+            var row = `
+              <tr>
+                <td>`+test.CID+`</td>
+                <td>`+test.Fname+`</td>
+                <td>`+test.Lname+`</td>
+                <td>`+test.Username+`</td>
+                <td>`+test.Cemail+`</td>
+                <td>`+test.Address+`</td>
+                <td>`+test.BirthDate+`</td>
+                <td>`+test.CitizenID+`</td>
+                <td>`+test.PhoneNum+`</td>
+                <td>`+test.RoomID+`</td>
+              </tr>
+            `;
+            read_test.insertAdjacentHTML("beforeend",row);
+          }
+        })
+        .catch((error) => console.error(error));
+        }
+    
+    </script>
+</body>
+</html>
