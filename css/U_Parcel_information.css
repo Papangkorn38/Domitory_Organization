@@ -1,0 +1,373 @@
+@import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Ubuntu+Sans:ital,wght@0,100..800;1,100..800&display=swap");
+
+* {
+  font-family: "Kanit", sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --Huge-font: 32px;
+  --Big-font: 20px;
+  --Normal-font: 16px;
+  --Small-font: 14px;
+}
+
+.template {
+  display: flex;
+}
+
+.sideBar {
+  height: 100vh;
+  width: 20%;
+  padding: 30px 25px 30px 25px;
+  background: linear-gradient(#1c2c42 25%, #223953 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: 0.4s ease;
+  /* border: 1px solid red; */
+}
+
+.sideBar.collapsed {
+  width: 85px;
+}
+
+.closeOpenContainer {
+  /* border: 1px solid #ffffff; */
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.closeOpenContainer i {
+  color: #ffffff;
+  font-size: var(--Huge-font);
+  cursor: pointer;
+  border-radius: 50%;
+  padding: 4px;
+  transition: background-color 0.5s ease;
+}
+
+.menuBtn {
+  position: absolute;
+}
+
+.menuBtn.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.closeBtn.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.closeOpenContainer i:hover {
+  background-color: #336296;
+}
+
+.sideBarDormLogo {
+  width: 120px;
+  margin-bottom: 40px;
+  transition: opacity 0.4s ease;
+  /* border: 1px solid #ffffff; */
+}
+
+.sideBar.collapsed .sideBarDormLogo {
+  opacity: 0;
+}
+
+.sideBarLinksContainer {
+  /* border: 1px solid #ffffff; */
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin-bottom: 40px;
+  gap: 10px;
+  width: 100%;
+}
+
+.sideBarLinksContainer li {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  cursor: pointer;
+  gap: 10px;
+  border-radius: 8px;
+  padding: 8px;
+  width: 100%;
+  transition: background-color 0.5s ease;
+  /* border: 1px solid #ffffff; */
+}
+
+.sideBarLinksContainer li:hover {
+  background-color: #21262c;
+}
+
+.sideBarLinksContainer li a {
+  /* flex-shrink: 0; */
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-decoration: none;
+  color: #ffffff;
+  font-size: var(--Normal-font);
+  transition: opacity 0.4s ease;
+}
+.sideBarLinksContainer li img {
+  height: 20px;
+}
+
+.sideBar.collapsed .sideBarLinksContainer li a {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.logoutBtn {
+  font-size: var(--Normal-font);
+  width: 130px;
+  height: 40px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.logoutBtn.hidden {
+  opacity: 0;
+}
+
+.logoutBtn:hover {
+  border: 2px solid #ffffff;
+  background-color: #21262c;
+  color: #ffffff;
+}
+
+.contents {
+  width: 100%;
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
+
+}
+
+.headerDormLogo {
+  width: 110px;
+  height: 96px;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.profileText {
+  text-transform: uppercase;
+  font-weight: 500;
+  color: #434343;
+  line-height: 1.2;
+  font-size: var(--Small-font);
+}
+
+.profileImg {
+  border-radius: 50%;
+  width: 50px;
+}
+.titleContainer {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background-color: #f1f1f1;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 10px 30px;
+  width: 100%;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 5px -2px;
+}
+
+.titleContainer i {
+  font-size: var(--Huge-font);
+}
+
+.title {
+  font-size: var(--Big-font);
+  color: #223953;
+}
+
+/* .mainContent{
+  height: 70vh; 
+   overflow-y: scroll; 
+} */
+
+/*Parcel_information.css start */
+
+.userSection {
+  display: flex;
+  gap: 20px;
+  padding: 30px;
+  flex-wrap: wrap;
+  align-items: flex;
+}
+
+.Userimg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 180px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  margin-right: 100px;
+}
+
+.user-id-box {
+  margin-top: -50px;
+  margin-left: 50px;
+  font-size: 25px;
+  font-weight: normal;
+  color: #274663;
+  text-align: center;
+  border-radius: 6px;
+}
+
+.parcelAvatarImg {
+  width: 130px;
+  height: 130px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin: 0% 50px 75px 100px;
+}
+
+.userFormContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background: #f0f0f0;
+    padding: 30px;
+    border-radius: 10px;
+    font-size: 15px;
+    width: 100%;
+    max-width: 1200px; 
+  }
+
+.user-id {
+  font-size: 18px;
+  font-weight: bold;
+  color: #1c2e4a;
+}
+
+.userFormContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.formGroup {
+  display: flex;
+  align-items: center; 
+  gap: 20px;
+}
+
+.formGroup label {
+  min-width: 150px;
+  font-weight: normal;
+  margin-bottom: 3px;
+  align-items: flex-start;
+}
+
+input[type="text"] {
+  padding: 10px;
+  border-radius: 6px;
+  border: 0px solid #ccc;
+  background-color: #fff;
+}
+
+.upload-box {
+  width: 500px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border: 2px dashed #aaa;
+  text-align: center;
+  border-radius: 6px;
+  color: #888;
+}
+
+.box{
+  color: #848484;
+  background-color: #DFDFDF;
+  text-align: left;
+  font-size: 15px;
+  padding: 8px; 
+  border-radius: 6px; 
+  border: 0px solid #c4c4c4;
+  font-size: normal; 
+  flex: 1; 
+  max-width: 185px
+}
+
+.parcel-box{
+  color: #000000;
+  background-color: #DFDFDF;
+  text-align: center;
+  font-size: 15px;
+  padding: 8px; 
+  border-radius: 6px; 
+  border: 0px solid #c4c4c4;
+  font-size: normal; 
+  flex: 1; 
+  max-width: 185px
+}
+
+.receive_parcel {
+  margin-top: 20px;
+  margin-left: 250px;
+  padding: 10px 70px;
+  background-color: #1c2e4a;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  align-self: flex-start;
+}
+
+.receive_parcel:hover {
+  background-color: #314a75;
+}
+
+.backBtn {
+  display: flex;
+  align-items: center;
+  color: #434343;
+  gap: 8px;
+  margin: 30px;
+  font-size: 15px;
+  cursor: pointer;
+  }
+
+  .btn {
+    padding: 10px 30px;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
+  }
+
+
+
