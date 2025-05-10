@@ -38,8 +38,7 @@ var login = function(){
         if(result.status == 'ok'){
             alert('เข้าสู่ระบบเรียบร้อย');
             if(result.role == 'client'){
-                window.location.href = '#';
-                console.log('ได้หน้าuserมาแล้วเอามาใส่ด้วยนะ');
+                window.location.href = `../html/home-client.html?id=${result.RoomID}`;
             }else if(result.role == 'admin'){
                 window.location.href = '../html/roomStatus.html';
             }else{

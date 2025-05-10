@@ -700,7 +700,7 @@ app.post('/api/login',async(req,res) => {
             if(ClientResults.length > 0){
                 //ถ้าเจอและรหัสถูก
                 if(Password == ClientResults[0].Password){
-                    return res.json({status:'ok', role: "client",message:'login success'})
+                    return res.json({status:'ok', role: "client",message:'login success',RoomID:ClientResults[0].RoomID})
                 }else{
                     return res.json({status:'error', role: "client",message:'wrong password'})
                 }

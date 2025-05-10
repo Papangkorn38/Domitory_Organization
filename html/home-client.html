@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <link href="../css/home-css.css"rel="stylesheet"type="text/css"/>
+    </head>
+    <body onload="load_user_id()">
+        <!--Logo ด้านบนสุด-->
+        <div class="headlogo">
+            <img src="../img/logo.png" class="logo" alt="logo" >
+        </div>
+        <!--เนื้อหาในหน้า ไม่รวม footer/logo-->
+        <div class="content">
+            <div class="container">
+                <div class="user-container">
+                    <!--container บอกเลขห้องของ Client-->
+                    <div class="user">
+                        <img src="../img/User_home.png" class="user-img">
+                    </div>
+                    <div class="user-text">
+                    <p class="user-room" id="user_roomID"></p>
+                    <p class="user-organization">Domitory Organization</p>
+                    </div>
+                </div>
+                <!--Container รูปภาพหอพัก-->
+                <div class="image-container">
+                    <img src="../img/Wallpaper.png" class="image-img" alt="Wallpaper">
+                </div>
+                <!--Container คลิกไปดูข้อมูลของลูกบ้าน-->
+                <div class="client-container">
+                    <img src="../img/Tall Person.png" class="client-img">
+                    <p class="client-text">ข้อมูลลูกบ้าน</p>
+                </div>
+                <!--Container คลิกไปดูข้อมูลพัสดุ-->
+                <div class="parcel-container">
+                    <img src="../img/Cardboard Box_reverse.png" class="parcel-img">
+                    <p class="parcel-text">พัสดุ</p>
+                </div>
+                <!--Container คลิกไปชำระค่าใช้จ่าย-->
+                <div class="paybill-container">
+                    <img src="../img/Wallet.png" class="paybill-img">
+                    <p class="paybill-text">ชำระค่าใช้จ่าย</p>
+                </div>
+                <!--Container คลิกไปดูข้อมูลบิลค่าใช้จ่าย-->
+                <div class="bill-container">
+                    <img src="../img/Bill_reverse.png" class="bill-img">
+                    <p class="bill-text">บิลค่าใช้จ่าย</p>
+                </div>
+                <!--Container คลิกไปส่งคำร้องแจ้งซ่อม-->
+                <div class="request-container">
+                    <img src="../img/Maintenance_reverse.png" class="request-img">
+                    <p class="request-text">แจ้งซ่อม</p>
+                </div>
+                <!--Container คลิกไปดูข้อมูลการติดต่อแอดมิน-->
+                <div class="contact-container">
+                    <img src="../img/Talk.png" class="contact-img">
+                    <p class="contact-text">ติดต่อเรา</p>
+                </div>
+                <!--Container คลิกไปดูประวัติบิลค่าใช้จ่าย-->
+                <div class="billhistory-container">
+                    <img src="../img/Folder_reverse.png" class="billhistory-img">
+                    <p class="billhistory-text">ประวัติบิลค่าใช้จ่าย (Payment History)</p>
+                </div>
+                <!--Container welcome ชื่อลูกบ้าน-->
+                <div class="welcome-container">
+                    <img src="../img/Usercircle.png" class="welcome-img">
+                    <div class="welcome-texts">
+                    <p class="welcome-text">WELCOME BACK</p> 
+                    <p class="welcome-text">K.SOMPONG LUMKEN</p>
+                    </div>
+                    <!--ปุ่ม Logout-->
+                    <button class="logout-button">Log Out</button>
+                </div>
+                </div>
+            </div>
+        </div>
+        <!--Footer ข้อความและ logo ด้านล่างสุด-->
+        <footer class="footer">
+            <div class="footer-header">
+                <p>© 2025 Dormitory Organization | Developed by CS251 Database 1 Group 14</p>
+            </div>
+            <div class="footer-footer">
+            <div class="footer-logo">
+                <img src="../img/logo.png" class="footer-logo-img">
+            </div>
+            <div class="footer-lefttext">
+                <p class="footer-headertext">ติดต่อเรา</p>
+                <p>Tel : +66 xxxx xxxx</p>
+                <p>Email : xxxx@gmail.com</p>
+                <p>Line ID : Domitory_Organization</p>
+            </div>
+            <div class="footer-righttext">
+                <p class="footer-headertext">ที่อยู่</p>
+                <p>Domitory </p>
+                <p>Khlong Neung,Khlong Luang</p>
+                <p>Pathum Thani</p>
+                <p>Thailand</p>
+            </div>
+            </div>
+        </footer>
+    </body>
+    <script src="../javascript/home-client.js"></script>
+</html>
