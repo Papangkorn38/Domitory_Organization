@@ -4,7 +4,10 @@ const mysql = require('mysql2'); // ดึง mysql2 มาใช้
 const cors = require('cors');// ดึง cors มาใช้
 const multer  = require('multer') // ดึง multer มาใช้เพื่ออัพโหลดรูปภาพ
 const bcrypt = require('bcrypt');
+<<<<<<< HEAD
 const path = require('path');
+=======
+>>>>>>> 6e0378752dbfe525e121b02fd87c6c850c4a56b5
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "uploads");
@@ -19,7 +22,10 @@ const upload = multer({
 });
 
 const app = express(); //เรียก express ที่เราดึงมาใช้
+<<<<<<< HEAD
 app.use(express.static(path.join(__dirname, "../")));  // ให้ Express มองเห็นโฟลเดอร์ 'html', 'css', 'assets', 'img', 'javascript'
+=======
+>>>>>>> 6e0378752dbfe525e121b02fd87c6c850c4a56b5
 const port = 3000; //กำหนด port ของserver
 
 app.use(cors());
@@ -28,8 +34,13 @@ app.use(cors());
 const connection = mysql.createConnection({
   host: "localhost", //กำหนดให้เป็น local host
   user: "root", //ชื่อที่เราตั้ง
+<<<<<<< HEAD
   password: "root", //password ที่เราตั้งไว้
   database: "mydb", // ชื่อ schema ที่เราตั้งไว้
+=======
+  password: "", //password ที่เราตั้งไว้
+  database: "mydb1", // ชื่อ schema ที่เราตั้งไว้
+>>>>>>> 6e0378752dbfe525e121b02fd87c6c850c4a56b5
 });
 
 //ดักจับerrorระหว่าง connect ไปยัง database
@@ -74,10 +85,13 @@ app.post("/request", upload.single("IMG"), (req, res) => {
   }
 });
 
+<<<<<<< HEAD
 app.use(express.static(path.join(__dirname, '../'))); 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../html/login.html'));
 });
+=======
+>>>>>>> 6e0378752dbfe525e121b02fd87c6c850c4a56b5
 //เพิ่มพัสดุเข้าสู่ระบบ
 app.post("/upload", upload.single("IMG"), (req, res) => {
   console.log("Request Object:", req); // ลอง Log Request ทั้งหมด
@@ -108,6 +122,7 @@ app.post("/upload", upload.single("IMG"), (req, res) => {
   }
 });
 
+<<<<<<< HEAD
 app.use(express.static(path.join(__dirname, "../html")));
 
 //ดึงข้อมูลพัสดุรับแล้ว
@@ -120,6 +135,8 @@ app.get('/api/read/parcel/status/received', (req, res) => {
     }
   );
 });
+=======
+>>>>>>> 6e0378752dbfe525e121b02fd87c6c850c4a56b5
 //เพิ่มพัสดุเข้าสู่ระบบ
 app.post("/slip", upload.single("IMG"), (req, res) => {
   console.log("Request Object:", req); // ลอง Log Request ทั้งหมด
@@ -144,6 +161,7 @@ app.post("/slip", upload.single("IMG"), (req, res) => {
       res.send("File uploaded successfully");
     });
   }
+<<<<<<< HEAD
 
 });
 
@@ -160,6 +178,10 @@ app.get('/api/read/parcel/status/unreceived', (req, res) => {
 
 
 
+=======
+});
+
+>>>>>>> 6e0378752dbfe525e121b02fd87c6c850c4a56b5
 app.use("/api", express.json());
 
 //สร้าง API สำหรับเพิ่มข้อมูล
@@ -489,7 +511,11 @@ app.get("/api/read/client/:RoomID", async (req, res) => {
   const roomID = req.params.RoomID;
   try {
     connection.query(
+<<<<<<< HEAD
       "SELECT *,TIMESTAMPDIFF(YEAR, BirthDate, CURDATE()) AS age FROM client JOIN room ON client.RoomID = room.RoomID WHERE client.RoomID = ?",
+=======
+      "SELECT * FROM client WHERE RoomID = ?",
+>>>>>>> 6e0378752dbfe525e121b02fd87c6c850c4a56b5
       [roomID],
       (error, results, fields) => {
         if (error) {
@@ -522,6 +548,7 @@ app.get("/api/read/bill", async (req, res) => {
 });
 
 //เพิ่มbillsเข้าระบบ
+<<<<<<< HEAD
 //roomcharge = ค่าเช่า 
 app.post("/api/insert/bill", (req, res) => {
   const { RoomID, AID, RoomCharge, TotalCharge, WaterBill, ElecticBill, BillingCycle,
@@ -539,6 +566,20 @@ app.post("/api/insert/bill", (req, res) => {
       if (error) {
         console.error("Error to inserting data ", error);
         return res.status(500).json({ error: "Internal server error" });
+=======
+app.post("/api/insert/bill", (req, res) => {
+  const { RoomID, AID, RoomCharge, TotalCharge, WaterBill, ElecticBill } =
+    req.body;
+  const query =
+    "INSERT INTO bills(RoomID , AID , RoomCharge , TotalCharge , WaterBill , ElecticBill) VALUES(?,?,?,?,?,?)";
+  connection.query(
+    query,
+    [RoomID, AID, RoomCharge, TotalCharge, WaterBill, ElecticBill],
+    (error, result) => {
+      if (error) {
+        console.error("Error to inserting data ", error);
+        res.status(500).json({ error: "Internal server error" });
+>>>>>>> 6e0378752dbfe525e121b02fd87c6c850c4a56b5
       }
       res.json({
         msg: "Data inserted successfully",
@@ -585,6 +626,7 @@ app.get("/api/read/parcel", async (req, res) => {
   }
 });
 
+<<<<<<< HEAD
 //เอาไว้อ่านข้อมูลพัสดุ
 app.get("/api/read/parcelByPID/:PID", (req, res) => {
   const pid = req.params.PID;
@@ -601,6 +643,8 @@ app.get("/api/read/parcelByPID/:PID", (req, res) => {
   );
 });
 
+=======
+>>>>>>> 6e0378752dbfe525e121b02fd87c6c850c4a56b5
 //ฟอร์มแจ้งข้อมูลพัสดุ
 app.get("/api/read/parcel/:RoomID", async (req, res) => {
   const roomID = req.params.RoomID;
@@ -753,7 +797,11 @@ app.post('/api/login',async(req,res) => {
             if(ClientResults.length > 0){
                 //ถ้าเจอและรหัสถูก
                 if(Password == ClientResults[0].Password){
+<<<<<<< HEAD
                     return res.json({status:'ok', role: "client",message:'login success',RoomID:ClientResults[0].RoomID})
+=======
+                    return res.json({status:'ok', role: "client",message:'login success'})
+>>>>>>> 6e0378752dbfe525e121b02fd87c6c850c4a56b5
                 }else{
                     return res.json({status:'error', role: "client",message:'wrong password'})
                 }
@@ -775,7 +823,11 @@ app.post('/api/login',async(req,res) => {
                     }
                 }
                 else{
+<<<<<<< HEAD
                     return res.json({status:'user not found',message:'user not found'})
+=======
+                    return res.json({status:'error',message:'user not found'})
+>>>>>>> 6e0378752dbfe525e121b02fd87c6c850c4a56b5
                 }
             })
         })
@@ -822,6 +874,7 @@ app.patch("/api/update/parcel/:roomid", async (req, res) => {
     return res.status(500).send();
   }
 });
+<<<<<<< HEAD
 
 //อันนี้คือไว้แสดงหน้าเว้ปในport 3000
 app.get("/billing", (req, res) => {
@@ -889,6 +942,8 @@ app.patch("/api/update/parcel/:pid", async (req, res) => {
     return res.status(500).send();
   }
 });
+=======
+>>>>>>> 6e0378752dbfe525e121b02fd87c6c850c4a56b5
 
 //มันจะแสดงต้องเปิดserver
 app.listen(port, () => {
