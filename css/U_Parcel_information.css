@@ -162,8 +162,8 @@
 }
 
 .headerDormLogo {
-  width: 8%;
-  height: 8%;
+  width: 110px;
+  height: 96px;
 }
 
 .profile {
@@ -197,10 +197,6 @@
   box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 5px -2px;
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 2c10c7f8dbd6cdbdccbcf6ece06b3de5e95a8fab
 .titleContainer i {
   font-size: var(--Huge-font);
 }
@@ -214,45 +210,164 @@
   height: 70vh; 
    overflow-y: scroll; 
 } */
-  
-.parcelHistoryTable {
-  width: 100%;
-  max-width: calc(100% - 60px);
-  margin: 20px auto;
-  border-collapse: collapse;
-  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 5px -2px;
-  border-radius: 8px;
-  overflow: hidden;
+
+/*Parcel_information.css start */
+
+.userSection {
+  display: flex;
+  gap: 20px;
+  padding: 30px;
+  flex-wrap: wrap;
+  align-items: flex;
 }
-  
-  .parcelHistoryTable th,
-  .parcelHistoryTable td {
-    padding: 12px 16px;
-    text-align: center;
-    font-size: var(--Normal-font);
+
+.Userimg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 180px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  margin-right: 100px;
+}
+
+.user-id-box {
+  margin-top: -50px;
+  margin-left: 50px;
+  font-size: 25px;
+  font-weight: normal;
+  color: #274663;
+  text-align: center;
+  border-radius: 6px;
+}
+
+.parcelAvatarImg {
+  width: 130px;
+  height: 130px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin: 0% 50px 75px 100px;
+}
+
+.userFormContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background: #f0f0f0;
+    padding: 30px;
+    border-radius: 10px;
+    font-size: 15px;
+    width: 100%;
+    max-width: 1200px; 
   }
-  
-  .parcelHistoryTable thead {
-    background-color: #223953;
-    color: #ffffff;
+
+.user-id {
+  font-size: 18px;
+  font-weight: bold;
+  color: #1c2e4a;
+}
+
+.userFormContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.formGroup {
+  display: flex;
+  align-items: center; 
+  gap: 20px;
+}
+
+.formGroup label {
+  min-width: 150px;
+  font-weight: normal;
+  margin-bottom: 3px;
+  align-items: flex-start;
+}
+
+input[type="text"] {
+  padding: 10px;
+  border-radius: 6px;
+  border: 0px solid #ccc;
+  background-color: #fff;
+}
+
+.upload-box {
+  width: 500px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border: 2px dashed #aaa;
+  text-align: center;
+  border-radius: 6px;
+  color: #888;
+}
+
+.box{
+  color: #848484;
+  background-color: #DFDFDF;
+  text-align: left;
+  font-size: 15px;
+  padding: 8px; 
+  border-radius: 6px; 
+  border: 0px solid #c4c4c4;
+  font-size: normal; 
+  flex: 1; 
+  max-width: 185px
+}
+
+.parcel-box{
+  color: #000000;
+  background-color: #DFDFDF;
+  text-align: center;
+  font-size: 15px;
+  padding: 8px; 
+  border-radius: 6px; 
+  border: 0px solid #c4c4c4;
+  font-size: normal; 
+  flex: 1; 
+  max-width: 185px
+}
+
+.receive_parcel {
+  margin-top: 20px;
+  margin-left: 250px;
+  padding: 10px 70px;
+  background-color: #1c2e4a;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  align-self: flex-start;
+}
+
+.receive_parcel:hover {
+  background-color: #314a75;
+}
+
+.backBtn {
+  display: flex;
+  align-items: center;
+  color: #434343;
+  gap: 8px;
+  margin: 30px;
+  font-size: 15px;
+  cursor: pointer;
   }
-  
-  .parcelHistoryTable tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
+
+  .btn {
+    padding: 10px 30px;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
   }
-  
-  .parcelHistoryTable tbody tr:nth-child(odd) {
-    background-color: #ffffff;
-  }
-  
-  .parcelHistoryTable tbody td {
-    color: #434343;
-  }
-  .parcelHistoryTable tbody tr:hover {
-    background-color: #eef4fb;
-    transition: background-color 0.3s ease;
-<<<<<<< HEAD
-  }
-=======
-  }
->>>>>>> 2c10c7f8dbd6cdbdccbcf6ece06b3de5e95a8fab
+
+
+
