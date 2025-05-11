@@ -10,7 +10,7 @@
     />
     <title>Project Template</title>
   </head>
-  <body>
+  <body onload="userinfo()">
     <div class="template">
       <div class="sideBar collapsed">
         <div class="closeOpenContainer">
@@ -100,23 +100,23 @@
           <div class="formRow">
             <div class="formGroup">
               <label>First Name</label>
-              <input type="text" value="SOMPONG"readonly />
+              <input id = "Fname" type ="text" value=""readonly />
             </div>
             <div class="formGroup">
               <label>Last Name</label>
-              <input type="text" value="LUMKEN"readonly />
+              <input id = "Lname" type="text" value=""readonly />
             </div>
           </div>
           <div class="formRow">
             <div class="formGroup">
               <label>เลขบัตรประชาชน</label>
-              <input type="text" value="1 010x xxxxx x x"readonly />
+              <input id = "CitizenID" type="text" value=""readonly />
             </div>
           </div>
           <div class="formRow">
             <div class="formGroup">
               <label>วัน/เดือน/ปีเกิด</label>
-              <input type="text" value="17/03/2002"readonly />
+              <input id = "BirthDate" type ="text" value=""readonly />
             </div>
             <div class="formGroup">
               <label>อายุ</label>
@@ -124,19 +124,19 @@
             </div>
             <div class="formGroup">
               <label>อีเมล</label>
-              <input type="email" value="xxxx@gmail.com"readonly />
+              <input id = "Cemail" type="email" value=""readonly />
             </div>
           </div>
           <div class="formRow">
             <div class="formGroup">
               <label>เบอร์โทรศัพท์</label>
-              <input type="text" value="092-xxx-xxxx"readonly />
+              <input id = "PhoneNum" type="text" value=""readonly />
             </div>
           </div>
           <div class="formRow">
             <div class="formGroup" style="flex: 1">
               <label>ที่อยู่</label>
-              <input type="text" value="25/8 หมู่ x ตำบล xxxxxxx อำเภอ xxxxx จังหวัด xxxxx xxxxx"readonly />
+              <input id = "Address" type="text" value=""readonly />
             </div>
           </div>
         </div>
@@ -149,7 +149,7 @@
       <!-- JS เชื่อมกลับไปหน้าหลัก/หน้าก่อนหน้า -->
       </div>
     </div>
-    <script src="../javascript/template.js"></script>
+    <script src="../javascript/U_User_Info.js"></script>
   </body>
 </html>
 <!-- TEst -->
