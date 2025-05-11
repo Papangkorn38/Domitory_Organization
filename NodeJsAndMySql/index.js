@@ -128,7 +128,7 @@ app.post("/slip", upload.single("IMG"), (req, res) => {
   }
 });
 
-// app.use("/api", express.json());
+app.use("/api", express.json());
 
 //สร้าง API สำหรับเพิ่มข้อมูล
 app.post("/api/insert/client", (req, res) => {
@@ -458,7 +458,7 @@ app.get("/api/read/client/:RoomID", async (req, res) => {
   const roomID = req.params.RoomID;
   try {
     connection.query(
-      "SELECT * FROM client WHERE RoomID = ?",
+      "SELECT *,TIMESTAMPDIFF(YEAR, BirthDate, CURDATE()) AS age FROM client JOIN room ON client.RoomID = room.RoomID WHERE client.RoomID = ?",
       [roomID],
       (error, results, fields) => {
         if (error) {
@@ -708,6 +708,7 @@ app.post("/api/login", async (req, res) => {
               status: "ok",
               role: "client",
               message: "login success",
+              RoomID: ClientResults[0].RoomID,
             });
           } else {
             return res.json({
@@ -744,7 +745,10 @@ app.post("/api/login", async (req, res) => {
                 });
               }
             } else {
-              return res.json({ status: "error", message: "user not found" });
+              return res.json({
+                status: "user not found",
+                message: "user not found",
+              });
             }
           }
         );

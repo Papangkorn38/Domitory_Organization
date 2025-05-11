@@ -1,5 +1,4 @@
 // const { request } = require("http");
-
 const sideBar = document.querySelector(".sideBar");
 const closeBtn = document.querySelector(".closeBtn");
 const menuBtn = document.querySelector(".menuBtn");
@@ -92,19 +91,26 @@ window.onload = async function () {
       "Content-Type": "application/json",
     },
   });
-
   request = await response.json();
-  console.log(request);
-
+  console.log(request[0].IMG);
   // Add pending request
   request.forEach(function (userPendingRequest) {
+    // Convert buffer to base64 string
+    const buffer = userPendingRequest.IMG.data;
+    const base64Image = btoa(
+      String.fromCharCode.apply(null, new Uint8Array(buffer))
+    );
+    console.log(buffer);
+    console.log(buffer.toString());
+    console.log(base64Image);
+
     pendingRequestContainer.insertAdjacentHTML(
       "beforeend",
       `<div class="pendingRequest">
                   <div class="pendingImgContainer">
                     <img
-                      src="../img/brokenCeilingLamp.jpg"
-                      alt="Broken Ceiling Lamp"
+                      src="data:image/jpeg;base64,${base64Image}"
+                      alt="Maintenance Request Image"
                       class="requestImg"
                     />
                   </div>

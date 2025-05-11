@@ -36,34 +36,39 @@ const openCloseSidebar = function () {
   });
 };
 
-const confirmRequest = async function (data) {
-  const response = await fetch(`http://localhost:3000/request`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "multipart/form-data;",
-    },
-    body: JSON.stringify(data),
-  });
-  console.log(response.json());
-};
+confirmBtn.addEventListener("click", async function (event) {
+  event.preventDefault();
 
-confirmBtn.addEventListener("click", function () {
   if (
     topicInput.value.trim() === "" ||
     descriptionInput.value.trim() === "" ||
     imageInput.files.length === 0
   ) {
     console.log("Please fill all the input");
-  } else {
-    let data = {
-      RoomID: "0002",
-      AID: "A000000001",
-      Topic: topicInput.value,
-      Description: descriptionInput.value,
-      IMG: imageInput.files[0].name,
-    };
-    // console.log(data);
-    confirmRequest(data);
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append("IMG", imageInput.files[0]);
+  formData.append("RoomID", "0002");
+  formData.append("AID", "A000000001");
+  formData.append("Topic", topicInput.value);
+  formData.append("Description", descriptionInput.value);
+
+  try {
+    const response = await fetch(`http://localhost:3000/request/`, {
+      method: "POST",
+      body: formData,
+    });
+
+    if (response.ok) {
+      // Handle successful response
+      window.location.href = "../html/User_maintenanceStatus.html"; // Redirect after successful submission
+    } else {
+      console.error("Request failed:", response.status);
+    }
+  } catch (error) {
+    console.error("Error:", error);
   }
 });
 
