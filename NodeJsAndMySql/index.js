@@ -781,9 +781,10 @@ app.post('/api/login',async(req,res) => {
         })
     }catch(error){
         console.log(error);
-        return res.status(500).send();
-    }
-})
+        return res.status(400).send();
+      }
+      res.status(200).json(results);
+    });
 
 //อัปเดต Status ของ request
 app.patch("/api/update/request/:roomid", async (req, res) => {
