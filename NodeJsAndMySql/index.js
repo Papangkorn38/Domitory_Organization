@@ -3,18 +3,7 @@ const express = require('express'); //ดึง express มาใช้
 const mysql = require('mysql2'); // ดึง mysql2 มาใช้
 const cors = require('cors');// ดึง cors มาใช้
 const multer  = require('multer') // ดึง multer มาใช้เพื่ออัพโหลดรูปภาพ
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-const path = require("path"); //ดึง module path ของ Node.js มาใช้ในโปรเจกต์
 const bcrypt = require('bcrypt');
-=======
-//const bcrypt = require('bcrypt');
->>>>>>> 5399ed55f3db22bd0e86502574e683a4213a8c19
-=======
-const bcrypt = require('bcrypt');
-const path = require("path");
->>>>>>> 9bd2137be403978d7ff4f79cb9f41dc792cc3acb
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "uploads");
@@ -30,65 +19,15 @@ const upload = multer({
 
 const app = express(); //เรียก express ที่เราดึงมาใช้
 const port = 3000; //กำหนด port ของserver
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
-const bcrypt = require('bcrypt');
-const path = require('path');
-
-
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "uploads");
-  },
-  filename: function (req, file, cb) {
-    const filename = `${Date.now()}-${file.originalname}`;
-    cb(null, filename);
-  },
-});
-const upload = multer({
-  storage,
-});
-
-const app = express(); //เรียก express ที่เราดึงมาใช้
-const port = 3000; //กำหนด port ของserver
->>>>>>> 2c10c7f8dbd6cdbdccbcf6ece06b3de5e95a8fab
 
 app.use(cors());
->>>>>>> 5399ed55f3db22bd0e86502574e683a4213a8c19
-=======
 
-//เอาไว้เปิดพอร์ต 3000
-app.use(express.static(path.join(__dirname, "../")));
-app.get("/request", (req, res) => {
-  res.sendFile(path.join(__dirname, "../html/request.html"));
-});
-
-app.use(cors());
->>>>>>> 9bd2137be403978d7ff4f79cb9f41dc792cc3acb
-
-app.use(cors());
-app.use(express.static(path.join(__dirname, "../")));  // ให้ Express มองเห็นโฟลเดอร์ 'html', 'css', 'assets', 'img', 'javascript'
 //connect กับตัวdatabase ใน mysql
 const connection = mysql.createConnection({
   host: "localhost", //กำหนดให้เป็น local host
   user: "root", //ชื่อที่เราตั้ง
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
   password: "root", //password ที่เราตั้งไว้
-=======
-  password: "pb05112547", //password ที่เราตั้งไว้
->>>>>>> 5399ed55f3db22bd0e86502574e683a4213a8c19
-=======
-  password: "root", //password ที่เราตั้งไว้
->>>>>>> 9bd2137be403978d7ff4f79cb9f41dc792cc3acb
   database: "mydb", // ชื่อ schema ที่เราตั้งไว้
-=======
-  password: "root", //password ที่เราตั้งไว้
-  database: "oatty", // ชื่อ schema ที่เราตั้งไว้
->>>>>>> 2c10c7f8dbd6cdbdccbcf6ece06b3de5e95a8fab
 });
 
 //ดักจับerrorระหว่าง connect ไปยัง database
@@ -101,10 +40,6 @@ connection.connect((error) => {
   //ถ้าไม่มี error ก็ให้บอกว่าเชื่อมต่อสำเร็จ
   console.log("Connect to MySql successfully");
 });
-<<<<<<< HEAD
-=======
-
->>>>>>> 2c10c7f8dbd6cdbdccbcf6ece06b3de5e95a8fab
 
 //เพิ่ม request เข้าสู่ระบบ
 app.post("/request", upload.single("IMG"), (req, res) => {
@@ -207,10 +142,7 @@ app.post("/slip", upload.single("IMG"), (req, res) => {
       res.send("File uploaded successfully");
     });
   }
-<<<<<<< HEAD
-});
 
-=======
 });
 
 //ดึงข้อมูลพัสดุที่ยังไม่ได้รับ
@@ -226,7 +158,6 @@ app.get('/api/read/parcel/status/unreceived', (req, res) => {
 
 
 
->>>>>>> 2c10c7f8dbd6cdbdccbcf6ece06b3de5e95a8fab
 app.use("/api", express.json());
 
 //สร้าง API สำหรับเพิ่มข้อมูล
@@ -556,19 +487,7 @@ app.get("/api/read/client/:RoomID", async (req, res) => {
   const roomID = req.params.RoomID;
   try {
     connection.query(
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
       "SELECT *,TIMESTAMPDIFF(YEAR, BirthDate, CURDATE()) AS age FROM client JOIN room ON client.RoomID = room.RoomID WHERE client.RoomID = ?",
-=======
-      "SELECT * FROM client WHERE RoomID = ?",
->>>>>>> 5399ed55f3db22bd0e86502574e683a4213a8c19
-=======
-      "SELECT * FROM client WHERE RoomID = ?",
->>>>>>> 9bd2137be403978d7ff4f79cb9f41dc792cc3acb
-=======
-      "SELECT * FROM client WHERE RoomID = ?",
->>>>>>> 2c10c7f8dbd6cdbdccbcf6ece06b3de5e95a8fab
       [roomID],
       (error, results, fields) => {
         if (error) {
@@ -601,31 +520,6 @@ app.get("/api/read/bill", async (req, res) => {
 });
 
 //เพิ่มbillsเข้าระบบ
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-//roomcharge = ค่าเช่า 
-app.post("/api/insert/bill", (req, res) => {
-  const { RoomID, AID, RoomCharge, TotalCharge, WaterBill, ElecticBill, BillingCycle,
-    WaterCurrent, WaterPrevious, WaterUsed, WaterPrice,
-    ElectricCurrent, ElectricPrevious, ElectricUsed, ElectricPriced } =
-    req.body;
-  const query =
-    "INSERT INTO bills (RoomID, AID, RoomCharge, TotalCharge, WaterBill, ElecticBill, BillingCycle,WaterCurrent, WaterPrevious, WaterUsed, WaterPrice,ElectricCurrent, ElectricPrevious, ElectricUsed, ElectricPriced) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-  connection.query(
-    query,
-    [RoomID, AID, RoomCharge, TotalCharge, WaterBill, ElecticBill, BillingCycle,
-      WaterCurrent, WaterPrevious, WaterUsed, WaterPrice,
-      ElectricCurrent, ElectricPrevious, ElectricUsed, ElectricPriced],
-    (error, result) => {
-      if (error) {
-        console.error("Error to inserting data ", error);
-        return res.status(500).json({ error: "Internal server error" });
-=======
-=======
->>>>>>> 9bd2137be403978d7ff4f79cb9f41dc792cc3acb
-=======
->>>>>>> 2c10c7f8dbd6cdbdccbcf6ece06b3de5e95a8fab
 app.post("/api/insert/bill", (req, res) => {
   const { RoomID, AID, RoomCharge, TotalCharge, WaterBill, ElecticBill } =
     req.body;
@@ -638,13 +532,6 @@ app.post("/api/insert/bill", (req, res) => {
       if (error) {
         console.error("Error to inserting data ", error);
         res.status(500).json({ error: "Internal server error" });
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 5399ed55f3db22bd0e86502574e683a4213a8c19
-=======
->>>>>>> 9bd2137be403978d7ff4f79cb9f41dc792cc3acb
-=======
->>>>>>> 2c10c7f8dbd6cdbdccbcf6ece06b3de5e95a8fab
       }
       res.json({
         msg: "Data inserted successfully",
@@ -691,24 +578,6 @@ app.get("/api/read/parcel", async (req, res) => {
   }
 });
 
-<<<<<<< HEAD
-=======
-//เอาไว้อ่านข้อมูลพัสดุ
-app.get("/api/read/parcelByPID/:PID", (req, res) => {
-  const pid = req.params.PID;
-  connection.query(
-    "SELECT * FROM parcel WHERE PID = ?",
-    [pid],
-    (error, results) => {
-      if (error || results.length === 0) {
-        console.log(error || "ไม่พบข้อมูล");
-        return res.status(404).send({ error: "ไม่พบพัสดุ" });
-      }
-      res.status(200).json(results[0]);
-    }
-  );
-});
->>>>>>> 2c10c7f8dbd6cdbdccbcf6ece06b3de5e95a8fab
 //ฟอร์มแจ้งข้อมูลพัสดุ
 app.get("/api/read/parcel/:RoomID", async (req, res) => {
   const roomID = req.params.RoomID;
@@ -861,19 +730,7 @@ app.post('/api/login',async(req,res) => {
             if(ClientResults.length > 0){
                 //ถ้าเจอและรหัสถูก
                 if(Password == ClientResults[0].Password){
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
                     return res.json({status:'ok', role: "client",message:'login success',RoomID:ClientResults[0].RoomID})
-=======
-                    return res.json({status:'ok', role: "client",message:'login success'})
->>>>>>> 5399ed55f3db22bd0e86502574e683a4213a8c19
-=======
-                    return res.json({status:'ok', role: "client",message:'login success'})
->>>>>>> 9bd2137be403978d7ff4f79cb9f41dc792cc3acb
-=======
-                    return res.json({status:'ok', role: "client",message:'login success'})
->>>>>>> 2c10c7f8dbd6cdbdccbcf6ece06b3de5e95a8fab
                 }else{
                     return res.json({status:'error', role: "client",message:'wrong password'})
                 }
@@ -895,19 +752,7 @@ app.post('/api/login',async(req,res) => {
                     }
                 }
                 else{
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
                     return res.json({status:'user not found',message:'user not found'})
-=======
-                    return res.json({status:'error',message:'user not found'})
->>>>>>> 5399ed55f3db22bd0e86502574e683a4213a8c19
-=======
-                    return res.json({status:'error',message:'user not found'})
->>>>>>> 9bd2137be403978d7ff4f79cb9f41dc792cc3acb
-=======
-                    return res.json({status:'error',message:'user not found'})
->>>>>>> 2c10c7f8dbd6cdbdccbcf6ece06b3de5e95a8fab
                 }
             })
         })
@@ -936,7 +781,6 @@ app.patch("/api/update/request/:roomid", async (req, res) => {
   }
 });
 
-<<<<<<< HEAD
 //อัปเดต Status ของ parcel
 app.patch("/api/update/parcel/:roomid", async (req, res) => {
   const roomID = req.params.roomid;
@@ -949,59 +793,12 @@ app.patch("/api/update/parcel/:roomid", async (req, res) => {
         return res.status(400).send();
       }
       res.status(200).json(results);
-=======
-app.patch("/api/update/parcel-by-pid/:pid", (req, res) => {
-  const pid = req.params.pid;
-  const { Status } = req.body;
-
-  connection.query(
-    "UPDATE parcel SET Status = ? WHERE PID = ?",
-    [Status, pid],
-    (err, results) => {
-      if (err) {
-        console.error(err);
-        return res.status(500).json({ error: "อัปเดตล้มเหลว" });
-      }
-      res.status(200).json({ message: "อัปเดตสำเร็จ", affectedRows: results.affectedRows });
-    }
-  );
-});
-
-app.use(express.json());
-//อัปเดต Status ของ parcel
-app.patch("/api/update/parcel/:pid", async (req, res) => {
-  const pid = req.params.pid;
-  const { Status } = req.body;
-
-  const query = "UPDATE parcel SET Status = ? WHERE PID = ?";
-  try {
-    connection.query(query, [Status, pid], (error, results) => {
-      if (error) {
-        console.log(error);
-        return res.status(400).send("อัปเดตไม่สำเร็จ");
-      }
-      res.status(200).json({ message: "อัปเดตสำเร็จ", affectedRows: results.affectedRows });
->>>>>>> 2c10c7f8dbd6cdbdccbcf6ece06b3de5e95a8fab
     });
   } catch (error) {
     console.log(error);
     return res.status(500).send();
   }
 });
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-//อันนี้คือไว้แสดงหน้าเว้ปในport 3000
-app.get("/billing", (req, res) => {
-  res.sendFile(path.join(__dirname, "../html/U_User_Billing_Form.html"));
-});
-
-=======
->>>>>>> 5399ed55f3db22bd0e86502574e683a4213a8c19
-=======
->>>>>>> 9bd2137be403978d7ff4f79cb9f41dc792cc3acb
-=======
->>>>>>> 2c10c7f8dbd6cdbdccbcf6ece06b3de5e95a8fab
 
 //มันจะแสดงต้องเปิดserver
 app.listen(port, () => {
