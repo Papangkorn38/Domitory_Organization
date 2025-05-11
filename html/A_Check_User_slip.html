@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/A_Check_User_slip.css" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <title>CheckSlip</title>
+  </head>
+  <body>
+    <div class="template">
+      <div class="sideBar collapsed">
+        <div class="closeOpenContainer">
+          <i class="bx bx-menu menuBtn"></i>
+          <i class="bx bx-x closeBtn hidden"></i>
+        </div>
+
+        <img src="../assets/dormLogo.png" alt="Dormitory Logo" class="sideBarDormLogo" />
+
+        <ul class="sideBarLinksContainer">
+          <li><img src="../img/Building.png" alt=""><a href="#">สถานะห้องพักรายเดือน</a></li>
+          <li><img src="../img/Folder.png" alt=""><a href="#">รายการบิลผู้เช่า</a></li>
+          <li><img src="../img/Bill.png" alt=""><a href="#">ฟอร์มเเจ้งบิลค่าใช้จ่าย</a></li>
+          <li><img src="../img/Cardboard Box.png" alt=""><a href="#">ฟอร์มเเจ้งข้อมูลพัสดุ</a></li>
+          <li><img src="../img/file-tray-sharp.png" alt=""><a href="#">ประวิติพัสดุผู้เช่า</a></li>
+          <li><img src="../img/Maintenance.png" alt=""><a href="#">รายการแจ้งซ่อม</a></li>
+          <li><img src="../img/Vector.png" alt=""><a href="#">ตรวจสอบสลิปผู้เช่า</a></li>
+        </ul>
+
+        <button class="logoutBtn hidden">Log Out</button>
+      </div>
+
+      <div class="contents">
+        <div class="header">
+          <img src="../assets/dormLogo.png" alt="Dormitory Logo" class="headerDormLogo" />
+          <div class="profile">
+            <img src="../assets/Male User.png" alt="Profile Image" class="profileImg" />
+            <p class="profileText">Welcome Back! <br />K. SOMPONG LUMKEN</p>
+          </div>
+        </div>
+
+        <div class="titleContainer">
+          <img src="../img/Bill_reverse.png" alt="">
+          <p class="title">ตรวจสอบสลิปลูกบ้าน</p>
+        </div>
+
+        <div class="mainContent">
+          <div class="userSection">
+            <div class="Userimg">
+              <img src="../assets/User.png" class="A002UserImg" />
+              <div class="user-id-box" id="displayRoomID">A0001</div>
+            </div>
+
+            <nav>
+              <div class="userFormContainer">
+                <div class="formGroup">
+                  <label>เลขห้อง</label>
+                  <select class="box" id="roomIDField"></select>
+                </div>
+                <div class="formGroup">
+                  <label>รอบบิล</label>
+                  <input id="billing-cycle" class="billing-cycle" readonly />
+                </div>
+                <div class="formGroup">
+                  <label>วันออกบิล</label>
+                  <input id="billdate" class="billdate" readonly />
+                </div>
+                <div class="formGroup">
+                  <label>ค่าเช่า</label>
+                  <input id="rent-box" class="rent-box" readonly />
+                </div>
+                <div class="formGroup">
+                  <label>รายละเอียดรูปภาพ</label>
+                  <div class="upload-slip-box">
+                    <img id="slipImage" src="" alt="img">
+                  </div>
+                </div>
+              </div>
+
+              <div class="buttonGroup">
+                <button id="btn edit" class="btn edit" onclick="showApproveModal()">อนุมัติ</button>
+                <button id="btn delete" class="btn delete" onclick="showRejectModal()">ไม่อนุมัติ</button>
+              </div>
+
+              <div id="approveModal" class="modal hidden">
+                <div class="modal-content">
+                  <p>อนุมัติสำเร็จ!</p>
+                  <button onclick="closeModal('approveModal')">ตกลง</button>
+                </div>
+              </div>
+
+              <div id="rejectModal" class="modal hidden">
+                <div class="modal-content">
+                  <p>ไม่อนุมัติสำเร็จ!</p>
+                  <button onclick="closeModal('rejectModal')">ตกลง</button>
+                </div>
+              </div>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="../javascript/A_Check_User_slip.js"></script>
+  </body>
+</html>

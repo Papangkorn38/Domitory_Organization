@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const roomID = "0009"; // หรือใช้ดึงจาก URL เช่น ?room=4051
+    const roomID = "0011"; // หรือใช้ดึงจาก URL เช่น ?room=4051
   
     fetch(`http://localhost:3000/api/read/bill/${roomID}`)
       .then(response => response.json())
