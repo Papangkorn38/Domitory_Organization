@@ -4,6 +4,7 @@ const mysql = require('mysql2'); // ดึง mysql2 มาใช้
 const cors = require('cors');// ดึง cors มาใช้
 const multer  = require('multer') // ดึง multer มาใช้เพื่ออัพโหลดรูปภาพ
 const bcrypt = require('bcrypt');
+const path = require('path');
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "uploads");
@@ -74,7 +75,7 @@ app.post("/request", upload.single("IMG"), (req, res) => {
 
 app.use(express.static(path.join(__dirname, '../'))); 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../html/User_Parcel.html'));
+  res.sendFile(path.join(__dirname, '../html/login.html'));
 });
 //เพิ่มพัสดุเข้าสู่ระบบ
 app.post("/upload", upload.single("IMG"), (req, res) => {
@@ -520,18 +521,23 @@ app.get("/api/read/bill", async (req, res) => {
 });
 
 //เพิ่มbillsเข้าระบบ
+//roomcharge = ค่าเช่า 
 app.post("/api/insert/bill", (req, res) => {
-  const { RoomID, AID, RoomCharge, TotalCharge, WaterBill, ElecticBill } =
+  const { RoomID, AID, RoomCharge, TotalCharge, WaterBill, ElecticBill, BillingCycle,
+    WaterCurrent, WaterPrevious, WaterUsed, WaterPrice,
+    ElectricCurrent, ElectricPrevious, ElectricUsed, ElectricPriced } =
     req.body;
   const query =
-    "INSERT INTO bills(RoomID , AID , RoomCharge , TotalCharge , WaterBill , ElecticBill) VALUES(?,?,?,?,?,?)";
+    "INSERT INTO bills (RoomID, AID, RoomCharge, TotalCharge, WaterBill, ElecticBill, BillingCycle,WaterCurrent, WaterPrevious, WaterUsed, WaterPrice,ElectricCurrent, ElectricPrevious, ElectricUsed, ElectricPriced) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
   connection.query(
     query,
-    [RoomID, AID, RoomCharge, TotalCharge, WaterBill, ElecticBill],
+    [RoomID, AID, RoomCharge, TotalCharge, WaterBill, ElecticBill, BillingCycle,
+      WaterCurrent, WaterPrevious, WaterUsed, WaterPrice,
+      ElectricCurrent, ElectricPrevious, ElectricUsed, ElectricPriced],
     (error, result) => {
       if (error) {
         console.error("Error to inserting data ", error);
-        res.status(500).json({ error: "Internal server error" });
+        return res.status(500).json({ error: "Internal server error" });
       }
       res.json({
         msg: "Data inserted successfully",
@@ -798,6 +804,11 @@ app.patch("/api/update/parcel/:roomid", async (req, res) => {
     console.log(error);
     return res.status(500).send();
   }
+});
+
+//อันนี้คือไว้แสดงหน้าเว้ปในport 3000
+app.get("/billing", (req, res) => {
+  res.sendFile(path.join(__dirname, "../html/U_User_Billing_Form.html"));
 });
 
 //มันจะแสดงต้องเปิดserver
