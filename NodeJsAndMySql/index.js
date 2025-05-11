@@ -23,7 +23,7 @@ app.use(express.static(path.join(__dirname, "../")));  // ให้ Express ม�
 const port = 3000; //กำหนด port ของserver
 
 app.use(cors());
-
+app.use(express.static(path.join(__dirname, "../")));  // ให้ Express มองเห็นโฟลเดอร์ 'html', 'css', 'assets', 'img', 'javascript'
 //connect กับตัวdatabase ใน mysql
 const connection = mysql.createConnection({
   host: "localhost", //กำหนดให้เป็น local host
