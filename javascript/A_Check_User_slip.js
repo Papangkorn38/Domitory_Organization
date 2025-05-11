@@ -55,12 +55,12 @@ function updateSlipAndBillData(roomID) {
   document.getElementById("roomIDField").value = roomID;
 
   // เคลียร์ค่าก่อน
-  document.querySelector(".billing-cycle").value = "";
-  document.querySelector(".billdate").value = "";
-  document.querySelector(".rent-box").value = "";
+  document.getElementById("billing-cycle").value = "";
+  document.getElementById("billdate").value = "";
+  document.getElementById("rent-box").value = "";
   document.getElementById("slipImage").src = "";
 
-  // 🔸 Fetch Bill
+  //Fetch Bill
   fetch(`http://localhost:3000/api/read/bill/${roomIDText}`)
     .then(res => res.json())
     .then(billData => {
@@ -78,14 +78,14 @@ function updateSlipAndBillData(roomID) {
           month: "long", year: "numeric"
         });
 
-        document.querySelector(".billing-cycle").value = `-- ${monthYear} --`;
-        document.querySelector(".billdate").value = `${dateStr} ${timeStr}`;
-        document.querySelector(".rent-box").value = `${bill.TotalCharge} บาท`;
+        document.getElementById("billing-cycle").value = `-- ${monthYear} --`;
+        document.getElementById("billdate").value = `${dateStr} ${timeStr}`;
+        document.getElementById("rent-box").value = `${bill.TotalCharge}`;
       }
     })
     .catch(err => console.error("Error fetching bill:", err));
 
-  // 🔸 Fetch Slip Image
+  //Fetch Slip Image
   fetch(`http://localhost:3000/api/read/slip/${roomIDText}`)
     .then(res => res.json())
     .then(slipData => {

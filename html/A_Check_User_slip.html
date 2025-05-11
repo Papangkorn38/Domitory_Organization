@@ -62,15 +62,15 @@
                 </div>
                 <div class="formGroup">
                   <label>รอบบิล</label>
-                  <input class="billing-cycle" readonly />
+                  <input id="billing-cycle" class="billing-cycle" readonly />
                 </div>
                 <div class="formGroup">
                   <label>วันออกบิล</label>
-                  <input class="billdate" readonly />
+                  <input id="billdate" class="billdate" readonly />
                 </div>
                 <div class="formGroup">
                   <label>ค่าเช่า</label>
-                  <input class="rent-box" readonly />
+                  <input id="rent-box" class="rent-box" readonly />
                 </div>
                 <div class="formGroup">
                   <label>รายละเอียดรูปภาพ</label>
@@ -81,8 +81,8 @@
               </div>
 
               <div class="buttonGroup">
-                <button class="btn edit" onclick="showApproveModal()">อนุมัติ</button>
-                <button class="btn delete" onclick="showRejectModal()">ไม่อนุมัติ</button>
+                <button id="btn edit" class="btn edit" onclick="showApproveModal()">อนุมัติ</button>
+                <button id="btn delete" class="btn delete" onclick="showRejectModal()">ไม่อนุมัติ</button>
               </div>
 
               <div id="approveModal" class="modal hidden">
