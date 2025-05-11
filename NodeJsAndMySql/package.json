@@ -14,13 +14,8 @@
     "cors": "^2.8.5",
     "express": "^5.1.0",
     "multer": "^1.4.5-lts.2",
-<<<<<<< HEAD
     "mysql2": "^3.14.0",
     "nodejsandmysql": "file:",
     "path": "^0.12.7"
-=======
-    "mysql2": "^3.14.1",
-    "nodejsandmysql": "file:"
->>>>>>> 6e0378752dbfe525e121b02fd87c6c850c4a56b5
   }
 }
