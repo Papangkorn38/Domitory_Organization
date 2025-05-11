@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/roomStatus.css" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <title>RoomStatus</title>
+  </head>
+  <body onload="read_room()">
+    <div class="template">
+      <div class="sideBar collapsed">
+        <div class="closeOpenContainer">
+          <i class="bx bx-menu menuBtn"></i>
+          <i class="bx bx-x closeBtn hidden"></i>
+        </div>
+
+        <img
+          src="../assets/dormLogo.png"
+          alt="Dormitory Logo"
+          class="sideBarDormLogo"
+        />
+        <!--แถบสีฟ้าซ้ายมือ-->
+        <ul class="sideBarLinksContainer">
+          <li>
+            <img src="../img/Building.png" alt=""><a href="#">สถานะห้องพักรายเดือน</a>
+          </li>
+          <li><img src="../img/Folder.png" alt=""><a href="#">รายการบิลผู้เช่า</a></li>
+          <li>
+            <img src="../img/Bill.png" alt=""><a href="#">ฟอร์มเเจ้งบิลค่าใช้จ่าย</a>
+          </li>
+          <li>
+            <img src="../img/Cardboard Box.png" alt=""hei><a href="#">ฟอร์มเเจ้งข้อมูลพัสดุ</a>
+          </li>
+          <li>
+            <img src="../img/file-tray-sharp.png" alt=""><a href="#">ประวิติพัสดุผู้เช่า</a>
+          </li>
+          <li><img src="../img/Maintenance.png" alt=""><a href="#">รายการแจ้งซ่อม</a></li>
+          <li>
+            <img src="../img/Vector.png" alt=""><a href="#">ตรวจสอบสลิปผู้เช่า</a>
+          </li>
+        </ul>
+
+        <button class="logoutBtn hidden"onclick = "logout()">Log Out</button>
+      </div>
+
+      <div class="contents">
+        <div class="header">
+          <img
+            src="../assets/dormLogo.png"
+            alt="Dormitory Logo"
+            class="headerDormLogo"
+          />
+          <div class="profile">
+            <p class="profileText">WELCOME BACK!</p>
+          </div>
+        </div>
+        <div class="titleContainer">
+          <!--โลโก้ของแต่ละหัวข้อ-->
+          <img src="../img/Building_reverse.png" alt=""><!--โลโก้สีกรมจะมีชื่อว่า reverse ต่อท้ายนะ-->
+          <p class="title">สถานะห้องพักรายเดือน</p>
+        </div>
+        <!--เพิ่มเนื้อหาตรงนี้นะ(mainContent)-->
+        <div class="mainContent">
+            <div class="main_container">
+              <div class="room_summary_container">
+                <div class="room_summary_flex_box">
+
+                  <div class="room_status_info">
+                    <p>Total room</p>
+                    <p>จำนวนห้องทั้งหมด</p>
+                    <div id="total_room">20</div>
+                  </div>
+                  <div class="img_icon"><img src="../img/Folder.png" alt=""></div>
+
+                </div>
+
+                <div class="room_summary_flex_box">
+
+                  <div class="room_status_info">
+                    <p>Total Avalible room</p>
+                    <p>จำนวนห้องว่าง</p>
+                    <div id="total_Avalible_room">5</div>
+                  </div>
+                  <div class="img_icon"><img src="../img/Folder.png" alt=""></div>
+
+                </div>
+
+                <div class="room_summary_flex_box">
+                  <div class="room_status_info">
+                    <p>Total Unpaid room</p>
+                    <p>จำนวนห้องที่ยังไม่จ่ายทั้งหมด</p>
+                    <div id="total_Unpaid_room">3</div>
+                  </div>
+                  <div class="img_icon"><img src="../img/Folder.png" alt=""></div>
+
+                </div>
+                
+                <div class="room_summary_flex_box">
+                  <div class="room_status_info">
+                    <p>Total Paid</p>
+                    <p>จำนวนห้องที่จ่ายแล้วทั้งหมด</p>
+                    <div id="total_Paid_room">12</div>
+                  </div>
+                  <div class="img_icon"><img src="../img/Folder.png" alt=""></div>
+                </div>
+              </div>
+              <div class="room_box_container"id = "test">
+                <div class="room_box_flex_box">A001</div>
+                <div class="room_box_flex_box">A002</div>
+                <div class="room_box_flex_box">A003</div>
+                <div class="room_box_flex_box">A004</div>
+                <div class="room_box_flex_box">A005</div>
+                <div class="room_box_flex_box">A006</div>
+                <div class="room_box_flex_box">A007</div>
+                <div class="room_box_flex_box">A008</div>
+                <div class="room_box_flex_box">A009</div>
+                <div class="room_box_flex_box">A010</div>
+                <div class="room_box_flex_box">A011</div>
+                <div class="room_box_flex_box">A012</div>
+                <div class="room_box_flex_box">A013</div>
+                <div class="room_box_flex_box">A014</div>
+                <div class="room_box_flex_box">A015</div>
+                <div class="room_box_flex_box">A016</div>
+                <div class="room_box_flex_box">A017</div>
+                <div class="room_box_flex_box">A018</div>
+                <div class="room_box_flex_box">A019</div>
+                <div class="room_box_flex_box">A020</div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <script src="../javascript/roomStatus.js"></script>
+    <script src="../javascript/template.js"></script>
+  </body>
+</html>
+<!-- TEst -->
