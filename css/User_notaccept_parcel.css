@@ -279,38 +279,57 @@
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
   
-  .parcelList {
+.parcelList {
     display: flex;
     flex-direction: column;
     gap: 20px;
     flex: 1;
   }
-  
+
   .parcelItem {
-    display: flex;
-    gap: 20px;
-    width: 450px;
-    padding: 16px;
-    background-color: #f3f3f3;
-    border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-  }
-  
+  display: flex;
+  padding: 16px;
+  background-color: #f3f3f3;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  width: 200%;
+  max-width: 450px;
+  margin-bottom: 20px;
+}
+.parcelItem:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
   .parcelImage {
-    width: 100px;
-    height: 100px;
-    border-radius: 8px;
-    object-fit: cover;
-  }
-  
+  width: 100px;
+  height: 100px;
+  object-fit: cover; /* เพื่อให้รูปขนาดพอดีกับกรอบและไม่ผิดสัดส่วน /
+  border-radius: 8px; / ให้มุมโค้งมน /
+  margin-right: 20px; / ระยะห่างระหว่างรูปและข้อมูล /
+}
+
   .parcelDetail {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    font-size: 14px;
-    color: #222;
-    gap: 4px;
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1; / ทำให้ข้อมูลในช่องนี้ยืดเต็มที่ /
+  margin-left: 20px; / ระยะห่างจากรูป */
+}
+.parcelDetail div {
+  margin: 5px 0;
+}
+
+.parcelStatus {
+  font-size: 0.9em;
+  font-style: italic;
+  color: #666;
+}
+.parcelLink {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+}
   .mainContent {
     display: flex;
     gap: 40px;
