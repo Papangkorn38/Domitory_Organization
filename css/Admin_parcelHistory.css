@@ -197,10 +197,6 @@
   box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 5px -2px;
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 2c10c7f8dbd6cdbdccbcf6ece06b3de5e95a8fab
 .titleContainer i {
   font-size: var(--Huge-font);
 }
@@ -251,8 +247,4 @@
   .parcelHistoryTable tbody tr:hover {
     background-color: #eef4fb;
     transition: background-color 0.3s ease;
-<<<<<<< HEAD
   }
-=======
-  }
->>>>>>> 2c10c7f8dbd6cdbdccbcf6ece06b3de5e95a8fab

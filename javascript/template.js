@@ -33,7 +33,6 @@ const openCloseSidebar = function () {
 };
 
 openCloseSidebar();
-<<<<<<< HEAD
 var logout = function(){
   if(confirm('ต้องการจะออกสุ่ระบบใช่ไหม')){
       window.location.href = '../html/login.html';
@@ -41,19 +40,3 @@ var logout = function(){
       console.log('ยกเลิกการlogoutเรียบร้อยแล้ว');
   }
 }
-=======
-
-/*ใช้เลื่อนแถบ*/ 
-const tabs = document.querySelectorAll('.tab');
-const indicator = document.querySelector('.blueline');
-
-tabs.forEach((tab, index) => {
-  tab.addEventListener('click', () => {
-    tabs.forEach(t => t.classList.remove('active'));
-    tab.classList.add('active');
-
-    indicator.style.transform = `translateX(${index * 100}%)`;
-  });
-});
-
->>>>>>> 9bd2137be403978d7ff4f79cb9f41dc792cc3acb
