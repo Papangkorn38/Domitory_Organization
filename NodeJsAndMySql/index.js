@@ -19,6 +19,7 @@ const upload = multer({
 });
 
 const app = express(); //เรียก express ที่เราดึงมาใช้
+app.use(express.static(path.join(__dirname, "../")));  // ให้ Express มองเห็นโฟลเดอร์ 'html', 'css', 'assets', 'img', 'javascript'
 const port = 3000; //กำหนด port ของserver
 
 app.use(cors());
@@ -584,6 +585,22 @@ app.get("/api/read/parcel", async (req, res) => {
   }
 });
 
+//เอาไว้อ่านข้อมูลพัสดุ
+app.get("/api/read/parcelByPID/:PID", (req, res) => {
+  const pid = req.params.PID;
+  connection.query(
+    "SELECT * FROM parcel WHERE PID = ?",
+    [pid],
+    (error, results) => {
+      if (error || results.length === 0) {
+        console.log(error || "ไม่พบข้อมูล");
+        return res.status(404).send({ error: "ไม่พบพัสดุ" });
+      }
+      res.status(200).json(results[0]);
+    }
+  );
+});
+
 //ฟอร์มแจ้งข้อมูลพัสดุ
 app.get("/api/read/parcel/:RoomID", async (req, res) => {
   const roomID = req.params.RoomID;
@@ -809,6 +826,68 @@ app.patch("/api/update/parcel/:roomid", async (req, res) => {
 //อันนี้คือไว้แสดงหน้าเว้ปในport 3000
 app.get("/billing", (req, res) => {
   res.sendFile(path.join(__dirname, "../html/U_User_Billing_Form.html"));
+  });
+//เพิ่ม post billhistory
+app.post("/api/insert/bills_history", (req, res) => {
+  const { BID,RoomID,BHRoomChaege,BHTotalCharge,BHWaterBill,BHElectricBill,BHDate,Status,Bill} =
+    req.body;
+  const query =
+    "INSERT INTO bills_history (BID,RoomID,BHRoomChaege,BHTotalCharge,BHWaterBill,BHElectricBill,BHDate,Status,Bill) VALUES (?, ?, ?, ?, ?, ?, ? , ?, ?)";
+  connection.query(
+    query,
+    [BID,RoomID,BHRoomChaege,BHTotalCharge,BHWaterBill,BHElectricBill,BHDate,Status,Bill],
+    (error, result) => {
+      if (error) {
+        console.error("Error to inserting data ", error);
+        return res.status(500).json({ error: "Internal server error" });
+      }
+      res.json({
+        msg: "Data inserted successfully",
+        insertedID: result.insertId,
+      });
+    }
+  );
+});
+
+//เพิ่ม get billhistory
+app.get("/api/read/bills_history/:RoomID", (req, res) => {
+  const roomID = req.params.RoomID;
+  try {
+    connection.query(
+      "SELECT * FROM bills_history WHERE RoomID = ?",
+      [roomID],
+      (error, results, fields) => {
+        if (error) {
+          console.log(error);
+          return res.status(400).send();
+        }
+        res.status(200).json(results);
+      }
+    );
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send();
+  }
+});
+
+//อัปเดต Status ของ parcel
+app.patch("/api/update/parcel/:pid", async (req, res) => {
+  const pid = req.params.pid;
+  const { Status } = req.body;
+
+  const query = "UPDATE parcel SET Status = ? WHERE PID = ?";
+  try {
+    connection.query(query, [Status, pid], (error, results) => {
+      if (error) {
+        console.log(error);
+        return res.status(400).send("อัปเดตไม่สำเร็จ");
+      }
+      res.status(200).json({ message: "อัปเดตสำเร็จ", affectedRows: results.affectedRows });
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send();
+  }
 });
 
 //มันจะแสดงต้องเปิดserver

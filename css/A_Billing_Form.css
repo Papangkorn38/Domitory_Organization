@@ -295,32 +295,35 @@ input[type="text"] {
   background-color: #fff;
 }
 
-.billing-cycle-box{
-    text-align: center;
-    font-size: 15px;
-    padding: 8px; 
-    border-radius: 6px; 
-    border: 0px solid #c4c4c4;
-    font-size: normal; 
-    flex: 1; 
-    max-width: 185px
-  }
-
-.box{
-    color: #848484;
-    background-color: #DFDFDF;
+.billing-cycle{
     text-align: left;
     font-size: 15px;
-    padding: 8px; 
+    padding: 7px; 
     border-radius: 6px; 
     border: 0px solid #c4c4c4;
     font-size: normal; 
-    flex: 1; 
-    max-width: 185px
-}
+    flex: 1;
+    max-width: 185px 
+  }
 
-.date-box{
-    text-align: center;
+  .submit-btn {
+    margin-top: 20px;
+    margin-left: 250px;
+    padding: 12px 24px;
+    background-color: #1c2e4a;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    align-self: flex-start;
+  }
+  
+  .submit-btn:hover {
+    background-color: #314a75;
+  }
+
+  .box{
+    text-align: left;
     font-size: 15px;
     padding: 8px; 
     border-radius: 6px; 
@@ -433,47 +436,5 @@ input[type="number"]{
     font-weight: normal;
 }
 
-.pay-bill {
-  margin-top: 20px;
-  margin-left: 250px;
-  padding: 10px 20px;
-  background-color: #1c2e4a;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  align-self: flex-start;
-}
 
-.pay-bill:hover {
-  background-color: #314a75;
-}
 
-.backBtn {
-    display: flex;
-    align-items: center;
-    color: #434343;
-    gap: 8px;
-    margin: 30px;
-    font-size: 15px;
-    cursor: pointer;
-    }
-  
-    .btn {
-      padding: 10px 30px;
-      border: none;
-      border-radius: 6px;
-      font-size: 15px;
-      cursor: pointer;
-    }
-
-  .user-id-display {
-    margin-top: -50px;
-    margin-left: 50px;
-    font-size: 25px;
-    font-weight: normal;
-    color: #274663;
-    text-align: center;
-    border-radius: 6px;
-    }
-    
