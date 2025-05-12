@@ -29,9 +29,9 @@ const connection = mysql.createConnection({
   host: "localhost", //กำหนดให้เป็น local host
   user: "root", //ชื่อที่เราตั้ง
   password: "root", //password ที่เราตั้งไว้
-  database: "mydb", // ชื่อ schema ที่เราตั้งไว้
+  database: "dormitorydb", // ชื่อ schema ที่เราตั้งไว้
 });
-
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 //ดักจับerrorระหว่าง connect ไปยัง database
 connection.connect((error) => {
   //ถ้าเจอให้ขึ้นข้อความพร้อมบอกว่า error อะไร
@@ -85,16 +85,16 @@ app.post("/upload", upload.single("IMG"), (req, res) => {
     console.log("no file upload");
     return res.status(400).send("No file uploaded");
   } else {
-    const { PID, CID, RoomID } = req.body;
+    const { PID, RoomID } = req.body;
     // ดึงชื่อไฟล์จาก req.file.filename (หรือ req.file.path ตามการตั้งค่า multer)
     const uploadedFileName = req.file.filename;
     // หรือ const uploadedFilePath = req.file.path;
 
-    const inserDATA = "INSERT INTO parcel(PID,CID,RoomID,IMG) VALUES(?,?,?,?)";
+    const inserDATA = "INSERT INTO parcel(PID,RoomID,IMG) VALUES(?,?,?)";
     // ใช้ uploadedFileName (หรือ uploadedFilePath) แทน req.body.IMG
     connection.query(
       inserDATA,
-      [PID, CID, RoomID, uploadedFileName],
+      [PID, RoomID, uploadedFileName],
       (error, result) => {
         if (error) {
           console.error(error);
@@ -835,7 +835,6 @@ app.post("/api/login", async (req, res) => {
     console.log(error);
     return res.status(400).send();
   }
-  res.status(200).json(results);
 });
 
 //อัปเดต Status ของ request
