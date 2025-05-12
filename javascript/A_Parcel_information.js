@@ -4,7 +4,6 @@ const menuBtn = document.querySelector(".menuBtn");
 const logoutBtn = document.querySelector(".logoutBtn");
 const sideBarIcons = document.querySelectorAll(".sideBarLinksContainer li");
 
-//Open and close side-bar function
 const openCloseSidebar = function () {
   const toggleSidebar = function (isCollapsed) {
     sideBar.classList.toggle("collapsed", isCollapsed);
@@ -13,20 +12,20 @@ const openCloseSidebar = function () {
     logoutBtn.classList.toggle("hidden", isCollapsed);
   };
 
-  closeBtn.addEventListener("click", function () {
+  closeBtn.addEventListener("click", () => {
     toggleSidebar(true);
   });
 
-  menuBtn.addEventListener("click", function () {
+  menuBtn.addEventListener("click", () => {
     toggleSidebar(false);
   });
 
-  sideBar.addEventListener("mouseleave", function () {
+  sideBar.addEventListener("mouseleave", () => {
     toggleSidebar(true);
   });
 
-  sideBarIcons.forEach(function (element) {
-    element.addEventListener("mouseover", function () {
+  sideBarIcons.forEach((el) => {
+    el.addEventListener("mouseover", () => {
       toggleSidebar(false);
     });
   });
@@ -39,31 +38,40 @@ window.addEventListener("DOMContentLoaded", () => {
   const roomID = urlParams.get("room");
 
   fetch(`http://localhost:3000/api/read/parcel/${roomID}`)
-    .then((res) => res.json())
-    .then((data) => {
+    .then(res => res.json())
+    .then(data => {
       if (!Array.isArray(data) || data.length === 0) {
         console.error("ไม่พบข้อมูลพัสดุ");
         return;
       }
 
       const latest = data[data.length - 1];
+
       const roomDisplay = "A" + latest.RoomID;
       document.getElementById("user-id-box").textContent = roomDisplay;
       document.getElementById("box").value = roomDisplay;
 
-      const date = new Date(latest.ParcelDate);
-      const formattedDate = `${date.getDate().toString().padStart(2, '0')}-${(date.getMonth()+1).toString().padStart(2, '0')}-${date.getFullYear()+543}   ${date.toTimeString().split(' ')[0]}`;
+      const d = new Date(latest.ParcelDate);
+      const formattedDate =
+        d.getDate().toString().padStart(2, "0") + "-" +
+        (d.getMonth() + 1).toString().padStart(2, "0") + "-" +
+        (d.getFullYear() + 543) + "   " +
+        d.toTimeString().split(" ")[0];
       document.getElementById("date-box").value = formattedDate;
 
-      const imgBox = document.getElementById("upload-box img");
-      imgBox.src = `../uploads/${latest.IMG}`;
-      imgBox.alt = "รูปพัสดุ";
+      const parcelDisplay = "A" + latest.PID;
+      document.getElementById("parcelbox").value = parcelDisplay;
+
+      const imgEl = document.querySelector("#upload-box img");
+      if (imgEl && latest.IMG) {
+        imgEl.src = `../uploads/${latest.IMG}`;
+        imgEl.alt = "รูปพัสดุ";
+      }
     })
-    .catch((err) => {
+    .catch(err => {
       console.error("ไม่สามารถโหลดข้อมูลพัสดุ:", err);
     });
 
-  // เพิ่มปุ่มย้อนกลับไปยังหน้า Admin_parcelHistory.html
   const backBtn = document.getElementById("backBtn");
   if (backBtn) {
     backBtn.addEventListener("click", () => {

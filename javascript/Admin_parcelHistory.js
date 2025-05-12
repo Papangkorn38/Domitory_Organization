@@ -69,7 +69,7 @@ var admin_parcelHistory = function(){
             <tr onclick="window.location.href='A_Parcel_information.html?room=${user.RoomID}'" style="cursor: pointer;">
               <td>${user.RoomID}</td>
               <td>${formatDate}</td>
-              <td>${user.IMG}></td>
+              <td>${user.PID}</td>
               <td>${user.Status}</td>
             </tr>
           `;
