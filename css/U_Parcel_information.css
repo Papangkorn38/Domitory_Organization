@@ -158,7 +158,6 @@
   justify-content: space-between;
   align-items: center;
   padding: 20px 30px;
-
 }
 
 .headerDormLogo {
@@ -252,16 +251,16 @@
 }
 
 .userFormContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    background: #f0f0f0;
-    padding: 30px;
-    border-radius: 10px;
-    font-size: 15px;
-    width: 100%;
-    max-width: 1200px; 
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: #f0f0f0;
+  padding: 30px;
+  border-radius: 10px;
+  font-size: 15px;
+  width: 100%;
+  max-width: 1200px;
+}
 
 .user-id {
   font-size: 18px;
@@ -278,7 +277,7 @@
 
 .formGroup {
   display: flex;
-  align-items: center; 
+  align-items: center;
   gap: 20px;
 }
 
@@ -309,30 +308,34 @@ input[type="text"] {
   color: #888;
 }
 
-.box{
-  color: #848484;
-  background-color: #DFDFDF;
-  text-align: left;
-  font-size: 15px;
-  padding: 8px; 
-  border-radius: 6px; 
-  border: 0px solid #c4c4c4;
-  font-size: normal; 
-  flex: 1; 
-  max-width: 185px
+.parcelImage {
+  width: 100%;
 }
 
-.parcel-box{
+.box {
+  color: #848484;
+  background-color: #dfdfdf;
+  text-align: left;
+  font-size: 15px;
+  padding: 8px;
+  border-radius: 6px;
+  border: 0px solid #c4c4c4;
+  font-size: normal;
+  flex: 1;
+  max-width: 185px;
+}
+
+.parcel-box {
   color: #000000;
-  background-color: #DFDFDF;
+  background-color: #dfdfdf;
   text-align: center;
   font-size: 15px;
-  padding: 8px; 
-  border-radius: 6px; 
+  padding: 8px;
+  border-radius: 6px;
   border: 0px solid #c4c4c4;
-  font-size: normal; 
-  flex: 1; 
-  max-width: 185px
+  font-size: normal;
+  flex: 1;
+  max-width: 185px;
 }
 
 .receive_parcel {
@@ -359,15 +362,12 @@ input[type="text"] {
   margin: 30px;
   font-size: 15px;
   cursor: pointer;
-  }
+}
 
-  .btn {
-    padding: 10px 30px;
-    border: none;
-    border-radius: 6px;
-    font-size: 15px;
-    cursor: pointer;
-  }
-
-
-
+.btn {
+  padding: 10px 30px;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  cursor: pointer;
+}

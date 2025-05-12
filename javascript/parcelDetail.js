@@ -3,8 +3,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (pid) {
     fetch(`http://localhost:3000/api/read/parcelByPID/${pid}`)
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         document.querySelector(".user-id-box").innerText = data.RoomID || "-";
         document.querySelector(".box").value = data.RoomID || "-";
 
@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         document.querySelector(".upload-box").innerHTML = `
-          <img src="/api/image/${data.PID}" class="parcelAvatarImg" alt="Parcel Image" />
+          <img src="../NodeJsAndMySql/uploads/${data.IMG}" class="parcelImage" alt="Parcel Image" />
         `;
 
         const btn = document.querySelector(".receive_parcel");
