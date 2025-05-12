@@ -33,3 +33,8 @@ const openCloseSidebar = function () {
 };
 
 openCloseSidebar();
+
+// จะรู้ได้ไง่ว่า request ที่กดมาเป็น request อันไหน
+window.onload = async function () {
+  const response = fetch(``);
+};
