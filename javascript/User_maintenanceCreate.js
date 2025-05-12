@@ -36,6 +36,31 @@ const openCloseSidebar = function () {
   });
 };
 
+const getData = async function () {
+  const urlParam = window.location.search;
+  const searchParams = new URLSearchParams(urlParam);
+  const roomID = searchParams.get("id");
+
+  const response = await fetch(
+    `http://localhost:3000/api/read/request/${roomID}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+
+  const dataFromApi = await response.json();
+  const roomAndAdminID = {
+    RoomID: dataFromApi[0].RoomID,
+    AdminID: dataFromApi[0].AID,
+  };
+
+  console.log(roomAndAdminID.RoomID);
+  return roomAndAdminID;
+};
+
 confirmBtn.addEventListener("click", async function (event) {
   event.preventDefault();
 
@@ -44,31 +69,32 @@ confirmBtn.addEventListener("click", async function (event) {
     descriptionInput.value.trim() === "" ||
     imageInput.files.length === 0
   ) {
-    console.log("Please fill all the input");
-    return;
-  }
+    alert("Please fill all the input");
+  } else {
+    const roomData = getData();
+    const formData = new FormData();
+    formData.append("IMG", imageInput.files[0]);
+    formData.append("RoomID", `${(await roomData).RoomID}`);
+    formData.append("AID", `${(await roomData).AdminID}`);
+    formData.append("Topic", topicInput.value);
+    formData.append("Description", descriptionInput.value);
 
-  const formData = new FormData();
-  formData.append("IMG", imageInput.files[0]);
-  formData.append("RoomID", "0002");
-  formData.append("AID", "A000000001");
-  formData.append("Topic", topicInput.value);
-  formData.append("Description", descriptionInput.value);
+    try {
+      const response = await fetch(`http://localhost:3000/request/`, {
+        method: "POST",
+        body: formData,
+      });
 
-  try {
-    const response = await fetch(`http://localhost:3000/request/`, {
-      method: "POST",
-      body: formData,
-    });
-
-    if (response.ok) {
-      // Handle successful response
-      window.location.href = "../html/User_maintenanceStatus.html"; // Redirect after successful submission
-    } else {
-      console.error("Request failed:", response.status);
+      if (response.ok) {
+        window.location.href = `../html/User_maintenanceStatus.html?id=${
+          (await roomData).RoomID
+        }`;
+      } else {
+        console.error("Request failed:", response.status);
+      }
+    } catch (error) {
+      console.error("Error:", error);
     }
-  } catch (error) {
-    console.error("Error:", error);
   }
 });
 

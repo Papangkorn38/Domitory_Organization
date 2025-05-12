@@ -17,15 +17,22 @@ const addRequestBtn = document.querySelector(".addRequest");
 
 window.onload = async function () {
   // เหลือเอาเลขห้องมาจาก url
-
+  const urlParam = window.location.search;
+  const searchParams = new URLSearchParams(urlParam);
+  const roomID = searchParams.get("id");
   // Fetch getting pending request
-  const response = await fetch(`http://localhost:3000/api/read/request/0007`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+
+  const response = await fetch(
+    `http://localhost:3000/api/read/request/${roomID}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
   request = await response.json();
+  console.log(request);
 
   // Add pending request
   request.forEach(function (userPendingRequest) {
@@ -87,15 +94,19 @@ window.onload = async function () {
         </div>`
       );
     }
-  });
 
-  if (document.querySelector(".pendingRequest") !== null) {
-    document
-      .querySelector(".pendingRequest")
-      .addEventListener("click", function () {
-        window.location.href = "../html/User_maintenanceSent.html";
-      });
-  }
+    if (document.querySelector(".pendingRequest") !== null) {
+      document
+        .querySelector(".pendingRequest")
+        .addEventListener("click", function () {
+          window.location.href = `../html/User_maintenanceSent.html?id=${roomID}&requestID=${userPendingRequest.requestID}`;
+        });
+    }
+
+    addRequestBtn.addEventListener("click", function () {
+      window.location.href = `../html/User_maintenanceCreate.html?id=${roomID}`;
+    });
+  });
 };
 
 //Open and close side-bar function
@@ -156,10 +167,6 @@ const switchStatus = function () {
     toggleVisibility(successRequestContainer, "hideRequest", "add");
   });
 };
-
-addRequestBtn.addEventListener("click", function () {
-  window.location.href = "../html/User_maintenanceCreate.html";
-});
 
 switchStatus();
 openCloseSidebar();
