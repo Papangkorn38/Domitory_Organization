@@ -294,11 +294,11 @@ app.post("/api/insert/room", (req, res) => {
 app.patch("/api/update/room/:roomid", async (req, res) => {
   const roomID = req.params.roomid;
   const { RoomID, Status } = req.body;
-  const query = "UPDATE room SET RoomID = ?,Status = ? WHERE RoomID = ?";
+  const query = "UPDATE room SET Status = ? WHERE RoomID = ?";
   try {
     connection.query(
       query,
-      [RoomID, Status, roomID],
+      [ Status, roomID],
       (error, results, fields) => {
         if (error) {
           console.log(error);

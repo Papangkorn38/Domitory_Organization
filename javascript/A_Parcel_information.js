@@ -64,7 +64,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
       const imgEl = document.querySelector("#upload-box img");
       if (imgEl && latest.IMG) {
-        imgEl.src = `../uploads/${latest.IMG}`;
+        imgEl.src = `../NodeJsAndMySql/uploads/${latest.IMG}`;
         imgEl.alt = "รูปพัสดุ";
       }
     })

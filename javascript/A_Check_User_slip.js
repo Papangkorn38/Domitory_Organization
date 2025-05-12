@@ -3,6 +3,7 @@ const closeBtn = document.querySelector(".closeBtn");
 const menuBtn = document.querySelector(".menuBtn");
 const logoutBtn = document.querySelector(".logoutBtn");
 const sideBarIcons = document.querySelectorAll(".sideBarLinksContainer li");
+const selector = document.getElementById("roomIDField");
 
 const openCloseSidebar = function () {
   const toggleSidebar = function (isCollapsed) {
@@ -21,31 +22,63 @@ const openCloseSidebar = function () {
 openCloseSidebar();
 
 function showApproveModal() {
-  document.getElementById("approveModal").classList.remove("hidden");
+  // 1. อ่านข้อความใน <div id="displayRoomID"> (เช่น "A0002")
+  const displayID = document.getElementById("displayRoomID").innerText;
+
+  // 2. ตัดตัว "A" ด้านหน้าออก เพื่อให้ตรงกับ PK ในฐานข้อมูล (เช่น "0002")
+  const rawID = displayID.replace(/^A/, "");
+
+  // 3. เรียก API PATCH ไปอัปเดตสถานะห้อง
+  fetch(`http://localhost:3000/api/update/room/${rawID}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ Status: "Paid" })
+  })
+    .then(res => {
+      if (!res.ok) throw new Error("อัปเดตสถานะห้องไม่สำเร็จ");
+      document.getElementById("approveModal").classList.remove("hidden");
+    })
+    .catch(err => console.error(err));
 }
+
 function showRejectModal() {
-  document.getElementById("rejectModal").classList.remove("hidden");
+  const displayID = document.getElementById("displayRoomID").innerText;
+  const rawID = displayID.replace(/^A/, "");
+  fetch(`http://localhost:3000/api/update/room/${rawID}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ Status: "Unpaid" })
+  })
+    .then(res => {
+      if (!res.ok) throw new Error("อัปเดตสถานะห้องไม่สำเร็จ");
+      document.getElementById("rejectModal").classList.remove("hidden");
+    })
+    .catch(err => console.error(err));
 }
+
 function closeModal(modalId) {
   document.getElementById(modalId).classList.add("hidden");
 }
 
-window.onload = function () {
-  const selector = document.getElementById("roomIDField");
-  for (let i = 1; i <= 20; i++) {
-    const room = `A${i.toString().padStart(4, "0")}`;
-    const option = document.createElement("option");
-    option.value = room;
-    option.textContent = room;
-    selector.appendChild(option);
-  }
+window.onload = function() {
+  // 3.1 ดึง list ห้องมาก่อน
+  fetch("http://localhost:3000/api/read/room")
+    .then(res => res.json())
+    .then(rooms => {
+      // สมมติ rooms = ["0001","0002",…]
+      selector.innerHTML = rooms
+        .map(r => `<option value="A${r.RoomID}">A${r.RoomID}</option>`)
+        .join("");
 
-  selector.addEventListener("change", function () {
-    const selectedRoom = this.value;
-    updateSlipAndBillData(selectedRoom);
-  });
+      // 3.2 ตั้ง listener หลังจากมี <option> แล้ว
+      selector.addEventListener("change", () => {
+        updateSlipAndBillData(selector.value);
+      });
 
-  updateSlipAndBillData("A0001");
+      // 3.3 เรียกครั้งแรกด้วยค่า default (ค่าตัวแรกใน <select>)
+      updateSlipAndBillData(selector.value);
+    })
+    .catch(err => console.error("Error fetching rooms:", err));
 };
 
 function updateSlipAndBillData(roomID) {
