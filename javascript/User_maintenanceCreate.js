@@ -7,6 +7,7 @@ const confirmBtn = document.querySelector(".action-btn");
 const topicInput = document.getElementById("topicInput");
 const descriptionInput = document.getElementById("descriptionInput");
 const imageInput = document.getElementById("imgInput");
+const uploadContainer = document.querySelector(".upload-wrapper");
 
 //Open and close side-bar function
 const openCloseSidebar = function () {
@@ -36,6 +37,18 @@ const openCloseSidebar = function () {
   });
 };
 
+imageInput.addEventListener("change", function () {
+  let image = URL.createObjectURL(imageInput.files[0]);
+  if (uploadContainer.lastElementChild.tagName.toLowerCase() === "img") {
+    uploadContainer.lastElementChild.src = image;
+  } else {
+    let newImage = document.createElement("img");
+    newImage.src = image;
+    newImage.classList.add("uploadedImage");
+    uploadContainer.insertAdjacentElement("beforeend", newImage);
+  }
+});
+
 const getData = async function () {
   const urlParam = window.location.search;
   const searchParams = new URLSearchParams(urlParam);
@@ -57,7 +70,6 @@ const getData = async function () {
     AdminID: dataFromApi[0].AID,
   };
 
-  console.log(roomAndAdminID.RoomID);
   return roomAndAdminID;
 };
 
