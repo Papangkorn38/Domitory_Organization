@@ -1,10 +1,10 @@
 //2ตัวนี้เป็น package ที่เราโหลดมาใช้จาก package-lock.json
-const express = require('express'); //ดึง express มาใช้
-const mysql = require('mysql2'); // ดึง mysql2 มาใช้
-const cors = require('cors');// ดึง cors มาใช้
-const multer  = require('multer') // ดึง multer มาใช้เพื่ออัพโหลดรูปภาพ
-const bcrypt = require('bcrypt');
-const path = require('path');
+const express = require("express"); //ดึง express มาใช้
+const mysql = require("mysql2"); // ดึง mysql2 มาใช้
+const cors = require("cors"); // ดึง cors มาใช้
+const multer = require("multer"); // ดึง multer มาใช้เพื่ออัพโหลดรูปภาพ
+const bcrypt = require("bcrypt");
+const path = require("path");
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "uploads");
@@ -19,11 +19,11 @@ const upload = multer({
 });
 
 const app = express(); //เรียก express ที่เราดึงมาใช้
-app.use(express.static(path.join(__dirname, "../")));  // ให้ Express มองเห็นโฟลเดอร์ 'html', 'css', 'assets', 'img', 'javascript'
+app.use(express.static(path.join(__dirname, "../"))); // ให้ Express มองเห็นโฟลเดอร์ 'html', 'css', 'assets', 'img', 'javascript'
 const port = 3000; //กำหนด port ของserver
 
 app.use(cors());
-app.use(express.static(path.join(__dirname, "../")));  // ให้ Express มองเห็นโฟลเดอร์ 'html', 'css', 'assets', 'img', 'javascript'
+app.use(express.static(path.join(__dirname, "../"))); // ให้ Express มองเห็นโฟลเดอร์ 'html', 'css', 'assets', 'img', 'javascript'
 //connect กับตัวdatabase ใน mysql
 const connection = mysql.createConnection({
   host: "localhost", //กำหนดให้เป็น local host
@@ -74,9 +74,9 @@ app.post("/request", upload.single("IMG"), (req, res) => {
   }
 });
 
-app.use(express.static(path.join(__dirname, '../'))); 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../html/login.html'));
+app.use(express.static(path.join(__dirname, "../")));
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "../html/login.html"));
 });
 //เพิ่มพัสดุเข้าสู่ระบบ
 app.post("/upload", upload.single("IMG"), (req, res) => {
@@ -111,7 +111,7 @@ app.post("/upload", upload.single("IMG"), (req, res) => {
 app.use(express.static(path.join(__dirname, "../html")));
 
 //ดึงข้อมูลพัสดุรับแล้ว
-app.get('/api/read/parcel/status/received', (req, res) => {
+app.get("/api/read/parcel/status/received", (req, res) => {
   connection.query(
     "SELECT * FROM parcel WHERE Status = 'received'",
     (err, results) => {
@@ -144,11 +144,10 @@ app.post("/slip", upload.single("IMG"), (req, res) => {
       res.send("File uploaded successfully");
     });
   }
-
 });
 
 //ดึงข้อมูลพัสดุที่ยังไม่ได้รับ
-app.get('/api/read/parcel/status/unreceived', (req, res) => {
+app.get("/api/read/parcel/status/unreceived", (req, res) => {
   connection.query(
     "SELECT * FROM parcel WHERE Status = 'unreceived'",
     (err, results) => {
@@ -157,8 +156,6 @@ app.get('/api/read/parcel/status/unreceived', (req, res) => {
     }
   );
 });
-
-
 
 app.use("/api", express.json());
 
@@ -372,43 +369,44 @@ app.get("/api/read/room/:RoomID", async (req, res) => {
 });
 
 // อ่านข้อมูล room พร้อม summary
-app.get('/api/read/count/room', async (req, res) => {
-    try {
-        // ดึงข้อมูลทั้งหมด
-        connection.query("SELECT * FROM room", (err1, roomResults) => {
-            if (err1) {
-                console.log(err1);
-                return res.status(400).send();
-            }
+app.get("/api/read/count/room", async (req, res) => {
+  try {
+    // ดึงข้อมูลทั้งหมด
+    connection.query("SELECT * FROM room", (err1, roomResults) => {
+      if (err1) {
+        console.log(err1);
+        return res.status(400).send();
+      }
 
-            // ดึงข้อมูลสรุปสถานะ
-            connection.query(`
+      // ดึงข้อมูลสรุปสถานะ
+      connection.query(
+        `
                 SELECT
                     COUNT(*) AS total,
                     SUM(CASE WHEN status = 'Unoccupied' THEN 1 ELSE 0 END) AS do_count,
                     SUM(CASE WHEN status = 'Unpaid' THEN 1 ELSE 0 END) AS doing_count,
                     SUM(CASE WHEN status = 'Paid' THEN 1 ELSE 0 END) AS done_count
                 FROM room
-            `, (err2, summaryResults) => {
-                if (err2) {
-                    console.log(err2);
-                    return res.status(400).send();
-                }
+            `,
+        (err2, summaryResults) => {
+          if (err2) {
+            console.log(err2);
+            return res.status(400).send();
+          }
 
-                // ตอบกลับด้วยข้อมูลทั้งหมด + สรุป
-                res.status(200).json({
-                    data: roomResults,
-                    summary: summaryResults[0]
-                });
-            });
-        });
-
-    } catch (error) {
-        console.log(error);
-        return res.status(500).send();
-    }
+          // ตอบกลับด้วยข้อมูลทั้งหมด + สรุป
+          res.status(200).json({
+            data: roomResults,
+            summary: summaryResults[0],
+          });
+        }
+      );
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send();
+  }
 });
-
 
 //insert admin
 app.post("/api/insert/admin", (req, res) => {
@@ -522,19 +520,46 @@ app.get("/api/read/bill", async (req, res) => {
 });
 
 //เพิ่มbillsเข้าระบบ
-//roomcharge = ค่าเช่า 
+//roomcharge = ค่าเช่า
 app.post("/api/insert/bill", (req, res) => {
-  const { RoomID, AID, RoomCharge, TotalCharge, WaterBill, ElecticBill, BillingCycle,
-    WaterCurrent, WaterPrevious, WaterUsed, WaterPrice,
-    ElectricCurrent, ElectricPrevious, ElectricUsed, ElectricPriced } =
-    req.body;
+  const {
+    RoomID,
+    AID,
+    RoomCharge,
+    TotalCharge,
+    WaterBill,
+    ElecticBill,
+    BillingCycle,
+    WaterCurrent,
+    WaterPrevious,
+    WaterUsed,
+    WaterPrice,
+    ElectricCurrent,
+    ElectricPrevious,
+    ElectricUsed,
+    ElectricPriced,
+  } = req.body;
   const query =
     "INSERT INTO bills (RoomID, AID, RoomCharge, TotalCharge, WaterBill, ElecticBill, BillingCycle,WaterCurrent, WaterPrevious, WaterUsed, WaterPrice,ElectricCurrent, ElectricPrevious, ElectricUsed, ElectricPriced) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
   connection.query(
     query,
-    [RoomID, AID, RoomCharge, TotalCharge, WaterBill, ElecticBill, BillingCycle,
-      WaterCurrent, WaterPrevious, WaterUsed, WaterPrice,
-      ElectricCurrent, ElectricPrevious, ElectricUsed, ElectricPriced],
+    [
+      RoomID,
+      AID,
+      RoomCharge,
+      TotalCharge,
+      WaterBill,
+      ElecticBill,
+      BillingCycle,
+      WaterCurrent,
+      WaterPrevious,
+      WaterUsed,
+      WaterPrice,
+      ElectricCurrent,
+      ElectricPrevious,
+      ElectricUsed,
+      ElectricPriced,
+    ],
     (error, result) => {
       if (error) {
         console.error("Error to inserting data ", error);
@@ -741,50 +766,77 @@ app.get("/api/read/request/:RoomID/:Status", async (req, res) => {
 });
 
 //login client
-app.post('/api/login',async(req,res) => {
-    const {Username,Password} = req.body;
-    try{
-        connection.query("SELECT * FROM client WHERE Username = ?", [Username], (error,ClientResults,fields)=>{
-            if(error){
-                console.log(error);
-                return res.status(400).send();
+app.post("/api/login", async (req, res) => {
+  const { Username, Password } = req.body;
+  try {
+    connection.query(
+      "SELECT * FROM client WHERE Username = ?",
+      [Username],
+      (error, ClientResults, fields) => {
+        if (error) {
+          console.log(error);
+          return res.status(400).send();
+        }
+        //ถ้าไม่เจอ user
+        if (ClientResults.length > 0) {
+          //ถ้าเจอและรหัสถูก
+          if (Password == ClientResults[0].Password) {
+            return res.json({
+              status: "ok",
+              role: "client",
+              message: "login success",
+              RoomID: ClientResults[0].RoomID,
+            });
+          } else {
+            return res.json({
+              status: "error",
+              role: "client",
+              message: "wrong password",
+            });
+          }
+        }
+
+        //res.status(200).json(results)
+        connection.query(
+          "SELECT * FROM admin WHERE Username = ?",
+          [Username],
+          (error2, AdminResults, fields) => {
+            if (error2) {
+              console.log(error2);
+              return res.status(400).send();
             }
             //ถ้าไม่เจอ user
-            if(ClientResults.length > 0){
-                //ถ้าเจอและรหัสถูก
-                if(Password == ClientResults[0].Password){
-                    return res.json({status:'ok', role: "client",message:'login success',RoomID:ClientResults[0].RoomID})
-                }else{
-                    return res.json({status:'error', role: "client",message:'wrong password'})
-                }
+            if (AdminResults.length > 0) {
+              //ถ้าเจอและรหัสถูก
+              if (Password == AdminResults[0].Password) {
+                return res.json({
+                  status: "ok",
+                  role: "admin",
+                  message: "login success",
+                });
+              } else {
+                return res.json({
+                  status: "error",
+                  role: "admin",
+                  message: "wrong password",
+                });
+              }
+            } else {
+              return res.json({
+                status: "user not found",
+                message: "user not found",
+              });
             }
-            
-            //res.status(200).json(results)
-            connection.query("SELECT * FROM admin WHERE Username = ?", [Username], (error2,AdminResults,fields)=>{
-                if(error2){
-                    console.log(error2);
-                    return res.status(400).send();
-                }
-                //ถ้าไม่เจอ user
-                if(AdminResults.length > 0){
-                    //ถ้าเจอและรหัสถูก
-                    if(Password == AdminResults[0].Password){
-                        return res.json({status:'ok', role: "admin",message:'login success'})
-                    }else{
-                        return res.json({status:'error', role: "admin",message:'wrong password'})
-                    }
-                }
-                else{
-                    return res.json({status:'user not found',message:'user not found'})
-                }
-            })
-        })
-    }catch(error){
-        console.log(error);
-        return res.status(400).send();
+          }
+        );
       }
-      res.status(200).json(results);
-    });
+    );
+  } catch (error) {
+    console.log(error);
+    return res.status(400).send();
+  }
+  res.status(200).json(results);
+});
 
 //อัปเดต Status ของ request
 app.patch("/api/update/request/:roomid", async (req, res) => {
@@ -827,16 +879,35 @@ app.patch("/api/update/parcel/:roomid", async (req, res) => {
 //อันนี้คือไว้แสดงหน้าเว้ปในport 3000
 app.get("/billing", (req, res) => {
   res.sendFile(path.join(__dirname, "../html/U_User_Billing_Form.html"));
-  });
+});
 //เพิ่ม post billhistory
 app.post("/api/insert/bills_history", (req, res) => {
-  const { BID,RoomID,BHRoomChaege,BHTotalCharge,BHWaterBill,BHElectricBill,BHDate,Status,Bill} =
-    req.body;
+  const {
+    BID,
+    RoomID,
+    BHRoomChaege,
+    BHTotalCharge,
+    BHWaterBill,
+    BHElectricBill,
+    BHDate,
+    Status,
+    Bill,
+  } = req.body;
   const query =
     "INSERT INTO bills_history (BID,RoomID,BHRoomChaege,BHTotalCharge,BHWaterBill,BHElectricBill,BHDate,Status,Bill) VALUES (?, ?, ?, ?, ?, ?, ? , ?, ?)";
   connection.query(
     query,
-    [BID,RoomID,BHRoomChaege,BHTotalCharge,BHWaterBill,BHElectricBill,BHDate,Status,Bill],
+    [
+      BID,
+      RoomID,
+      BHRoomChaege,
+      BHTotalCharge,
+      BHWaterBill,
+      BHElectricBill,
+      BHDate,
+      Status,
+      Bill,
+    ],
     (error, result) => {
       if (error) {
         console.error("Error to inserting data ", error);
@@ -883,7 +954,9 @@ app.patch("/api/update/parcel/:pid", async (req, res) => {
         console.log(error);
         return res.status(400).send("อัปเดตไม่สำเร็จ");
       }
-      res.status(200).json({ message: "อัปเดตสำเร็จ", affectedRows: results.affectedRows });
+      res
+        .status(200)
+        .json({ message: "อัปเดตสำเร็จ", affectedRows: results.affectedRows });
     });
   } catch (error) {
     console.log(error);
