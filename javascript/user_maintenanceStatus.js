@@ -1,4 +1,3 @@
-// const { request } = require("http");
 const sideBar = document.querySelector(".sideBar");
 const closeBtn = document.querySelector(".closeBtn");
 const menuBtn = document.querySelector(".menuBtn");
@@ -7,7 +6,6 @@ const sideBarIcons = document.querySelectorAll(".sideBarLinksContainer li");
 const pendingHeader = document.querySelector(".pendingStatus");
 const successHeader = document.querySelector(".successStatus");
 const animationLine = document.querySelector(".line2");
-const pendingRequest = document.querySelector(".pendingRequest");
 const pendingRequestContainer = document.querySelector(
   ".pendingRequestContainer"
 );
@@ -16,6 +14,89 @@ const successRequestContainer = document.querySelector(
 );
 const successRequest = document.querySelector(".successRequest");
 const addRequestBtn = document.querySelector(".addRequest");
+
+window.onload = async function () {
+  // เหลือเอาเลขห้องมาจาก url
+
+  // Fetch getting pending request
+  const response = await fetch(`http://localhost:3000/api/read/request/0007`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  request = await response.json();
+
+  // Add pending request
+  request.forEach(function (userPendingRequest) {
+    let fullDate = new Date(userPendingRequest.R_date);
+    if (userPendingRequest.Status === "done") {
+      successRequestContainer.insertAdjacentHTML(
+        "beforeend",
+        `<div class="successRequest hideRequest">
+                  <div class="successImgContainer">
+                    <img
+                      src="../NodeJsAndMySql/uploads/${userPendingRequest.IMG}"
+                      alt="Broken Ceiling Lamp"
+                      class="requestImg"
+                    />
+                  </div>
+                  <div class="successDescriptionContainer">
+                    <p class="successTopic">Topic : <span>${
+                      userPendingRequest.Topic
+                    }</span></p>
+                    <p class="successDescription">
+                      Description : <span>${
+                        userPendingRequest.Description
+                      }</span>
+                    </p>
+                    <p class="successDate">
+                      Date : <span>${userPendingRequest.R_date.slice(
+                        0,
+                        10
+                      )} ${fullDate.toLocaleTimeString()}</span>
+                    </p>
+                  </div>
+                </div>`
+      );
+    } else {
+      pendingRequestContainer.insertAdjacentHTML(
+        "beforeend",
+        `<div class="pendingRequest">
+          <div class="pendingImgContainer">
+            <img
+              src="../NodeJsAndMySql/uploads/${userPendingRequest.IMG}"
+              alt="Maintenance Request Image"
+              class="requestImg"
+            />
+          </div>
+          <div class="pendingDescriptionContainer">
+            <p class="pendingTopic">Topic : <span>${
+              userPendingRequest.Topic
+            }</span></p>
+            <p class="pendingDescription">
+              Description : <span>${userPendingRequest.Description}</span>
+            </p>
+            <p class="pendingDate">
+              Date : <span>${userPendingRequest.R_date.slice(
+                0,
+                10
+              )} ${fullDate.toLocaleTimeString()}</span>
+            </p>
+          </div>
+        </div>`
+      );
+    }
+  });
+
+  if (document.querySelector(".pendingRequest") !== null) {
+    document
+      .querySelector(".pendingRequest")
+      .addEventListener("click", function () {
+        window.location.href = "../html/User_maintenanceSent.html";
+      });
+  }
+};
 
 //Open and close side-bar function
 const openCloseSidebar = function () {
@@ -82,48 +163,3 @@ addRequestBtn.addEventListener("click", function () {
 
 switchStatus();
 openCloseSidebar();
-
-window.onload = async function () {
-  // Fetch getting pending request
-  const response = await fetch(`http://localhost:3000/api/read/request/`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  request = await response.json();
-  console.log(request[0].IMG);
-  // Add pending request
-  request.forEach(function (userPendingRequest) {
-    // Convert buffer to base64 string
-    const buffer = userPendingRequest.IMG.data;
-    const base64Image = btoa(
-      String.fromCharCode.apply(null, new Uint8Array(buffer))
-    );
-    console.log(buffer);
-    console.log(buffer.toString());
-    console.log(base64Image);
-
-    pendingRequestContainer.insertAdjacentHTML(
-      "beforeend",
-      `<div class="pendingRequest">
-                  <div class="pendingImgContainer">
-                    <img
-                      src="data:image/jpeg;base64,${base64Image}"
-                      alt="Maintenance Request Image"
-                      class="requestImg"
-                    />
-                  </div>
-                  <div class="pendingDescriptionContainer">
-                    <p class="pendingTopic">Topic : <span>${userPendingRequest.Topic}</span></p>
-                    <p class="pendingDescription">
-                      Description : <span>${userPendingRequest.Description}</span>
-                    </p>
-                    <p class="pendingDate">
-                      Date : <span>30-03-2568 14:50:00</span>
-                    </p>
-                  </div>
-                </div>`
-    );
-  });
-};
