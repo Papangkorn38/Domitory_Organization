@@ -23,7 +23,7 @@ var read_room = function(){
 
             for(let test of result.data){
                 var row = `
-                  <a href="../html/U_User_Info.html?id=`+test.RoomID+`"><div class="room_box_flex_box" id="room_${test.RoomID}">${test.RoomID}</div></a>
+                  <a href="../html/A_User_Info.html?id=`+test.RoomID+`"><div class="room_box_flex_box" id="room_${test.RoomID}">${test.RoomID}</div></a>
                 `;
                 test_container.insertAdjacentHTML("beforeend",row);
                 var roomElement = document.getElementById(`room_${test.RoomID}`);
