@@ -8,7 +8,6 @@ var received_btn = function(){
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-<<<<<<< HEAD
   const roomID = window.location.search.substring(1); 
   const params = new URLSearchParams(window.location.search);
   const id = params.get('id');
@@ -17,13 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
   fetch(`http://localhost:3000/api/read/parcel/${id}/unreceived`)
     .then(res => res.json())
     .then(data => {
-=======
-  const roomID = window.location.search.substring(1);
-
-  fetch(`http://localhost:3000/api/read/parcel/${roomID}/unreceived`)
-    .then((res) => res.json())
-    .then((data) => {
->>>>>>> fb23cdeb589c198d56148e4516d2fda342438a92
       const list = document.querySelector(".parcelList");
       list.innerHTML = "";
 

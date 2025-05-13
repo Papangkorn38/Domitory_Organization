@@ -28,7 +28,7 @@ const connection = mysql.createConnection({
   host: "localhost", //กำหนดให้เป็น local host
   user: "root", //ชื่อที่เราตั้ง
   password: "root", //password ที่เราตั้งไว้
-  database: "dormitorydb", // ชื่อ schema ที่เราตั้งไว้
+  database: "mydb", // ชื่อ schema ที่เราตั้งไว้
 });
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 //ดักจับerrorระหว่าง connect ไปยัง database
