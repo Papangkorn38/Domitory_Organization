@@ -3,7 +3,8 @@ const closeBtn = document.querySelector(".closeBtn");
 const menuBtn = document.querySelector(".menuBtn");
 const logoutBtn = document.querySelector(".logoutBtn");
 const sideBarIcons = document.querySelectorAll(".sideBarLinksContainer li");
-
+const confirmBtn = document.querySelector(".action-btn");
+const imageInput = document.getElementById("imgInput");
 const params = new URLSearchParams(window.location.search);
 const id = params.get('id');
 var bar = document.querySelector('.sideBarLinksContainer');
@@ -63,15 +64,77 @@ container.addEventListener("mouseover", function (event) {
     logoutBtn.classList.remove("hidden");
   }
 });
-
 };
 
-openCloseSidebar();
+confirmBtn.addEventListener("click", async function (event) {
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get('id');
+  event.preventDefault();
 
-var logout = function(){
-  if(confirm('ต้องการจะออกจากระบบใช่ไหม')){
-      window.location.href = '../html/login.html';
-  }else{
-      console.log('ยกเลิกการlogoutเรียบร้อยแล้ว');
+  if (
+    imageInput.files.length === 0
+  ) {
+    console.log("Please fill all the input");
+    return;
   }
+
+  const formData = new FormData();
+  formData.append("IMG", imageInput.files[0]);
+  formData.append("RoomID", id);
+
+  try {
+    const response = await fetch(`http://localhost:3000/slip/`, {
+      method: "POST",
+      body: formData,
+    });
+
+    if (response.ok) {
+      // Handle successful response
+      alert('ส่งข้อมูลเรียบร้อยแล้ว');
+      window.location.href = `../html/home-client.html?id=${id}`; // Redirect after successful submission
+    } else {
+      console.error("Request failed:", response.status);
+    }
+  } catch (error) {
+    console.error("Error:", error);
+  }
+});
+
+openCloseSidebar();
+  var read_bill = function(){
+    var roomID = document.getElementById('client_roomID');
+    var billMonth = document.getElementById('Date_month');
+    var billDate = document.getElementById('Date');
+    var billTotal = document.getElementById('total');
+  const requestOptions = {
+    method: "GET",
+    redirect: "follow"
+  };
+
+  fetch("http://localhost:3000/api/read/bill/"+id, requestOptions)
+    .then((response) => response.json())
+    .then((result) => {
+      var bill = result[result.length-1];
+
+      const dateObj = new Date(bill.BillDate);
+      const day = String(dateObj.getDate()).padStart(2, '0');
+      const month = String(dateObj.getMonth() + 1).padStart(2, '0'); // เดือนเริ่มที่ 0
+      const year = dateObj.getFullYear();
+      const formattedDate = `${day}/${month}/${year}`;
+      const months = dateObj.getMonth();
+
+      const thaiMonths = [
+        "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน",
+        "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม",
+        "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
+      ];
+
+      const thaiMonthName = thaiMonths[months];
+      
+      roomID.value = bill.RoomID;
+      billMonth.value = thaiMonthName;
+      billDate.value = formattedDate;
+      billTotal.value = bill.TotalCharge;
+    })
+    .catch((error) => console.error(error));
 }

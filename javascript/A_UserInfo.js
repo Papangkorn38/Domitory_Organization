@@ -16,6 +16,7 @@ var read_user_by_id = function(){
     var userCemail = document.getElementById('user_Cemail');
     var userPhone = document.getElementById('user_Phone');
     var userAddress = document.getElementById('user_Address');
+    var button = document.getElementById('id_button');
       
       fetch("http://localhost:3000/api/read/client/"+id, requestOptions)
         .then((response) => response.json())
@@ -51,9 +52,54 @@ var read_user_by_id = function(){
             userCemail.value = result[0].Cemail;
             userPhone.value = result[0].PhoneNum;
             userAddress.value = result[0].Address;
-            client_RoomID = result[0].RoomID;
 
+            button.innerHTML = `
+            <button class="update" onclick="window.location.href='../html/A_UserInfoEdit.html?id=`+result[0].RoomID+`'">แก้ไข</button>
+            <button class="delete" onclick="user_delete('${id}')">ลบ</button>
+            `;
         })
         .catch((error) => console.error(error));
 }
+var user_delete = function(id){
+    if(confirm('คุณต้องการจะลบข้อมูลลูกบ้านท่านนี้ใช่ไหม')){
+        
+        const requestOptions = {
+            method: "DELETE",
+            redirect: "follow"
+          };
+      
+      fetch("http://localhost:3000/api/delete/client/"+id, requestOptions)
+        .then((response) => response.text())
+        .then((result) => {
+            console.log('ลบข้อมูลเรียบร้อยแล้ว');
+            window.location.href='roomStatus.html';
+            user_update_status(id);
 
+        })
+        .catch((error) => console.error(error));
+    }else{
+        console.log('ยกเลิกการลบข้อมูลเรียบร้อยแล้ว');
+    }
+}
+
+var user_update_status = function(id){
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    const raw = JSON.stringify({
+    "RoomID": id,
+    "Status": "Unoccupied"
+    });
+
+    const requestOptions = {
+    method: "PATCH",
+    headers: myHeaders,
+    body: raw,
+    redirect: "follow"
+    };
+
+    fetch("http://localhost:3000/api/update/room/"+id, requestOptions)
+    .then((response) => response.text())
+    .then((result) => console.log(result))
+    .catch((error) => console.error(error));
+}

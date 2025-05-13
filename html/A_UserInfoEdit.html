@@ -3,14 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../css/A_UserInfoEdit.css" />
+    <link rel="stylesheet" href="../css/U_User_Info.css" />
     <link
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
     />
-    <title>Project Template</title>
+    <title>Edit</title>
   </head>
-  <body>
+  <body onload="read_user_by_id()">
     <div class="template">
       <div class="sideBar collapsed">
         <div class="closeOpenContainer">
@@ -44,7 +44,7 @@
           </li>
         </ul>
 
-        <button class="logoutBtn hidden">Log Out</button>
+        <button class="logoutBtn hidden" onclick="logout()">Log Out</button>
       </div>
 
       <div class="contents">
@@ -55,12 +55,8 @@
             class="headerDormLogo"
           />
           <div class="profile">
-            <img
-              src="../assets/Male User.png"
-              alt="Profile Image"
-              class="profileImg"
-            />
-            <p class="profileText">Welcome Back! <br />K. SOMPONG LUMKEN</p>
+            
+            <p class="profileText">Welcome Back!</p>
           </div>
         </div>
         <div class="titleContainer">
@@ -68,93 +64,96 @@
           <img src="../img/Tall_Person_reverse.png" alt="">
           <p class="title">รายละเอียดลูกบ้าน</p>
         </div>
-      <!--เพิ่มเนื้อหาตรงนี้นะ(mainContent)-->
+        <!--เพิ่มเนื้อหาตรงนี้นะ(mainContent)-->
       <div class="mainContent">
         <!-- User INFO admin start -->
         <!-- สามารถปรับเปลี่ยนตัวแปรได้ตามใจเลย -->
         <div class="userSection">
           <div class="Userimg">
             <img src="../assets/User.png" class="A002UserImg" />
-            <div class="user-id-box">A0002</div>
+            <div class="user-id-box" id="user_RoomID">ไม่มี</div>
           </div>
         <nav>
         <div class="userFormContainer">
           <div class="formRow">
-            <div class="formGroup"> <!-- สถาณะการชำระเงินไปใช้ ่JS-->
+            <div class="formGroup">
+              <div class="unpaid-status"style="max-width: 150px"> <!-- สถาณะการชำระเงินไปใช้ ่JS-->
                 <label>สถานะ</label>
-                  <select class="unpaid-status"style="max-width: 150px">
-                    <option>ยังไม่ชำระ</option>
-                    <option>ชำระแล้ว</option>
-                  </select>
+                <input type="text" id="user_Status" value="ยังไม่มีห้องพัก"readonly class="unpaid-status-text"/>
+              </div>
             </div>
           </div>
           <div class="formRow">
             <div class="formGroup" style="max-width: 700px">
               <label>ชื่อ</label>
-              <input type="text" value="สมปอง"/>
+              <input type="text" id="user_Fname" value="" class="statusInpust" onfocus="this.value=''" placeholder="ชื่อจริง"/>
             </div>
             <div class="formGroup"style="max-width: 700px">
-              <label>นามสกุล</label>              
-              <input type="text" value="สำคัญ"/>             
+              <label>นามสกุล</label>
+              <input type="text" id="user_Lname" value="" onfocus="this.value=''" placeholder="นามสกุล"/>
             </div>
           </div>
           <div class="formRow">
-            <div class="formGroup">
-              <label>First Name</label>
-              <input type="text" value="SOMPONG" />
+            <div class="formGroup" style="max-width: 700px">
+              <label>Username</label>
+              <input type="text" id="user_Username" value="" class="statusInpust" onfocus="this.value=''" placeholder=" username"/>
             </div>
-            <div class="formGroup">
-              <label>Last Name</label>
-              <input type="text" value="LUMKEN"/>
+            <div class="formGroup"style="max-width: 700px">
+              <label>Password</label>
+              <input type="password" id="user_Password" value="" onfocus="this.value=''" placeholder=" password"/>
             </div>
           </div>
           <div class="formRow">
             <div class="formGroup">
               <label>เลขบัตรประชาชน</label>
-              <input type="text" value="1 010x xxxxx x x"/>
+              <input type="text" id="user_CitizenID" value="" onfocus="this.value=''" placeholder="เลขบัตรประชาชน"/>
             </div>
           </div>
           <div class="formRow">
             <div class="formGroup">
               <label>วัน/เดือน/ปีเกิด</label>
-              <input type="text" value="17/03/2002" />
+              <input type="date" id="user_BirthDate" value="" onfocus="this.value=''"placeholder="วันเดือนปีเกิด"/>
             </div>
             <div class="formGroup">
               <label>อายุ</label>
-              <input type="text" value="23"ป๊ />
+              <input type="text" id="user_age" value="" readonly/>
             </div>
             <div class="formGroup">
               <label>อีเมล</label>
-              <input type="email" value="xxxx@gmail.com"/>
+              <input type="email" id="user_Cemail" value="" onfocus="this.value=''"placeholder="อีเมล"/>
             </div>
           </div>
           <div class="formRow">
             <div class="formGroup">
               <label>เบอร์โทรศัพท์</label>
-              <input type="text" value="092-xxx-xxxx" />
+              <input type="text" id="user_Phone" value="" onfocus="this.value=''"placeholder="เบอร์โทรศัพท์"/>
             </div>
           </div>
           <div class="formRow">
             <div class="formGroup" style="flex: 1">
               <label>ที่อยู่</label>
-              <input type="text" value="25/8 หมู่ x ตำบล xxxxxxx อำเภอ xxxxx จังหวัด xxxxx xxxxx" />
+              <input type="text" id="user_Address" value="" onfocus="this.value=''"placeholder="ที่อยู่"/>
+            </div>
+            <div class="formGroup">
+                <label>เลขห้อง</label>
+                <input type="text" id="user_RoomID_edit" value="" onfocus="this.value=''"placeholder="เลขห้อง"/>
             </div>
           </div>
         </div>
+        <div class="button">
+          <div id="id_button"></div>
+        </div>
         <!-- ส่วนนี้คือ form ของผู้ใช้เชื่อ Database ส่วนนี้ถ้าใช้ -->
-          <div class="buttonGroup">
-            <button class="btn save">บันทึก</button>
-          </div>
-        <!-- ส่วนปุ่มบันทึกข้อมูลของผู้ใช้ -->
       </div>
       </nav>
-      <div class="backBtn">
+      <div class="backBtn" onclick="window.location.href='roomStatus.html'">
           <img src="../img/Back_To_reverse.png" alt="">
         <span>ย้อนกลับ</span>
       <!-- JS เชื่อมกลับไปหน้าหลัก/หน้าก่อนหน้า -->
       </div>
     </div>
-    <script src="../javascript/template.js"></script>
   </body>
+  <script src="../javascript/template.js"></script>
+  <script src="../javascript/A_UserInfoEdit.js"></script>
 </html>
 <!-- TEst -->

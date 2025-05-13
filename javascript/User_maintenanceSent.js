@@ -1,42 +1,29 @@
-const sideBar = document.querySelector(".sideBar");
-const closeBtn = document.querySelector(".closeBtn");
-const menuBtn = document.querySelector(".menuBtn");
-const logoutBtn = document.querySelector(".logoutBtn");
-const sideBarIcons = document.querySelectorAll(".sideBarLinksContainer li");
-
-//Open and close side-bar function
-const openCloseSidebar = function () {
-  const toggleSidebar = function (isCollapsed) {
-    sideBar.classList.toggle("collapsed", isCollapsed);
-    closeBtn.classList.toggle("hidden", isCollapsed);
-    menuBtn.classList.toggle("hidden", !isCollapsed);
-    logoutBtn.classList.toggle("hidden", isCollapsed);
+var load_request = function(){
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get('id');
+  var client_roomID = document.getElementById('roomID');
+  var client_status = document.getElementById('status');
+  var client_topic = document.getElementById('topic');
+  var client_description = document.getElementById('description');
+  var client_img = document.querySelector('.image-wrapper');
+  const requestOptions = {
+    method: "GET",
+    redirect: "follow"
   };
 
-  closeBtn.addEventListener("click", function () {
-    toggleSidebar(true);
-  });
-
-  menuBtn.addEventListener("click", function () {
-    toggleSidebar(false);
-  });
-
-  sideBar.addEventListener("mouseleave", function () {
-    toggleSidebar(true);
-  });
-
-  sideBarIcons.forEach(function (element) {
-    element.addEventListener("mouseover", function () {
-      toggleSidebar(false);
-    });
-  });
-};
-
-openCloseSidebar();
-var logout = function(){
-  if(confirm('ต้องการจะออกสุ่ระบบใช่ไหม')){
-      window.location.href = '../html/login.html';
-  }else{
-      console.log('ยกเลิกการlogoutเรียบร้อยแล้ว');
-  }
+  fetch("http://localhost:3000/api/read/request/byID/"+id, requestOptions)
+    .then((response) => response.json())
+    .then((result) => {
+      var data = result[0];
+      client_roomID.value = data.RoomID;
+      client_status.value = data.Status;
+      client_topic.value = data.Topic;
+      client_description.value = data.Description;
+      client_img.innerHTML = `
+      <div class="image-wrapper">
+                    <img src="../NodeJsAndMySql/uploads/${data.IMG}" alt="แจ้งซ่อม" />
+      </div>
+      `
+    })
+    .catch((error) => console.error(error));
 }

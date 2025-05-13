@@ -27,27 +27,27 @@
                     <img src="../img/Wallpaper.png" class="image-img" alt="Wallpaper">
                 </div>
                 <!--Container คลิกไปดูข้อมูลของลูกบ้าน-->
-                <div class="client-container">
+                <div class="client-container"onclick ='client_info()'>
                     <img src="../img/Tall Person.png" class="client-img">
                     <p class="client-text">ข้อมูลลูกบ้าน</p>
                 </div>
                 <!--Container คลิกไปดูข้อมูลพัสดุ-->
-                <div class="parcel-container">
+                <div class="parcel-container"onclick = 'client_parcel()'>
                     <img src="../img/Cardboard Box_reverse.png" class="parcel-img">
                     <p class="parcel-text">พัสดุ</p>
                 </div>
                 <!--Container คลิกไปชำระค่าใช้จ่าย-->
-                <div class="paybill-container">
+                <div class="paybill-container"onclick="client_payment()">
                     <img src="../img/Wallet.png" class="paybill-img">
                     <p class="paybill-text">ชำระค่าใช้จ่าย</p>
                 </div>
                 <!--Container คลิกไปดูข้อมูลบิลค่าใช้จ่าย-->
-                <div class="bill-container">
+                <div class="bill-container"onclick="client_bill()">
                     <img src="../img/Bill_reverse.png" class="bill-img">
                     <p class="bill-text">บิลค่าใช้จ่าย</p>
                 </div>
                 <!--Container คลิกไปส่งคำร้องแจ้งซ่อม-->
-                <div class="request-container">
+                <div class="request-container" onclick="client_maintenance()">
                     <img src="../img/Maintenance_reverse.png" class="request-img">
                     <p class="request-text">แจ้งซ่อม</p>
                 </div>
@@ -57,7 +57,7 @@
                     <p class="contact-text">ติดต่อเรา</p>
                 </div>
                 <!--Container คลิกไปดูประวัติบิลค่าใช้จ่าย-->
-                <div class="billhistory-container">
+                <div class="billhistory-container" onclick="client_billhistory()">
                     <img src="../img/Folder_reverse.png" class="billhistory-img">
                     <p class="billhistory-text">ประวัติบิลค่าใช้จ่าย (Payment History)</p>
                 </div>
@@ -65,11 +65,9 @@
                 <div class="welcome-container">
                     <img src="../img/Usercircle.png" class="welcome-img">
                     <div class="welcome-texts">
-                    <p class="welcome-text">WELCOME BACK</p> 
-                    <p class="welcome-text">K.SOMPONG LUMKEN</p>
                     </div>
                     <!--ปุ่ม Logout-->
-                    <button class="logout-button">Log Out</button>
+                    <button class="logout-button"onclick = "logout()">Log Out</button>
                 </div>
                 </div>
             </div>

@@ -1,7 +1,19 @@
+var client_RoomID;
+var unreceived_btn = function(){
+      window.location.href=`../html/User_Parcel.html?id=${client_RoomID}`
+}
+
+var received_btn = function(){
+      window.location.href=`../html/User_accepted_parcel.html?id=${client_RoomID}`
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   const roomID = window.location.search.substring(1); 
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get('id');
+  client_RoomID = id;
 
-  fetch(`http://localhost:3000/api/read/parcel/${roomID}/unreceived`)
+  fetch(`http://localhost:3000/api/read/parcel/${id}/unreceived`)
     .then(res => res.json())
     .then(data => {
       const list = document.querySelector(".parcelList");

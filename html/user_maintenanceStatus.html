@@ -10,7 +10,7 @@
     />
     <title>Maintenance Status</title>
   </head>
-  <body>
+  <body onload="load_data()">
     <div class="template">
       <div class="sideBar collapsed">
         <div class="closeOpenContainer">
@@ -179,24 +179,7 @@
                 </div> -->
               </div>
               <div class="successRequestContainer">
-                <div class="successRequest hideRequest">
-                  <div class="successImgContainer">
-                    <img
-                      src="../img/brokenCeilingLamp.jpg"
-                      alt="Broken Ceiling Lamp"
-                      class="requestImg"
-                    />
-                  </div>
-                  <div class="successDescriptionContainer">
-                    <p class="successTopic">Topic : <span>ไฟเพดานเสีย</span></p>
-                    <p class="successDescription">
-                      Description : <span>หลอดไฟบริเวณห้องครัวเสีย</span>
-                    </p>
-                    <p class="successDate">
-                      Date : <span>30-03-2568 14:50:00</span>
-                    </p>
-                  </div>
-                </div>
+               
               </div>
             </div>
           </div>
@@ -206,10 +189,10 @@
           </div>
         </div>
 
-        <a href="#" class="goBackBtn">
+        <div class="goBackBtn" onclick="window.history.back()">
           <i class="bx bx-chevron-left"></i>
           <p>ย้อนกลับ</p>
-        </a>
+        </div>
       </div>
     </div>
     <script src="../javascript/user_maintenanceStatus.js"></script>

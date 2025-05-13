@@ -212,132 +212,117 @@
 } */
 
 
-.maintenance-content {
+.topSection {
   display: flex;
-  align-items: flex-start;
-  gap: 40px;
-  max-width: 1140px;
-  margin: 20px 0 0 0;
-  padding: 0 30px;
+  flex-direction: column; /* <<< ให้เรียงบนลงล่าง */
+  align-items: flex-start; /* <<< ให้ชิดซ้าย */
+  gap: 20px; /* <<< ระยะห่างระหว่างรูป, dropdown, ตาราง */
+  margin-top: 20px;
+  padding-left: 80px; /* <<< ขยับจากซ้าย */
 }
 
-.Userimg {
-  flex: 0 0 200px;
+.profileSection {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
 }
 
-.A002UserImg {
-  width: 130px;
-  height: 130px;
-  object-fit: cover;
-  border-radius: 10px;
-  background-color: #ddd;
+.profileAvatar {
+  width: 100px;
+  height: 100px;
+  background: #f1f1f1;
+  border-radius: 8px;
 }
 
-.user-id-box {
+.profileRoom {
   font-size: var(--Big-font);
   font-weight: bold;
-  color: #274663;
-  text-align: center;
+  margin-top: 10px;
+  color: #1c2c42;
 }
 
-.maintenance-card {
-  flex: none;
-  width: 800px;
-  background-color: #F5F5F5;
+.bill-table-section {
+  width: 100%;
+  max-width: 1100px;
+}
+
+.bill-control-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bill-table-section label {
+  font-size: var(--Normal-font);
+}
+
+#itemsPerPage {
+  margin: 0 5px;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.bill-table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: separate;
+  border-spacing: 0;
   border-radius: 10px;
-  padding: 48px 32px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.userFormContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
+.bill-table th {
+  background-color: #223953;
+  color: white;
+  padding: 12px;
+  font-size: var(--Normal-font);
+  position: relative; /* เพื่อให้ ::after ทำงานบน th ได้ */
 }
 
-.formGroup {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.formGroup label {
-  flex: 0 0 80px;
-  font-weight: 500;
-  color: #000;
-}
-
-.formGroup input[type="text"],
-.formGroup textarea {
-  padding: 10px 12px;
-  resize: none;
-  border: none;
-  border-radius: 6px;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  color: #000;
-}
-
-.formGroup #total{
-  width: 250px;
-}
-
-.image-group .upload-wrapper {
-  width: 200px;
-  height: 200px;
-  background-color: #ffffff;
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  cursor: pointer;
-}
-
-.upload-wrapper span {
-  pointer-events: none;
-  font-size: var(--Small-font);
-  color: #666;
+.bill-table td {
+  background: #fff;
+  color: #333;
+  padding: 12px;
+  font-size: var(--Normal-font);
   text-align: center;
 }
 
-.upload-wrapper input[type="file"] {
+.bill-table tbody tr:nth-child(even) td {
+  background-color: #f9f9f9;
+}
+
+.bill-table th:not(:last-child)::after {
+  content: "";
   position: absolute;
   top: 0;
-  left: 0;
-  width: 100%;
+  right: 0;
+  width: 1px;
   height: 100%;
-  opacity: 0;
-  cursor: pointer;
+  background-color: #fff;
 }
 
-.action-container {
-  margin-top: 24px;
-  display: flex;
-  justify-content: flex-start;
+.back-button {
+  margin: 30px 0 0 80px;
 }
 
-.action-btn {
-  background-color: #223953;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  padding: 7px 50px;
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;               /* ระยะระหว่างไอคอนกับข้อความ */
+  color: #223953;
+  text-decoration: none;
   font-size: var(--Normal-font);
-  cursor: pointer;
 }
 
-.action-btn:hover {
-  background-color: #1a2f48;
+.back-link:hover {
+  text-decoration: underline;
 }
-/* เพิ่ม wrapper สำหรับจัด layout card + ปุ่ม */
-.card-wrapper {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  margin-bottom: 60px;
+
+/* ปรับขนาดรูปย้อนกลับ */
+.back-icon {
+  display: block;
+  width: 24px;            /* ปรับขนาดไอคอนตามต้องการ */
+  height: 24px;
+  object-fit: contain;
 }

@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch(`http://localhost:3000/api/read/parcelByPID/${pid}`)
       .then(res => res.json())
       .then(data => {
+        console.log(data.PID)
         document.querySelector(".user-id-box").innerText = data.RoomID || "-";
         document.querySelector(".box").value = data.RoomID || "-";
 
@@ -40,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
               .then((res) => res.json())
               .then(() => {
                 alert("รับพัสดุเรียบร้อยแล้ว");
-                window.location.href = "User_accepted_parcel.html";
+                window.location.href = `User_accepted_parcel.html?id=${data.RoomID}`;
               })
               .catch((err) => {
                 console.error("รับพัสดุไม่สำเร็จ", err);

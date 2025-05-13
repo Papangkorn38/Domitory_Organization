@@ -1,5 +1,11 @@
+var payment = function(){
+  
+}
 document.addEventListener('DOMContentLoaded', () => {
-    const roomID = "0011"; // หรือใช้ดึงจาก URL เช่น ?room=4051
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
+    const roomID = id; // หรือใช้ดึงจาก URL เช่น ?room=4051
+    
   
     fetch(`http://localhost:3000/api/read/bill/${roomID}`)
       .then(response => response.json())
@@ -9,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
           return;
         }
   
-        const bill = data[0];
+        const bill = data[data.length-1];
   
         // ใส่ค่าจากฐานข้อมูลลงในช่อง input
         document.querySelector('.user-id-display').textContent = bill.RoomID;

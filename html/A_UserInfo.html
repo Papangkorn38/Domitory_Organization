@@ -3,14 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../css/A_UserInfo.css" />
+    <link rel="stylesheet" href="../css/U_User_Info.css" />
     <link
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
     />
     <title>Project Template</title>
   </head>
-  <body>
+  <body onload="read_user_by_id()">
     <div class="template">
       <div class="sideBar collapsed">
         <div class="closeOpenContainer">
@@ -44,7 +44,7 @@
           </li>
         </ul>
 
-        <button class="logoutBtn hidden">Log Out</button>
+        <button class="logoutBtn hidden" onclick="logout()">Log Out</button>
       </div>
 
       <div class="contents">
@@ -55,12 +55,8 @@
             class="headerDormLogo"
           />
           <div class="profile">
-            <img
-              src="../assets/Male User.png"
-              alt="Profile Image"
-              class="profileImg"
-            />
-            <p class="profileText">Welcome Back! <br />K. SOMPONG LUMKEN</p>
+            
+            <p class="profileText">Welcome Back!</p>
           </div>
         </div>
         <div class="titleContainer">
@@ -75,7 +71,7 @@
         <div class="userSection">
           <div class="Userimg">
             <img src="../assets/User.png" class="A002UserImg" />
-            <div class="user-id-box">A0002</div>
+            <div class="user-id-box" id="user_RoomID">ไม่มี</div>
           </div>
         <nav>
         <div class="userFormContainer">
@@ -83,78 +79,67 @@
             <div class="formGroup">
               <div class="unpaid-status"style="max-width: 150px"> <!-- สถาณะการชำระเงินไปใช้ ่JS-->
                 <label>สถานะ</label>
-                <input type="text" value="ยังไม่ชำระ"readonly class="unpaid-status-text"/>
+                <input type="text" id="user_Status" value="ยังไม่มีห้องพัก"readonly class="unpaid-status-text" />
               </div>
             </div>
           </div>
           <div class="formRow">
             <div class="formGroup" style="max-width: 700px">
               <label>ชื่อ</label>
-              <input type="text" value="สมปอง"readonly class="statusInpust" />
+              <input type="text" id="user_Fname" value="ไม่มี"readonly class="statusInpust" />
             </div>
             <div class="formGroup"style="max-width: 700px">
               <label>นามสกุล</label>
-              <input type="text" value="สำคัญ"readonly />
-            </div>
-          </div>
-          <div class="formRow">
-            <div class="formGroup">
-              <label>First Name</label>
-              <input type="text" value="SOMPONG"readonly />
-            </div>
-            <div class="formGroup">
-              <label>Last Name</label>
-              <input type="text" value="LUMKEN"readonly />
+              <input type="text" id="user_Lname" value="ไม่มี"readonly />
             </div>
           </div>
           <div class="formRow">
             <div class="formGroup">
               <label>เลขบัตรประชาชน</label>
-              <input type="text" value="1 010x xxxxx x x"readonly />
+              <input type="text" id="user_CitizenID" value="ไม่มี"readonly />
             </div>
           </div>
           <div class="formRow">
             <div class="formGroup">
               <label>วัน/เดือน/ปีเกิด</label>
-              <input type="text" value="17/03/2002"readonly />
+              <input type="text" id="user_BirthDate" value="ไม่มี"readonly />
             </div>
             <div class="formGroup">
               <label>อายุ</label>
-              <input type="text" value="23"readonly />
+              <input type="text" id="user_age" value="ไม่มี"readonly />
             </div>
             <div class="formGroup">
               <label>อีเมล</label>
-              <input type="email" value="xxxx@gmail.com"readonly />
+              <input type="email" id="user_Cemail" value="ไม่มี"readonly />
             </div>
           </div>
           <div class="formRow">
             <div class="formGroup">
               <label>เบอร์โทรศัพท์</label>
-              <input type="text" value="092-xxx-xxxx"readonly />
+              <input type="text" id="user_Phone" value="ไม่มี"readonly />
             </div>
           </div>
           <div class="formRow">
             <div class="formGroup" style="flex: 1">
               <label>ที่อยู่</label>
-              <input type="text" value="25/8 หมู่ x ตำบล xxxxxxx อำเภอ xxxxx จังหวัด xxxxx xxxxx"readonly />
+              <input type="text" id="user_Address" value="ไม่มี"readonly />
             </div>
           </div>
         </div>
+        <div class="button">
+          <div id="id_button"></div>
+        </div>
         <!-- ส่วนนี้คือ form ของผู้ใช้เชื่อ Database ส่วนนี้ถ้าใช้ -->
-          <div class="buttonGroup">
-            <button class="btn edit">แก้ไข</button>
-            <button class="btn delete">ลบ</button>
-          </div>
-        <!-- ส่วนปุ่มแก้ไขและลบข้อมูลของผู้ใช้ -->
       </div>
       </nav>
-      <div class="backBtn">
+      <div class="backBtn" onclick="window.location.href='roomStatus.html'">
           <img src="../img/Back_To_reverse.png" alt="">
         <span>ย้อนกลับ</span>
       <!-- JS เชื่อมกลับไปหน้าหลัก/หน้าก่อนหน้า -->
       </div>
     </div>
-    <script src="../javascript/template.js"></script>
   </body>
+  <script src="../javascript/A_UserInfo.js"></script>
+  <script src="../javascript/template.js"></script>
 </html>
 <!-- TEst -->
