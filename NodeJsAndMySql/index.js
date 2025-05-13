@@ -7,7 +7,7 @@ const bcrypt = require('bcrypt');
 const path = require('path');
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "uploads");
+    cb(null, path.join(__dirname, "uploads")); // ✅ ใช้ path.join แบบปลอดภัยตามตำแหน่งจริง
   },
   filename: function (req, file, cb) {
     const filename = `${Date.now()}-${file.originalname}`;
@@ -23,7 +23,6 @@ app.use(express.static(path.join(__dirname, "../")));  // ให้ Express ม�
 const port = 3000; //กำหนด port ของserver
 
 app.use(cors());
-app.use(express.static(path.join(__dirname, "../")));  // ให้ Express มองเห็นโฟลเดอร์ 'html', 'css', 'assets', 'img', 'javascript'
 //connect กับตัวdatabase ใน mysql
 const connection = mysql.createConnection({
   host: "localhost", //กำหนดให้เป็น local host
@@ -50,17 +49,17 @@ app.post("/request", upload.single("IMG"), (req, res) => {
     console.log("no file upload");
     return res.status(400).send("No file uploaded");
   } else {
-    const { RoomID, AID, Topic, Description } = req.body;
+    const { RoomID, Topic, Description } = req.body;
     // ดึงชื่อไฟล์จาก req.file.filename (หรือ req.file.path ตามการตั้งค่า multer)
     const uploadedFileName = req.file.filename;
     // หรือ const uploadedFilePath = req.file.path;
 
     const inserDATA =
-      "INSERT INTO request(RoomID,AID,Topic,Description,IMG) VALUES(?,?,?,?,?)";
+      "INSERT INTO request(RoomID,Topic,Description,IMG) VALUES(?,?,?,?)";
     // ใช้ uploadedFileName (หรือ uploadedFilePath) แทน req.body.IMG
     connection.query(
       inserDATA,
-      [RoomID, AID, Topic, Description, uploadedFileName],
+      [RoomID, Topic, Description, uploadedFileName],
       (error, result) => {
         if (error) {
           console.error(error);
@@ -529,7 +528,7 @@ app.post("/api/insert/bill", (req, res) => {
     ElectricCurrent, ElectricPrevious, ElectricUsed, ElectricPriced } =
     req.body;
   const query =
-    "INSERT INTO bills (RoomID, AID, RoomCharge, TotalCharge, WaterBill, ElecticBill, BillingCycle,WaterCurrent, WaterPrevious, WaterUsed, WaterPrice,ElectricCurrent, ElectricPrevious, ElectricUsed, ElectricPriced) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    "INSERT INTO bills (RoomID, AID, RoomCharge, TotalCharge, WaterBill, ElectricBill, BillingCycle,WaterCurrent, WaterPrevious, WaterUsed, WaterPrice,ElectricCurrent, ElectricPrevious, ElectricUsed, ElectricPriced) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
   connection.query(
     query,
     [RoomID, AID, RoomCharge, TotalCharge, WaterBill, ElecticBill, BillingCycle,
@@ -555,6 +554,27 @@ app.get("/api/read/bill/:RoomID", async (req, res) => {
     connection.query(
       "SELECT * FROM bills WHERE RoomID = ?",
       [roomID],
+      (error, results, fields) => {
+        if (error) {
+          console.log(error);
+          return res.status(400).send();
+        }
+        res.status(200).json(results);
+      }
+    );
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send();
+  }
+});
+
+//ฟอร์มแจ้งบิลค่าใช้จ่ายจากRoomID
+app.get("/api/read/billbyBID/:BID", async (req, res) => {
+  const billID = req.params.BID;
+  try {
+    connection.query(
+      "SELECT * FROM bills WHERE BID = ?",
+      [billID],
       (error, results, fields) => {
         if (error) {
           console.log(error);
@@ -697,6 +717,7 @@ app.get("/api/read/request", async (req, res) => {
   }
 });
 
+
 //อ่านข้อมูล request 1 คนดูจาก RoomID
 app.get("/api/read/request/:RoomID", async (req, res) => {
   const roomID = req.params.RoomID;
@@ -704,6 +725,27 @@ app.get("/api/read/request/:RoomID", async (req, res) => {
     connection.query(
       "SELECT * FROM request WHERE RoomID = ?",
       [roomID],
+      (error, results, fields) => {
+        if (error) {
+          console.log(error);
+          return res.status(400).send();
+        }
+        res.status(200).json(results);
+      }
+    );
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send();
+  }
+});
+
+//อ่านข้อมูล request 1 คนดูจาก RoomID
+app.get("/api/read/request/byID/:RequestID", async (req, res) => {
+  const requestID = req.params.RequestID;
+  try {
+    connection.query(
+      "SELECT * FROM request WHERE requestID = ?",
+      [requestID],
       (error, results, fields) => {
         if (error) {
           console.log(error);
@@ -783,7 +825,7 @@ app.post('/api/login',async(req,res) => {
         console.log(error);
         return res.status(400).send();
       }
-      res.status(200).json(results);
+      //res.status(200).json(results);
     });
 
 //อัปเดต Status ของ request
@@ -806,6 +848,7 @@ app.patch("/api/update/request/:roomid", async (req, res) => {
 });
 
 //อัปเดต Status ของ parcel
+/*
 app.patch("/api/update/parcel/:roomid", async (req, res) => {
   const roomID = req.params.roomid;
   const { Status } = req.body;
@@ -823,13 +866,14 @@ app.patch("/api/update/parcel/:roomid", async (req, res) => {
     return res.status(500).send();
   }
 });
+*/
 
 //อันนี้คือไว้แสดงหน้าเว้ปในport 3000
 app.get("/billing", (req, res) => {
   res.sendFile(path.join(__dirname, "../html/U_User_Billing_Form.html"));
   });
 //เพิ่ม post billhistory
-app.post("/api/insert/bills_history", (req, res) => {
+app.post("/api/inserts_history", (req, res) => {
   const { BID,RoomID,BHRoomChaege,BHTotalCharge,BHWaterBill,BHElectricBill,BHDate,Status,Bill} =
     req.body;
   const query =
