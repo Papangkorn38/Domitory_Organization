@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         document.querySelector(".upload-box").innerHTML = `
-          <img src="/api/image/${data.PID}" class="parcelAvatarImg" alt="Parcel Image" />
+          <img src="../NodeJsAndMySql/uploads/${data.IMG}" class="parcelImage" alt="Parcel Image" />
         `;
 
         const btn = document.querySelector(".receive_parcel");

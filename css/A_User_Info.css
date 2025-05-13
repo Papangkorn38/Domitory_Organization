@@ -1,0 +1,350 @@
+@import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Ubuntu+Sans:ital,wght@0,100..800;1,100..800&display=swap");
+
+* {
+  font-family: "Kanit", sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+a{
+  text-decoration: none;
+  color: #1c2c42;
+}
+
+:root {
+  --Huge-font: 32px;
+  --Big-font: 20px;
+  --Normal-font: 16px;
+  --Small-font: 14px;
+}
+
+.template {
+  display: flex;
+}
+
+.sideBar {
+  height: 100vh;
+  width: 20%;
+  padding: 30px 25px 30px 25px;
+  background: linear-gradient(#1c2c42 25%, #223953 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: 0.4s ease;
+  /* border: 1px solid red; */
+}
+
+.sideBar.collapsed {
+  width: 85px;
+}
+
+.closeOpenContainer {
+  /* border: 1px solid #ffffff; */
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.closeOpenContainer i {
+  color: #ffffff;
+  font-size: var(--Huge-font);
+  cursor: pointer;
+  border-radius: 50%;
+  padding: 4px;
+  transition: background-color 0.5s ease;
+}
+
+.menuBtn {
+  position: absolute;
+}
+
+.menuBtn.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.closeBtn.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.closeOpenContainer i:hover {
+  background-color: #336296;
+}
+
+.sideBarDormLogo {
+  width: 120px;
+  margin-bottom: 40px;
+  transition: opacity 0.4s ease;
+  /* border: 1px solid #ffffff; */
+}
+
+.sideBar.collapsed .sideBarDormLogo {
+  opacity: 0;
+}
+
+.sideBarLinksContainer {
+  /* border: 1px solid #ffffff; */
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin-bottom: 40px;
+  gap: 10px;
+  width: 100%;
+}
+
+.sideBarLinksContainer li {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  cursor: pointer;
+  gap: 10px;
+  border-radius: 8px;
+  padding: 8px;
+  width: 100%;
+  transition: background-color 0.5s ease;
+  /* border: 1px solid #ffffff; */
+}
+
+.sideBarLinksContainer li:hover {
+  background-color: #21262c;
+}
+
+.sideBarLinksContainer li a {
+  /* flex-shrink: 0; */
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-decoration: none;
+  color: #ffffff;
+  font-size: var(--Normal-font);
+  transition: opacity 0.4s ease;
+}
+.sideBarLinksContainer li img {
+  height: 20px;
+}
+
+.sideBar.collapsed .sideBarLinksContainer li a {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.logoutBtn {
+  font-size: var(--Normal-font);
+  width: 130px;
+  height: 40px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.logoutBtn.hidden {
+  opacity: 0;
+}
+
+.logoutBtn:hover {
+  border: 2px solid #ffffff;
+  background-color: #21262c;
+  color: #ffffff;
+}
+
+.contents {
+  width: 100%;
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
+
+}
+
+.headerDormLogo {
+  width: 8%;
+  height: 8%;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.profileText {
+  text-transform: uppercase;
+  font-weight: 500;
+  color: #434343;
+  line-height: 1.2;
+  font-size: var(--Small-font);
+}
+
+.profileImg {
+  border-radius: 50%;
+  width: 50px;
+}
+.titleContainer {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background-color: #f1f1f1;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 10px 30px;
+  width: 100%;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 5px -2px;
+}
+
+.titleContainer i {
+  font-size: var(--Huge-font);
+}
+
+.title {
+  font-size: var(--Big-font);
+  color: #223953;
+}
+
+/* .mainContent{
+  height: 70vh; 
+   overflow-y: scroll; 
+} */
+
+/* UserINFO.css ตั้งแต่ตรงนี้ */
+
+.userSection {
+  display: flex;
+  gap: 20px;
+  padding: 30px;
+  flex-wrap: wrap;
+  align-items: flex;
+}
+
+.Userimg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 180px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  margin-right: 100px;
+}
+
+.user-id-box {
+  margin-top: -50px;
+  margin-left: 50px;
+  font-size: 25px;
+  font-weight: normal;
+  color: #274663;
+  text-align: center;
+  border-radius: 6px;
+}
+
+.A002UserImg {
+  width: 130px;
+  height: 1300px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin: 0% 50px 75px 100px;
+}
+
+.formRow {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 15px;
+}
+
+.unpaid-status{
+  padding: 0px;
+  border-radius: 6px;
+  border: 0px solid #ffffff;
+  font-size: 15px;
+  font-size: normal;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.unpaid-status-text{
+  text-align: center;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.formGroup label {
+  font-size: 15px;
+}
+
+.formGroup input,
+.formGroup textarea {
+  color: #848484;
+  padding: 10px;
+  border-radius: 6px;
+  border: 0px solid #ffffff;
+  font-size: 15px;
+  height: 40px;
+}
+
+.btn {
+  padding: 10px 30px;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.backBtn {
+  display: flex;
+  align-items: center;
+  color: #434343;
+  gap: 8px;
+  margin: 30px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.userFormContainer {
+  font-size: 20px;
+  background-color: #F1F1F1;  
+  border: 0px solid #ddd;     
+  border-radius: 12px;        
+  padding: 30px;              
+  margin: auto;          
+  width:300%;  
+  height: 620px;               
+  max-width: 1200px;           
+  box-shadow: none; 
+  transition: all 0.3s ease;
+}
+
+.userFormContainer label {
+  font-size: 15px;
+  font-weight: normal;
+}
+.button button{
+  width: 115px;
+  height: 45px;
+  border-radius: 8px;
+  margin-top: 37px;
+  border: none;
+  color: #ffffff;
+}
+.update{
+  margin-right: 40px;
+  background-color: #1c2c42;
+}
+.delete{
+  background-color: #800020;
+}

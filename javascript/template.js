@@ -65,9 +65,7 @@ container.addEventListener("mouseover", function (event) {
 });
 
 };
-
 openCloseSidebar();
-
 var logout = function(){
   if(confirm('ต้องการจะออกจากระบบใช่ไหม')){
       window.location.href = '../html/login.html';

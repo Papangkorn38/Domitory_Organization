@@ -302,6 +302,10 @@
   /* border: 1px solid purple; */
 }
 
+.pendingRequest {
+  cursor: pointer;
+}
+
 .hideRequest {
   /* opacity: 0; */
   display: none;

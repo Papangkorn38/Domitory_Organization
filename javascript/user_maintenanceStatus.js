@@ -44,6 +44,100 @@ const successRequestContainer = document.querySelector(
 const successRequest = document.querySelector(".successRequest");
 const addRequestBtn = document.querySelector(".addRequest");
 
+window.onload = async function () {
+  // เหลือเอาเลขห้องมาจาก url
+  const urlParam = window.location.search;
+  const searchParams = new URLSearchParams(urlParam);
+  const roomID = searchParams.get("id");
+  // Fetch getting pending request
+
+  const response = await fetch(
+    `http://localhost:3000/api/read/request/${roomID}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  request = await response.json();
+  console.log(request);
+
+  // Add pending request
+  request.forEach(function (userPendingRequest) {
+    let fullDate = new Date(userPendingRequest.R_date);
+    if (userPendingRequest.Status === "done") {
+      successRequestContainer.insertAdjacentHTML(
+        "beforeend",
+        `<div class="successRequest hideRequest">
+                  <div class="successImgContainer">
+                    <img
+                      src="../NodeJsAndMySql/uploads/${userPendingRequest.IMG}"
+                      alt="Broken Ceiling Lamp"
+                      class="requestImg"
+                    />
+                  </div>
+                  <div class="successDescriptionContainer">
+                    <p class="successTopic">Topic : <span>${
+                      userPendingRequest.Topic
+                    }</span></p>
+                    <p class="successDescription">
+                      Description : <span>${
+                        userPendingRequest.Description
+                      }</span>
+                    </p>
+                    <p class="successDate">
+                      Date : <span>${userPendingRequest.R_date.slice(
+                        0,
+                        10
+                      )} ${fullDate.toLocaleTimeString()}</span>
+                    </p>
+                  </div>
+                </div>`
+      );
+    } else {
+      pendingRequestContainer.insertAdjacentHTML(
+        "beforeend",
+        `<div class="pendingRequest">
+          <div class="pendingImgContainer">
+            <img
+              src="../NodeJsAndMySql/uploads/${userPendingRequest.IMG}"
+              alt="Maintenance Request Image"
+              class="requestImg"
+            />
+          </div>
+          <div class="pendingDescriptionContainer">
+            <p class="pendingTopic">Topic : <span>${
+              userPendingRequest.Topic
+            }</span></p>
+            <p class="pendingDescription">
+              Description : <span>${userPendingRequest.Description}</span>
+            </p>
+            <p class="pendingDate">
+              Date : <span>${userPendingRequest.R_date.slice(
+                0,
+                10
+              )} ${fullDate.toLocaleTimeString()}</span>
+            </p>
+          </div>
+        </div>`
+      );
+    }
+
+    if (document.querySelector(".pendingRequest") !== null) {
+      document
+        .querySelector(".pendingRequest")
+        .addEventListener("click", function () {
+          window.location.href = `../html/User_maintenanceSent.html?id=${roomID}&requestID=${userPendingRequest.requestID}`;
+        });
+    }
+
+    addRequestBtn.addEventListener("click", function () {
+      window.location.href = `../html/User_maintenanceCreate.html?id=${roomID}`;
+    });
+  });
+};
+
 //Open and close side-bar function
 const openCloseSidebar = function () {
   const toggleSidebar = function (isCollapsed) {
