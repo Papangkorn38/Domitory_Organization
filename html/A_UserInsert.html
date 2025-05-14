@@ -3,12 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../css/A_User_Info.css" />
+    <link rel="stylesheet" href="../css/A_UserInsert.css" />
     <link
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
     />
-    <title>Project Template</title>
+    <title>Insert User</title>
   </head>
   <body onload="read_user_by_id()">
     <div class="template">
@@ -67,63 +67,70 @@
         <div class="userSection">
           <div class="Userimg">
             <img src="../assets/User.png" class="A002UserImg" />
-            <div class="user-id-box" id="user_RoomID">ไม่มี</div>
+            
           </div>
         <nav>
         <div class="userFormContainer">
+          
           <div class="formRow">
-            <div class="formGroup">
-              <div class="unpaid-status"style="max-width: 150px"> <!-- สถาณะการชำระเงินไปใช้ ่JS-->
-                <label>สถานะ</label>
-                <input type="text" id="user_Status" value="ยังไม่มีห้องพัก"readonly class="unpaid-status-text" />
-              </div>
+            <div class="formGroup" style="max-width: 700px">
+              <label>ชื่อ</label>
+              <input type="text" id="user_Fname" value=""  class="statusInpust" />
+            </div>
+            <div class="formGroup"style="max-width: 700px">
+              <label>นามสกุล</label>
+              <input type="text" id="user_Lname" value="" />
             </div>
           </div>
           <div class="formRow">
             <div class="formGroup" style="max-width: 700px">
-              <label>ชื่อ</label>
-              <input type="text" id="user_Fname" value="ไม่มี"readonly class="statusInpust" />
+              <label>Username</label>
+              <input type="text" id="user_Username" value=""  class="statusInpust" />
             </div>
             <div class="formGroup"style="max-width: 700px">
-              <label>นามสกุล</label>
-              <input type="text" id="user_Lname" value="ไม่มี"readonly />
+              <label>Password</label>
+              <input type="text" id="user_Password" value="" />
             </div>
           </div>
           <div class="formRow">
-            <div class="formGroup">
-              <label>เลขบัตรประชาชน</label>
-              <input type="text" id="user_CitizenID" value="ไม่มี"readonly />
-            </div>
           </div>
           <div class="formRow">
             <div class="formGroup">
               <label>วัน/เดือน/ปีเกิด</label>
-              <input type="text" id="user_BirthDate" value="ไม่มี"readonly />
+              <input type="date" id="user_BirthDate" value="" />
             </div>
             <div class="formGroup">
-              <label>อายุ</label>
-              <input type="text" id="user_age" value="ไม่มี"readonly />
+              <label>เบอร์โทรศัพท์</label>
+              <input type="text" id="user_Phone" value="" />
+            </div>
+            <div class="formGroup" >
+              <label>เลขห้อง</label>
+              <input type="text" id="user_RoomID" value=""  class="statusInpust" />
             </div>
             <div class="formGroup">
-              <label>อีเมล</label>
-              <input type="email" id="user_Cemail" value="ไม่มี"readonly />
+              <label>รหัสลูกบ้าน</label>
+              <input type="text" id="user_CID" value="" />
             </div>
           </div>
           <div class="formRow">
             <div class="formGroup">
-              <label>เบอร์โทรศัพท์</label>
-              <input type="text" id="user_Phone" value="ไม่มี"readonly />
+              <label>อีเมล</label>
+              <input type="email" id="user_Cemail" value="" />
+            </div>
+            <div class="formGroup">
+              <label>เลขบัตรประชาชน</label>
+              <input type="text" id="user_CitizenID" value="" />
             </div>
           </div>
           <div class="formRow">
             <div class="formGroup" style="flex: 1">
               <label>ที่อยู่</label>
-              <input type="text" id="user_Address" value="ไม่มี"readonly />
+              <input type="text" id="user_Address" value="" />
             </div>
           </div>
         </div>
         <div class="button">
-          <div id="id_button"></div>
+          <button onclick="insert_user()">บันทึก</button>
         </div>
         <!-- ส่วนนี้คือ form ของผู้ใช้เชื่อ Database ส่วนนี้ถ้าใช้ -->
       </div>
@@ -135,7 +142,7 @@
       </div>
     </div>
   </body>
-  <script src="../javascript/A_User_Info.js"></script>
+  <script src="../javascript/A_UserInsert.js"></script>
   <script src="../javascript/template.js"></script>
 </html>
 <!-- TEst -->

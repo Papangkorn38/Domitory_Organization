@@ -44,7 +44,7 @@
           </li>
         </ul>
 
-        <button class="logoutBtn hidden">Log Out</button>
+        <button class="logoutBtn hidden" onclick = "logout()">Log Out</button>
       </div>
 
       <div class="contents">
@@ -54,13 +54,7 @@
             alt="Dormitory Logo"
             class="headerDormLogo"
           />
-          <div class="profile">
-            <img src="../assets/Male User.png"
-              alt="Profile Image"
-              class="profileImg"
-            />
-            <p class="profileText">Welcome Back! <br />K. SOMPONG LUMKEN</p>
-          </div>
+          
         </div>
         <div class="titleContainer">
           <!--โลโก้ของแต่ละหัวข้อ-->
@@ -127,7 +121,7 @@
                     </div>
                     <div class="totalAmount">
                         <label>รวม (บาท)</label>
-                        <input type="text" class="totalInput" value="220" readonly>
+                        <input type="text" class="totalInput" value="220" readonly id="total_W">
                     </div>
                 </div>
         
@@ -151,7 +145,7 @@
                     </div>
                     <div class="totalAmount">
                         <label>รวม (บาท)</label>
-                        <input type="text" class="totalInput" value="1350"readonly >
+                        <input type="text" class="totalInput" value="1350"readonly id="total_E">
                     </div>
                 </div>
         

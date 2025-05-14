@@ -3,14 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../css/Admin_bill.css" />
+    <link rel="stylesheet" href="../css/request1.css" />
     <link
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
     />
-    <title>Bill</title>
+    <title>Project Template</title>
   </head>
-  <body id="bill-list-page">
+  <body>
     <div class="template">
       <div class="sideBar collapsed">
         <div class="closeOpenContainer">
@@ -44,7 +44,7 @@
           </li>
         </ul>
 
-        <button class="logoutBtn hidden" onclick="logout()">Log Out</button>
+        <button class="logoutBtn hidden" onclick = "logout()">Log Out</button>
       </div>
 
       <div class="contents">
@@ -57,27 +57,42 @@
         </div>
         <div class="titleContainer">
           <!--โลโก้ของแต่ละหัวข้อ-->
-          <img src="../img/Folder_reverse.png" alt=""><!--โลโก้สีกรมจะมีชื่อว่า reverse ต่อท้ายนะ-->
-          <p class="title">รายการบิลลูกบ้าน</p>
+          <img src="../img/Maintenance_reverse.png" alt=""><!--โลโก้สีกรมจะมีชื่อว่า reverse ต่อท้ายนะ-->
+          <p class="title">รายการแจ้งซ่อม</p>
         </div>
         <!--เพิ่มเนื้อหาตรงนี้นะ(mainContent)-->
         <div class="mainContent">
-            <table class="billTable">
-              <thead>
-                <tr>
-                  <th>เลขห้อง</th>
-                  <th>ชื่อ-นามสกุล</th>
-                </tr>
-              </thead>
-              <tbody>
-              
-              </tbody>
-            </table>
-          </div>
-          
-      </div>
+            <div class="boxuserpic">
+                <div class="userpic">
+                    <img src="../assets/User.png">
+                </div>
+                <div class="id"></div>
+            </div>
+            <div class="greybox">
+                <div class="tab noroom">
+                    <p class="label">เลขห้อง</p>
+                    <div class="boxnoroom"></div>
+                </div>
+                <div class="tab status">
+                    <p class="label">สถานะ</p>
+                    <div class="boxnoroom"></div>
+                </div>
+                <div class="tab topic">
+                    <p class="label">หัวข้อ</p>
+                    <div class="boxnoroom"></div>
+                </div>
+                <div class="text">
+                    <p class="label">ข้อความ</p>
+                    <div class="boxtext"></div>
+                </div>
+                <div class="pic">
+                    <p class="label">รูปภาพ</p>
+                    <div class="boxpic"></div>
+                </div>
+            </div>
+        </div>
     </div>
-    <script src="../javascript/bill_connect_fixed.js"></script>
+    <script src="../javascript/request1.js"></script>
   </body>
 </html>
 <!-- TEst -->

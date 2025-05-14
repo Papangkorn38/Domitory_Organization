@@ -3,6 +3,12 @@ const closeBtn = document.querySelector(".closeBtn");
 const menuBtn = document.querySelector(".menuBtn");
 const logoutBtn = document.querySelector(".logoutBtn");
 const sideBarIcons = document.querySelectorAll(".sideBarLinksContainer li");
+const query = `
+  SELECT b.*, r.Status as RoomStatus
+  FROM bills b
+  JOIN room r ON b.RoomID = r.RoomID
+  WHERE b.RoomID = ?
+`;
 
 //Open and close side-bar function
 const openCloseSidebar = function () {
@@ -151,6 +157,7 @@ async function fetchRoomBills(roomId) {
     const sampleData = {
     };
 
+
     const cleanRoomId = roomId.startsWith('A') ? roomId.substring(1) : roomId;
 
     // ถ้ามีข้อมูลตัวอย่างสำหรับห้องนี้ ให้ใช้ข้อมูลนั้น ถ้าไม่มีให้ใช้ข้อมูลของห้อง 101
@@ -199,6 +206,113 @@ async function fetchAllClients() {
     return [];
   }
 }
+
+// ฟังก์ชันสำหรับดึงข้อมูลห้องทั้งหมดพร้อม Status
+async function fetchAllRooms() {
+  try {
+    console.log("กำลังดึงข้อมูลห้องทั้งหมด");
+
+    const response = await fetch(`${API_BASE_URL}/read/room`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch rooms: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log("ข้อมูลห้องที่ได้รับจาก API:", data);
+    return data;
+  } catch (error) {
+    console.error("Error fetching rooms:", error);
+    return [];
+  }
+}
+
+fetchAllRooms()
+  .then((rooms) => {
+    console.log("ข้อมูลห้องที่ได้รับจาก API:", rooms);
+
+    const billTableBody = document.querySelector(".billTable tbody");
+    if (!billTableBody) {
+      console.error("ไม่พบตารางที่มี class .billTable tbody");
+      return;
+    }
+
+    // ล้างข้อมูลเดิม
+    billTableBody.innerHTML = "";
+
+    // ถ้าไม่มีข้อมูลห้อง
+    if (!rooms || rooms.length === 0) {
+      const emptyRow = document.createElement("tr");
+      emptyRow.innerHTML = `
+        <td colspan="2" style="text-align: center;">ไม่พบข้อมูลห้อง</td>
+      `;
+      billTableBody.appendChild(emptyRow);
+      return;
+    }
+
+    // เพิ่มข้อมูลห้องเข้าไปในตาราง
+    rooms.forEach((room) => {
+      const statusText = room.Status || "Unoccupied"; // ใช้ค่า Status จาก API หรือกำหนดค่าเริ่มต้น
+
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${room.RoomID || "-"}</td>
+        <td>${statusText}</td>
+      `;
+      billTableBody.appendChild(row);
+    });
+  })
+  .catch((error) => {
+    console.error("Error loading rooms:", error);
+
+    const billTableBody = document.querySelector(".billTable tbody");
+    if (billTableBody) {
+      billTableBody.innerHTML = `
+        <tr>
+          <td colspan="2" style="text-align: center; color: red;">
+            เกิดข้อผิดพลาดในการโหลดข้อมูล: ${error.message}
+          </td>
+        </tr>
+      `;
+    }
+  });
+
+async function updateRoomStatus(roomId, newStatus, billId) {
+  try {
+    console.log(`กำลังอัพเดตสถานะห้อง ${roomId} เป็น ${newStatus}`);
+    
+    const response = await fetch(`${API_BASE_URL}/update/room/status`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        roomId,
+        status: newStatus,
+        billId // อาจใช้หรือไม่ใช้ ขึ้นอยู่กับการออกแบบ API
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to update room status');
+    }
+
+    const result = await response.json();
+    console.log('อัพเดตสถานะเรียบร้อย:', result);
+    
+    // อาจจะรีโหลดข้อมูลหรือแสดงข้อความแจ้งเตือน
+    alert('อัพเดตสถานะเรียบร้อย');
+  } catch (error) {
+    console.error('Error updating room status:', error);
+    alert('เกิดข้อผิดพลาดในการอัพเดตสถานะ');
+  }
+}
+
 
 // ถ้าอยู่ที่หน้ารายการบิล
 if (isBillPage) {
@@ -296,54 +410,57 @@ if (isBillInfoPage) {
 
     // ดึงข้อมูลบิลของห้อง
     document.addEventListener('DOMContentLoaded', function() {
-      fetchRoomBills(roomId).then(bills => {
-        console.log("ได้รับข้อมูลบิลแล้ว:", bills);
-
-        const billTableBody = document.querySelector('.bill-table tbody');
-        if (billTableBody) {
-          console.log("พบตารางบิล");
-
-          // ล้างข้อมูลเดิม
-          billTableBody.innerHTML = '';
-
-          // ถ้าไม่มีข้อมูลบิล
-          if (!bills || bills.length === 0) {
-            console.log("ไม่พบข้อมูลบิล");
-            const emptyRow = document.createElement('tr');
-            emptyRow.innerHTML = `
-              <td colspan="8" style="text-align: center;">ไม่พบข้อมูลบิลสำหรับห้องนี้</td>
-            `;
-            billTableBody.appendChild(emptyRow);
-            return;
-          }
-
-          console.log("พบข้อมูลบิล:", bills.length, "รายการ");
-
-          // เพิ่มข้อมูลบิลเข้าไปในตาราง
-          bills.forEach(bill => {
-            console.log("กำลังเพิ่มบิล:", bill);
-
-            const row = document.createElement('tr');
-            row.innerHTML = `
-              <td>${bill.RoomID || roomId}</td>
-              <td>${formatDate(bill.BillDate)}</td>
-              <td>${bill.RoomCharge || 0}</td>
-              <td>${bill.WaterBill || 0}</td>
-              <td>${bill.ElecticBill || 0}</td>
-              <td>${bill.TotalCharge || 0}</td>
-              <td>${bill.Status || 'รอชำระ'}</td>
-              <td>${formatDate(bill.BillDate)}</td>
-            `;
-            billTableBody.appendChild(row);
-          });
-        } else {
-          console.log("ไม่พบตารางบิล (.bill-table tbody)");
+      fetchRoomBills(roomId).then((bills) => {
+        const billTableBody = document.querySelector(".bill-table tbody");
+        if (!billTableBody) {
+          console.error("ไม่พบตารางที่มี class .bill-table tbody");
+          return;
         }
-      }).catch(error => {
+      
+        // ล้างข้อมูลเดิม
+        billTableBody.innerHTML = "";
+      
+        // ถ้าไม่มีข้อมูลบิล
+        if (!bills || bills.length === 0) {
+          const emptyRow = document.createElement("tr");
+          emptyRow.innerHTML = `
+            <td colspan="7" style="text-align: center;">ไม่พบข้อมูลบิลสำหรับห้องนี้</td>
+          `;
+          billTableBody.appendChild(emptyRow);
+          return;
+        }
+      
+        // เพิ่มข้อมูลบิลเข้าไปในตาราง
+        bills.forEach((bill) => {
+          const statusText = bill.Status || "Unpaid"; // ใช้ค่า Status จาก API หรือกำหนดค่าเริ่มต้น
+      
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${bill.RoomID || roomId}</td>
+            <td>${formatDate(bill.BillDate)}</td>
+            <td>${bill.RoomCharge || 0}</td>
+            <td>${bill.WaterBill || 0}</td>
+            <td>${bill.ElectricBill || 0}</td>
+            <td>${bill.TotalCharge || 0}</td>
+          `;
+          billTableBody.appendChild(row);
+        });
+      }).catch((error) => {
         console.error(`Error loading bills for room ${roomId}:`, error);
+      
+        const billTableBody = document.querySelector(".bill-table tbody");
+        if (billTableBody) {
+          billTableBody.innerHTML = `
+            <tr>
+              <td colspan="7" style="text-align: center; color: red;">
+                เกิดข้อผิดพลาดในการโหลดข้อมูล: ${error.message}
+              </td>
+            </tr>
+          `;
+        }
       });
     });
-  }
+  } // ปิด if (roomId) ที่นี่
 
   // เพิ่ม event listener สำหรับปุ่มย้อนกลับ
   document.addEventListener('DOMContentLoaded', function() {
@@ -355,4 +472,11 @@ if (isBillInfoPage) {
       });
     }
   });
+} // ปิด if (isBillInfoPage) ที่นี่
+var logout = function(){
+  if(confirm('ต้องการจะออกจากระบบใช่ไหม')){
+      window.location.href = '../html/login.html';
+  }else{
+      console.log('ยกเลิกการlogoutเรียบร้อยแล้ว');
+  }
 }

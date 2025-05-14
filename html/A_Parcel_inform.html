@@ -44,7 +44,7 @@
           </li>
         </ul>
 
-        <button class="logoutBtn hidden">Log Out</button>
+        <button class="logoutBtn hidden" onclick="logout()">Log Out</button>
       </div>
 
       <div class="contents">
@@ -54,13 +54,6 @@
             alt="Dormitory Logo"
             class="headerDormLogo"
           />
-          <div class="profile">
-            <img src="../assets/Male User.png"
-              alt="Profile Image"
-              class="profileImg"
-            />
-            <p class="profileText">Welcome Back! <br />K. SOMPONG LUMKEN</p>
-          </div>
         </div>
         <div class="titleContainer">
           <!--โลโก้ของแต่ละหัวข้อ-->
@@ -72,7 +65,6 @@
           <div class="userSection">
             <div class="Userimg">
               <img src="../assets/User.png" class="A002UserImg" />
-              <div id="user-id-box" class="user-id-box">A0002</div>
             </div>
             <!-- ฟอร์มอัปโหลดพัสดุ -->
             <form id="uploadForm" class="userFormContainer" enctype="multipart/form-data">
@@ -101,5 +93,6 @@
       </div>
     </div>
     <script src="../javascript/A_Parcel_inform.js"></script>
+    <script src="../javascript/get_AID.js"></script>
   </body>
 </html>

@@ -58,6 +58,7 @@ function showRejectModal() {
 
 function closeModal(modalId) {
   document.getElementById(modalId).classList.add("hidden");
+  window.location.href='roomStatus.html';
 }
 
 window.onload = function() {
@@ -67,7 +68,7 @@ window.onload = function() {
     .then(rooms => {
       // สมมติ rooms = ["0001","0002",…]
       selector.innerHTML = rooms
-        .map(r => `<option value="A${r.RoomID}">A${r.RoomID}</option>`)
+        .map(r => `<option value="${r.RoomID}">${r.RoomID}</option>`)
         .join("");
 
       // 3.2 ตั้ง listener หลังจากมี <option> แล้ว
@@ -134,3 +135,11 @@ function updateSlipAndBillData(roomID) {
     .catch(err => console.error("Error fetching slip:", err));
 }
 
+var logout = function(){
+  if(confirm('ต้องการจะออกจากระบบใช่ไหม')){
+      localStorage.removeItem('AID');
+      window.location.href = '../html/login.html';
+  }else{
+      console.log('ยกเลิกการlogoutเรียบร้อยแล้ว');
+  }
+}

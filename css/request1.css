@@ -206,99 +206,107 @@
   color: #223953;
 }
 
-/* .mainContent{
-  height: 70vh; 
-   overflow-y: scroll; 
-} */
+.mainContent {
+    display: flex;
+}
 
-/* Css Bill ลบตรงนี้ได้*/
-.billTable {
-    width: 90%;
-    margin: 30px auto;
-    border-collapse: collapse;
-    font-size: var(--Normal-font);
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 8px;
-    border-radius: 8px;
-    overflow: hidden;
-}
-  
-.billTable thead {
-    background-color: #223953;
-    color: white;
-    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 5px -2px; /* เงาของหัวตาราง */
-}
-  
-.billTable th, .billTable td {
-    padding: 12px 16px;
-    text-align: left;
-}
-  
-.billTable tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-  
-.billTable tbody tr:hover {
-    background-color: #eef4fb;
-    transition: background-color 0.3s ease;
-}
-.main_container{
+.boxuserpic {
   display: flex;
   flex-direction: column;
-  margin: 30px auto;
-  width: 95%;
-}
-.room_summary_container{
-  width: 100%;
-  height: auto;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  
-}
-.room_summary_flex_box{
-  display: flex;
-  flex-direction: row;
   align-items: center;
-  justify-content: space-between;
-  width: 23.5%;
-  padding: 20px 30px 50px 20px;
-  border-radius: 15px;
-  background-color: white;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-left: 60px;
+  margin-top: 60px;
 }
-.room_box_container{
-  margin-top: 66px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 66px;
+
+.userpic {
+    background-color: #F5F5F5; 
+    width: 150px;  
+    height: 150px;
+    margin-left: 60px;
+    border-radius: 10px;
+    overflow: hidden;
+    align-items: center;
 }
-.room_box_flex_box{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: gray;
-  width: 220px;
-  height: 120px;
-  font-size: 25px;
-  color: white;
-  font-weight: bold;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+/*กรอบสีเทาตรงกลาง*/
+.greybox {
+  background-color: #F5F5F5;  
+  width: 70%;                
+  margin: 60px;                      
+  border-radius: 10px;           
+  box-shadow: 0 0 10px rgba(0,0,0,0.1); 
+  text-align: left;
+  min-height: 600px;
+  padding: 50px 80px;
 }
-a{
-  text-decoration: none;
+
+.tab {           
+    margin: 30px 35px;
+    display: flex;
+    align-items: center;
 }
-.insert_client{
-  color: white;
-  width: 125px;
-  height: 70px;
-  background-color: #223953;
-  border-radius: 7.5px;
-  margin-top: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 20px;
-  font-weight: 400;
-  font-size: 40px;
+
+.label {
+    width: 100px;
 }
+.boxnoroom {
+    background-color: #eeecec; 
+    width: 250px;
+    height: 40px; 
+    margin-left: 40px;     
+    border-radius: 10px;   
+}
+
+.text {
+    margin: 30px 35px;
+    display: flex;
+}
+
+.boxtext {
+    background-color: #eeecec; 
+    width: 600px;
+    height: 200px; 
+    margin-left: 40px;     
+    border-radius: 10px;   
+    display: flex;    
+    padding-top: 10px;
+    padding-left: 20px;
+}
+
+.pic {
+    margin: 30px 35px;
+    display: flex;
+}
+
+.boxpic {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #eeecec; 
+    width: 600px;
+    height: 200px; 
+    margin-left: 40px;     
+    border-radius: 10px;      
+}
+
+.userpic img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+
+.boxnoroom , .boxpic {
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+}
+
+.id {
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #000000;
+  margin-left: 60px;
+}
+
+
+

@@ -54,13 +54,6 @@
             alt="Dormitory Logo"
             class="headerDormLogo"
           />
-          <div class="profile">
-            <img src="../assets/Male User.png"
-              alt="Profile Image"
-              class="profileImg"
-            />
-            <p class="profileText">Welcome Back! <br />K. SOMPONG LUMKEN</p>
-          </div>
         </div>
         <div class="titleContainer">
           <!--โลโก้ของแต่ละหัวข้อ-->
@@ -79,11 +72,11 @@
         <div class="userFormContainer">
             <div class="formGroup">
               <label>เลขห้อง</label>
-              <input class="box" value="A0002"> 
+              <input class="box" value="" id="insert_roomID"> 
             </div>
             <div class="formGroup">
                 <label>รอบบิล</label> <!--ทำเป็น Select เลือกเดือนได้-->
-                <select class="billing-cycle"style="max-width: 180px">
+                <select class="billing-cycle"style="max-width: 180px" id="billing_cycle">
                     <option>-- มกราคม 2568 --</option>
                     <option>-- กุมภาพันธ์ 2568 --</option>
                     <option>-- มีนาคม 2568 --</option>
@@ -100,30 +93,30 @@
               </div>
             <div class="formGroup">
               <label>ค่าเช่า</label>
-              <input class="rent-box" value="6500"readonly /> 
+              <input class="rent-box" value="" id="rent"/> 
             </div>
             <div class="billingDetails">
                 <div class="billingItem">
                     <label>ค่าน้ำ</label> <!--ส่วนค่าน้ำ-->
                     <div class="inputGroup">
                         <label>เลขมิติเตอร์ปัจจุบัน</label>
-                        <input type="number" class="current-unitInput" value="12">
+                        <input type="number" class="current-unitInput" value="" id="current_unitInput_water">
                     </div>
                     <div class="inputGroup">
                         <label>เลขมิติเตอร์ครั้งก่อน</label>
-                        <input type="number" class="unitInput" value="6" readonly>
+                        <input type="number" class="unitInput" value="" id="unitInput_water">
                     </div>
                     <div class="inputGroup">
                         <label>หน่วยที่ใช้</label>
-                        <input type="number" class="current-unitInput" value="12">
+                        <input type="number" class="current-unitInput" value="" id="unit_used_water">
                     </div>
                     <div class="inputGroup">
                         <label>ราคา/หน่วย</label>
-                        <input type="number" class="pricePerUnit" value="20" readonly>
+                        <input type="number" class="pricePerUnit" value="" id="unit_cost_water">
                     </div>
                     <div class="totalAmount">
                         <label>รวม (บาท)</label>
-                        <input type="text" class="totalInput" value="220" readonly>
+                        <input type="text" class="totalInput" value="" id="total_water">
                     </div>
                 </div>
         
@@ -131,40 +124,41 @@
                     <label>ค่าไฟ</label> <!--ส่วนค่าไฟ-->
                     <div class="inputGroup">
                         <label>เลขมิติเตอร์ปัจจุบัน</label>
-                        <input type="number" class="current-unitInput" value="67">
+                        <input type="number" class="current-unitInput" value="" id="current_unitInput_electric">
                     </div>
                     <div class="inputGroup">
                         <label>เลขมิติเตอร์ครั้งก่อน</label>
-                        <input type="number" class="unitInput" value="60"readonly>
+                        <input type="number" class="unitInput" value="" id="unitInput_electric">
                     </div>
                     <div class="inputGroup">
                         <label>หน่วยที่ใช้</label>
-                        <input type="number" class="current-unitInput" value="67">
+                        <input type="number" class="current-unitInput" value="" id="unit_used_electric">
                     </div>
                     <div class="inputGroup">
                         <label>ราคา/หน่วย</label>
-                        <input type="number" class="pricePerUnit" value="20"readonly>
+                        <input type="number" class="pricePerUnit" value="" id="unit_cost_electric">
                     </div>
                     <div class="totalAmount">
                         <label>รวม (บาท)</label>
-                        <input type="text" class="totalInput" value="1350"readonly >
+                        <input type="text" class="totalInput" value="" id="total_electric">
                     </div>
                 </div>
         
                 <div class="totalBilling">
                     <label>รวมทั้งสิ้น</label>
-                    <input type="text" class="totalBillingInput" value="8070" readonly>
+                    <input type="text" class="totalBillingInput" value="" id="total">
                 </div>
             </div>
         </div>
         </div>
-        <button id="save-btn" class="submit-btn">บันทึก</button>
+        <button id="save-btn" class="submit-btn" onclick="insert_bill()">บันทึก</button>
       </div>
      
     </div>
 </div>
     <script src="../javascript/template.js"></script>
     <script src="../javascript/billing_form.js"></script>
+    <script src="../javascript/get_AID.js"></script>
   </body>
 </html>
 <!-- TEst -->

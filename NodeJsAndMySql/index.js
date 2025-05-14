@@ -49,7 +49,7 @@ app.post("/request", upload.single("IMG"), (req, res) => {
     console.log("no file upload");
     return res.status(400).send("No file uploaded");
   } else {
-    const { RoomID, Topic, Description } = req.body;
+    const { RoomID,Topic, Description } = req.body;
     // ดึงชื่อไฟล์จาก req.file.filename (หรือ req.file.path ตามการตั้งค่า multer)
     const uploadedFileName = req.file.filename;
     // หรือ const uploadedFilePath = req.file.path;
@@ -59,7 +59,7 @@ app.post("/request", upload.single("IMG"), (req, res) => {
     // ใช้ uploadedFileName (หรือ uploadedFilePath) แทน req.body.IMG
     connection.query(
       inserDATA,
-      [RoomID, Topic, Description, uploadedFileName],
+      [RoomID,Topic, Description, uploadedFileName],
       (error, result) => {
         if (error) {
           console.error(error);
@@ -84,16 +84,16 @@ app.post("/upload", upload.single("IMG"), (req, res) => {
     console.log("no file upload");
     return res.status(400).send("No file uploaded");
   } else {
-    const { PID, RoomID } = req.body;
+    const { PID, RoomID ,AID} = req.body;
     // ดึงชื่อไฟล์จาก req.file.filename (หรือ req.file.path ตามการตั้งค่า multer)
     const uploadedFileName = req.file.filename;
     // หรือ const uploadedFilePath = req.file.path;
 
-    const inserDATA = "INSERT INTO parcel(PID,RoomID,IMG) VALUES(?,?,?)";
+    const inserDATA = "INSERT INTO parcel(PID,RoomID,AID,IMG) VALUES(?,?,?,?)";
     // ใช้ uploadedFileName (หรือ uploadedFilePath) แทน req.body.IMG
     connection.query(
       inserDATA,
-      [PID, RoomID, uploadedFileName],
+      [PID, RoomID,AID, uploadedFileName],
       (error, result) => {
         if (error) {
           console.error(error);
@@ -199,6 +199,7 @@ app.post("/api/insert/client", (req, res) => {
         res.status(500).json({ error: "Internal server error" });
       }
       res.json({
+        status:"ok",
         msg: "Data inserted successfully",
         insertedID: result.insertId,
       });
@@ -527,7 +528,7 @@ app.post("/api/insert/bill", (req, res) => {
     RoomCharge,
     TotalCharge,
     WaterBill,
-    ElecticBill,
+    ElectricBill,
     BillingCycle,
     WaterCurrent,
     WaterPrevious,
@@ -539,7 +540,7 @@ app.post("/api/insert/bill", (req, res) => {
     ElectricPriced,
   } = req.body;
   const query =
-    "INSERT INTO bills (RoomID, AID, RoomCharge, TotalCharge, WaterBill, ElectricBill, BillingCycle,WaterCurrent, WaterPrevious, WaterUsed, WaterPrice,ElectricCurrent, ElectricPrevious, ElectricUsed, ElectricPriced) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    "INSERT INTO bills (RoomID, AID,RoomCharge, TotalCharge, WaterBill, ElectricBill, BillingCycle,WaterCurrent, WaterPrevious, WaterUsed, WaterPrice,ElectricCurrent, ElectricPrevious, ElectricUsed, ElectricPriced) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
   connection.query(
     query,
     [
@@ -548,7 +549,7 @@ app.post("/api/insert/bill", (req, res) => {
       RoomCharge,
       TotalCharge,
       WaterBill,
-      ElecticBill,
+      ElectricBill,
       BillingCycle,
       WaterCurrent,
       WaterPrevious,
@@ -577,7 +578,7 @@ app.get("/api/read/bill/:RoomID", async (req, res) => {
   const roomID = req.params.RoomID;
   try {
     connection.query(
-      "SELECT * FROM bills WHERE RoomID = ?",
+      "SELECT b.RoomID, b.RoomCharge, b.TotalCharge, b.WaterBill, b.ElectricBill, b.AID,b.BillDate, r.RoomID, r.Status FROM bills b JOIN room r ON b.RoomID = r.RoomID WHERE b.RoomID = ?",
       [roomID],
       (error, results, fields) => {
         if (error) {
@@ -855,6 +856,7 @@ app.post("/api/login", async (req, res) => {
                   status: "ok",
                   role: "admin",
                   message: "login success",
+                  AID:AdminResults[0].AID,
                 });
               } else {
                 return res.json({

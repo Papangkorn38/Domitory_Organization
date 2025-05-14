@@ -1,6 +1,3 @@
-var payment = function(){
-  
-}
 document.addEventListener('DOMContentLoaded', () => {
     const params = new URLSearchParams(window.location.search);
     const id = params.get('id');
@@ -21,9 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('.user-id-display').textContent = bill.RoomID;
         document.querySelector('.user-id-input').value = bill.RoomID;
         document.querySelector('.rent-box').value = bill.RoomCharge;
-        document.querySelectorAll('.totalInput')[0].value = bill.WaterBill;
-        document.querySelectorAll('.totalInput')[1].value = bill.ElecticBill;
         document.querySelector('.totalBillingInput').value = bill.TotalCharge;
+        document.getElementById('total_W').value = bill.WaterBill;
+        document.getElementById('total_E').value = bill.ElectricBill;
         //ไว้เช็ครอบบิล
         // วันออกบิล
         const billDateObj = new Date(bill.BillDate);

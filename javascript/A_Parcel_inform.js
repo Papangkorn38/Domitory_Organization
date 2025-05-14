@@ -35,36 +35,61 @@ const openCloseSidebar = function () {
 openCloseSidebar();
 
 window.addEventListener("DOMContentLoaded", () => {
-  // ปุ่มย้อนกลับ
+  const roomID = document.getElementById("box");
   const backBtn = document.getElementById("backBtn");
+  const uploadForm = document.getElementById("uploadForm");
+  const fileInput = document.getElementById("imgInput");
+  const ParcelID = document.getElementById('parcelbox');
+
+  // ปุ่มย้อนกลับ
   backBtn?.addEventListener("click", () => {
     window.location.href = "Admin_parcelHistory.html";
   });
 
-  // จัดการอัปโหลดพัสดุ
-  const uploadForm = document.getElementById("uploadForm");
-  uploadForm?.addEventListener("submit", async (e) => {
+  uploadForm?.addEventListener("submit", (e) => {
     e.preventDefault();
+    const requestOptions_R = {
+      method: "GET",
+      redirect: "follow"
+    };
 
-    // สร้าง FormData จากฟอร์ม
-    const formData = new FormData(uploadForm);
+    fetch("http://localhost:3000/api/read/room/"+roomID.value, requestOptions_R)
+      .then((response) => response.json())
+      .then((result) => {
+        if(result[0].Status == 'Unoccupied'){
+          alert('ห้องว่าง');
+        }else{
+          
+          const formdata = new FormData();
+          formdata.append("PID", ParcelID.value);
+          formdata.append("RoomID", roomID.value);
+          formdata.append("AID", window.AdminID);
+          formdata.append("IMG", fileInput.files[0]);
 
-    try {
-      const res = await fetch("http://localhost:3000/upload", {
-        method: "POST",
-        body: formData
-      });
+          const requestOptions = {
+            method: "POST",
+            body: formdata,
+            redirect: "follow"
+          };
 
-      if (res.ok) {
-        alert("อัปโหลดพัสดุสำเร็จ");
-        // ถ้าต้องการทำอะไรเพิ่ม เช่น clear form หรือ redirect ให้ใส่ที่นี่
-      } else {
-        const text = await res.text();
-        alert("เกิดข้อผิดพลาด: " + text);
-      }
-    } catch (err) {
-      console.error("ไม่สามารถเชื่อมต่อไปยังเซิร์ฟเวอร์:", err);
-      alert("ไม่สามารถเชื่อมต่อไปยังเซิร์ฟเวอร์");
-    }
+          fetch("http://localhost:3000/upload", requestOptions)
+            .then((response) => response.text())
+            .then((result) => console.log(result))
+            .catch((error) => console.error(error));
+          alert('บันทึกเรียบร้อย');
+        }
+      })
+      .catch((error) => console.error(error));
+
   });
+  
+  
 });
+var logout = function(){
+  if(confirm('ต้องการจะออกจากระบบใช่ไหม')){
+      localStorage.removeItem('AID');
+      window.location.href = '../html/login.html';
+  }else{
+      console.log('ยกเลิกการlogoutเรียบร้อยแล้ว');
+  }
+}

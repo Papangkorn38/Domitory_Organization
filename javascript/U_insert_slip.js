@@ -138,3 +138,10 @@ openCloseSidebar();
     })
     .catch((error) => console.error(error));
 }
+var logout = function(){
+  if(confirm('ต้องการจะออกจากระบบใช่ไหม')){
+      window.location.href = '../html/login.html';
+  }else{
+      console.log('ยกเลิกการlogoutเรียบร้อยแล้ว');
+  }
+}

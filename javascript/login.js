@@ -40,7 +40,7 @@ var login = function(){
             if(result.role == 'client'){
                 window.location.href = `../html/home-client.html?id=${result.RoomID}`;
             }else if(result.role == 'admin'){
-                window.location.href = '../html/roomStatus.html';
+                window.location.href = `../html/roomStatus.html?id=${result.AID}`;
             }else{
                 alert('error');
             }

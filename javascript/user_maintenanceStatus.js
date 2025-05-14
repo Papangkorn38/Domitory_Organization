@@ -45,10 +45,7 @@ const successRequest = document.querySelector(".successRequest");
 const addRequestBtn = document.querySelector(".addRequest");
 
 window.onload = async function () {
-  // เหลือเอาเลขห้องมาจาก url
-  const urlParam = window.location.search;
-  const searchParams = new URLSearchParams(urlParam);
-  const roomID = searchParams.get("id");
+  const roomID = id;
   // Fetch getting pending request
 
   const response = await fetch(
@@ -69,7 +66,7 @@ window.onload = async function () {
     if (userPendingRequest.Status === "done") {
       successRequestContainer.insertAdjacentHTML(
         "beforeend",
-        `<div class="successRequest hideRequest">
+        `<div class="successRequest hideRequest" onclick="window.location.href = '../html/User_maintenanceSent.html?id=${userPendingRequest.requestID}'">
                   <div class="successImgContainer">
                     <img
                       src="../NodeJsAndMySql/uploads/${userPendingRequest.IMG}"
@@ -98,7 +95,7 @@ window.onload = async function () {
     } else {
       pendingRequestContainer.insertAdjacentHTML(
         "beforeend",
-        `<div class="pendingRequest">
+        `<div class="pendingRequest" onclick="window.location.href = '../html/User_maintenanceSent.html?id=${userPendingRequest.requestID}'">
           <div class="pendingImgContainer">
             <img
               src="../NodeJsAndMySql/uploads/${userPendingRequest.IMG}"
@@ -124,18 +121,11 @@ window.onload = async function () {
       );
     }
 
-    if (document.querySelector(".pendingRequest") !== null) {
-      document
-        .querySelector(".pendingRequest")
-        .addEventListener("click", function () {
-          window.location.href = `../html/User_maintenanceSent.html?id=${roomID}&requestID=${userPendingRequest.requestID}`;
-        });
-    }
 
-    addRequestBtn.addEventListener("click", function () {
-      window.location.href = `../html/User_maintenanceCreate.html?id=${roomID}`;
-    });
   });
+  addRequestBtn.addEventListener("click", function () {
+      window.location.href = `../html/User_maintenanceCreate.html?id=${id}`;
+    });
 };
 
 //Open and close side-bar function
@@ -276,7 +266,7 @@ var load_data = function(){
         if (test.Status === "done") {
       successRequestContainer.insertAdjacentHTML(
         "beforeend",
-        `<div class="successRequest hideRequest"onclick="window.location.href='User_maintenanceSent.html?id=${test.requestID}'">
+        `<div class="successRequest hideRequest"onclick="window.location.href='User_maintenanceSent.html?id=${test.PID}'">
                   <div class="successImgContainer">
                     <img
                       src="../NodeJsAndMySql/uploads/${test.IMG}"
@@ -334,4 +324,11 @@ var load_data = function(){
     })
     .catch((error) => console.error(error));
 
+}
+var logout = function(){
+  if(confirm('ต้องการจะออกจากระบบใช่ไหม')){
+      window.location.href = '../html/login.html';
+  }else{
+      console.log('ยกเลิกการlogoutเรียบร้อยแล้ว');
+  }
 }
