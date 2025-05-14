@@ -92,7 +92,6 @@ window.addEventListener("DOMContentLoaded", () => {
             <td>${bill.WaterBill}</td>
             <td>${bill.ElectricBill}</td>
             <td>${bill.TotalCharge}</td>
-            <td>${bill.Status || "ยังไม่ชำระ"}</td>
           </tr>  
           `;
           tableBody.appendChild(row);
