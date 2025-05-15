@@ -29,7 +29,7 @@ bar.innerHTML = `
                     <img src="../img/Maintenance.png" alt=""><a href="user_maintenanceStatus.html?id=${id}">แจ้งซ่อม</a>
                 </li>
                 <li>
-                    <img src="../img/Contact.png" alt=""><a href="#">ติดต่อเรา</a>
+                    <img src="../img/Contact.png" alt=""><a href="home-client.html?id=${id}">ติดต่อเรา</a>
                 </li>
             `
 
@@ -68,42 +68,6 @@ container.addEventListener("mouseover", function (event) {
 });
 };
 
-imageInput.addEventListener("change", function () {
-  let image = URL.createObjectURL(imageInput.files[0]);
-  if (uploadContainer.lastElementChild.tagName.toLowerCase() === "img") {
-    uploadContainer.lastElementChild.src = image;
-  } else {
-    let newImage = document.createElement("img");
-    newImage.src = image;
-    newImage.classList.add("uploadedImage");
-    uploadContainer.insertAdjacentElement("beforeend", newImage);
-  }
-});
-
-const getData = async function () {
-  const urlParam = window.location.search;
-  const searchParams = new URLSearchParams(urlParam);
-  const roomID = searchParams.get("id");
-
-  const response = await fetch(
-    `http://localhost:3000/api/read/request/${roomID}`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
-
-  const dataFromApi = await response.json();
-  const roomAndAdminID = {
-    RoomID: dataFromApi[0].RoomID,
-    AdminID: dataFromApi[0].AID,
-  };
-
-  return roomAndAdminID;
-};
-
 confirmBtn.addEventListener("click", async function (event) {
   const params = new URLSearchParams(window.location.search);
   const id = params.get('id');
@@ -116,11 +80,9 @@ confirmBtn.addEventListener("click", async function (event) {
   ) {
     alert("Please fill all the input");
   } else {
-    const roomData = getData();
     const formData = new FormData();
     formData.append("IMG", imageInput.files[0]);
-    formData.append("RoomID", `${(await roomData).RoomID}`);
-    formData.append("AID", `${(await roomData).AdminID}`);
+    formData.append("RoomID", id);
     formData.append("Topic", topicInput.value);
     formData.append("Description", descriptionInput.value);
 
@@ -131,8 +93,7 @@ confirmBtn.addEventListener("click", async function (event) {
       });
 
       if (response.ok) {
-        window.location.href = `../html/User_maintenanceStatus.html?id=${
-          (await roomData).RoomID
+        window.location.href = `../html/User_maintenanceStatus.html?id=${id
         }`;
       } else {
         console.error("Request failed:", response.status);

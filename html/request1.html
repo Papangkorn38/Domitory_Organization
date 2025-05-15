@@ -8,7 +8,7 @@
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
     />
-    <title>Project Template</title>
+    <title>Dormitory Organization</title>
   </head>
   <body>
     <div class="template">
@@ -28,9 +28,10 @@
           <li>
             <img src="../img/Building.png" alt=""><a href="../html/roomStatus.html">สถานะห้องพักรายเดือน</a>
           </li>
-          <li><img src="../img/Folder.png" alt=""><a href="../html/A_Billing_Form.html">รายการบิลผู้เช่า</a></li>
           <li>
-            <img src="../img/Bill.png" alt=""><a href="../html/Admin_bill.html">ฟอร์มเเจ้งบิลค่าใช้จ่าย</a>
+            <img src="../img/Folder.png" alt=""><a href="../html/Admin_bill.html">รายการบิลผู้เช่า</a></li>
+          <li>
+            <img src="../img/Bill.png" alt=""><a href="../html/A_Billing_Form.html">ฟอร์มเเจ้งบิลค่าใช้จ่าย</a>
           </li>
           <li>
             <img src="../img/Cardboard Box.png" alt=""hei><a href="../html/A_Parcel_inform.html">ฟอร์มเเจ้งข้อมูลพัสดุ</a>
@@ -62,35 +63,36 @@
         </div>
         <!--เพิ่มเนื้อหาตรงนี้นะ(mainContent)-->
         <div class="mainContent">
-            <div class="boxuserpic">
-                <div class="userpic">
-                    <img src="../assets/User.png">
-                </div>
-                <div class="id"></div>
-            </div>
-            <div class="greybox">
-                <div class="tab noroom">
-                    <p class="label">เลขห้อง</p>
-                    <div class="boxnoroom"></div>
-                </div>
-                <div class="tab status">
-                    <p class="label">สถานะ</p>
-                    <div class="boxnoroom"></div>
-                </div>
-                <div class="tab topic">
-                    <p class="label">หัวข้อ</p>
-                    <div class="boxnoroom"></div>
-                </div>
-                <div class="text">
-                    <p class="label">ข้อความ</p>
-                    <div class="boxtext"></div>
-                </div>
-                <div class="pic">
-                    <p class="label">รูปภาพ</p>
-                    <div class="boxpic"></div>
-                </div>
-            </div>
+              <div class="boxuserpic">
+                  <div class="userpic">
+                      <img src="../assets/User.png">
+                  </div>
+                  <div class="id"></div>
+              </div>
+              <div class="greybox">
+                  <div class="tab noroom">
+                      <p class="label">เลขห้อง</p>
+                      <div class="boxnoroom"></div>
+                  </div>
+                  <div class="tab status">
+                      <p class="label">สถานะ</p>
+                      <div class="boxnoroom"></div>
+                  </div>
+                  <div class="tab topic">
+                      <p class="label">หัวข้อ</p>
+                      <div class="boxnoroom"></div>
+                  </div>
+                  <div class="text">
+                      <p class="label">ข้อความ</p>
+                      <div class="boxtext"></div>
+                  </div>
+                  <div class="pic">
+                      <p class="label">รูปภาพ</p>
+                      <div class="boxpic"></div>
+                  </div>
+              </div>
         </div>
+        <button class="accept" onclick="update_request()">ดำเนินการ</button>
     </div>
     <script src="../javascript/request1.js"></script>
   </body>

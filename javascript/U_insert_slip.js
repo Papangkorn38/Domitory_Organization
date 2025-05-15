@@ -27,7 +27,7 @@ bar.innerHTML = `
                     <img src="../img/Maintenance.png" alt=""><a href="user_maintenanceStatus.html?id=${id}">แจ้งซ่อม</a>
                 </li>
                 <li>
-                    <img src="../img/Contact.png" alt=""><a href="#">ติดต่อเรา</a>
+                    <img src="../img/Contact.png" alt=""><a href="home-client.html?id=${id}">ติดต่อเรา</a>
                 </li>
             `
 
@@ -115,7 +115,7 @@ openCloseSidebar();
     .then((response) => response.json())
     .then((result) => {
       var bill = result[result.length-1];
-
+      document.querySelector('.user-id-box').innerHTML = bill.RoomID;
       const dateObj = new Date(bill.BillDate);
       const day = String(dateObj.getDate()).padStart(2, '0');
       const month = String(dateObj.getMonth() + 1).padStart(2, '0'); // เดือนเริ่มที่ 0

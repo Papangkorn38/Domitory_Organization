@@ -578,7 +578,7 @@ app.get("/api/read/bill/:RoomID", async (req, res) => {
   const roomID = req.params.RoomID;
   try {
     connection.query(
-      "SELECT b.RoomID, b.RoomCharge, b.TotalCharge, b.WaterBill, b.ElectricBill, b.AID,b.BillDate, r.RoomID, r.Status FROM bills b JOIN room r ON b.RoomID = r.RoomID WHERE b.RoomID = ?",
+      "SELECT b.BID ,b.RoomID, b.RoomCharge, b.TotalCharge, b.WaterBill, b.ElectricBill, b.AID,b.BillDate,b.WaterCurrent,b.WaterPrevious,b.WaterUsed,b.WaterPrice,b.ElectricCurrent,b.ElectricPrevious,b.ElectricUsed,b.ElectricPriced,b.BillingCycle, r.RoomID, r.Status FROM bills b JOIN room r ON b.RoomID = r.RoomID WHERE b.RoomID = ?",
       [roomID],
       (error, results, fields) => {
         if (error) {

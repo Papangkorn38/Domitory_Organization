@@ -31,7 +31,7 @@ bar.innerHTML = `
                     <img src="../img/Maintenance.png" alt=""><a href="user_maintenanceStatus.html?id=${id}">แจ้งซ่อม</a>
                 </li>
                 <li>
-                    <img src="../img/Contact.png" alt=""><a href="#">ติดต่อเรา</a>
+                    <img src="../img/Contact.png" alt=""><a href="home-client.html?id=${id}">ติดต่อเรา</a>
                 </li>
             `
 

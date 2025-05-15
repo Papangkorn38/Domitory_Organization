@@ -432,12 +432,10 @@ if (isBillInfoPage) {
       
         // เพิ่มข้อมูลบิลเข้าไปในตาราง
         bills.forEach((bill) => {
-          const statusText = bill.Status || "Unpaid"; // ใช้ค่า Status จาก API หรือกำหนดค่าเริ่มต้น
-      
           const row = document.createElement("tr");
           row.innerHTML = `
             <td>${bill.RoomID || roomId}</td>
-            <td>${formatDate(bill.BillDate)}</td>
+            <td>${bill.BillingCycle}</td>
             <td>${bill.RoomCharge || 0}</td>
             <td>${bill.WaterBill || 0}</td>
             <td>${bill.ElectricBill || 0}</td>

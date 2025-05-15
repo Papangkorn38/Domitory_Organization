@@ -80,7 +80,7 @@ function loadRequests() {
           card.className = "boxrq";
           card.style.display = "block"; 
           card.innerHTML = `
-            <div style="padding-left: 12px; text-align: left;"onclick="window.location.href='request1.html?id=1${item.requestID}'">
+            <div style="padding-left: 12px; text-align: left;"onclick="window.location.href='request1.html?id=${item.requestID}'">
               <div>RoomID : ${item.RoomID || "-"}</div>
               <div>Topic : ${item.Topic || "-"}</div>
               <div>Description : ${item.Description || "-"}</div>
@@ -140,6 +140,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
 var logout = function(){
   if(confirm('ต้องการจะออกจากระบบใช่ไหม')){
       localStorage.removeItem('AID');

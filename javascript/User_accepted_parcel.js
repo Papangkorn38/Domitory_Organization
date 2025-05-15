@@ -12,11 +12,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const roomID = window.location.search.substring(1); // ดึง '0003' จาก '?0003'
   const params = new URLSearchParams(window.location.search);
   const id = params.get('id');
+  client_RoomID = id;
+  document.querySelector('.parcelRoomID').innerHTML = client_RoomID;
 
   fetch(`http://localhost:3000/api/read/parcel/${id}/received`)
     .then(res => res.json())
     .then(data => {
-      client_RoomID = data[0].RoomID;
       const list = document.querySelector(".parcelList");
       list.innerHTML = '';
       bar.innerHTML = `

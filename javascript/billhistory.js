@@ -25,7 +25,7 @@ bar.innerHTML = `
                     <img src="../img/Maintenance.png" alt=""><a href="user_maintenanceStatus.html?id=${id}">แจ้งซ่อม</a>
                 </li>
                 <li>
-                    <img src="../img/Contact.png" alt=""><a href="#">ติดต่อเรา</a>
+                    <img src="../img/Contact.png" alt=""><a href="home-client.html?id=${id}">ติดต่อเรา</a>
                 </li>
             `
 
@@ -82,6 +82,7 @@ window.addEventListener("DOMContentLoaded", () => {
         tableBody.innerHTML = ""; // ล้างตารางก่อน
   
         data.forEach(bill => {
+          document.querySelector('.profileRoom').innerHTML = id;
           const row = document.createElement("tr");
           row.onclick = () => window.location.href = `U_bill_by_id.html?id=${bill.BID}`;
           row.innerHTML = `

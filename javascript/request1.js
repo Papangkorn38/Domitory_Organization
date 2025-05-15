@@ -37,6 +37,8 @@ openCloseSidebar();
 /*ใช้เลื่อนแถบ*/ 
 const tabs = document.querySelectorAll('.tab');
 const indicator = document.querySelector('.blueline');
+const params = new URLSearchParams(window.location.search);
+const id = params.get('id'); 
 
 tabs.forEach((tab, index) => {
   tab.addEventListener('click', () => {
@@ -48,8 +50,6 @@ tabs.forEach((tab, index) => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  const params = new URLSearchParams(window.location.search);
-  const id = params.get('id'); 
   fetch(`http://localhost:3000/api/read/request/byID/${id}`, {
     cache: "no-store",
   })
@@ -86,4 +86,51 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error("เกิดข้อผิดพลาดในการโหลดข้อมูล:", error);
     });
 });
+var update_request = function(){
+    var R_status;
+  
+    const requestOptions = {
+      method: "GET",
+      redirect: "follow"
+    };
 
+    fetch("http://localhost:3000/api/read/request/byID/"+id, requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        
+        data = result[0];
+        if(data.Status == 'do'){
+          R_status = 'doing';
+        }else if(data.Status == 'doing'){
+          R_status = 'done';
+        }else{
+          alert('คำร้องนี้เป็นรายการที่สำเร็จไปแล้ว');
+          R_status = 'done';
+          window.location.href='../html/roomStatus.html';
+        }
+
+      const myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+
+      const raw = JSON.stringify({
+        "Status": R_status
+      });
+
+      const requestOptions = {
+        method: "PATCH",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow"
+      };
+
+      fetch("http://localhost:3000/api/update/request/"+data.RoomID, requestOptions)
+        .then((response) => response.text())
+        .then((result) => {
+          alert('อัพเดตข้อมูลเสร็จสิ้น');
+          window.location.href='../html/A_request.html';
+        })
+        .catch((error) => console.error(error));
+        
+      })
+      .catch((error) => console.error(error));
+}

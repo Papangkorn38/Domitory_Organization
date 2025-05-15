@@ -1,4 +1,5 @@
 var clientID;
+var rooID;
 var read_user_by_id = function(){
     const params = new URLSearchParams(window.location.search);
     const id = params.get('id');
@@ -68,6 +69,7 @@ var read_user_by_id = function(){
 var user_update_client = function(){
     const params = new URLSearchParams(window.location.search);
     const id = params.get('id');
+    rooID = id;
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     
@@ -92,12 +94,61 @@ var user_update_client = function(){
       redirect: "follow"
     };
     
-    fetch("http://localhost:3000/api/update/client/"+id, requestOptions)
+    fetch("http://localhost:3000/api/update/client/"+rooID, requestOptions)
       .then((response) => response.text())
-      .then((result) => {
-        console.log('แก้ไขข้อมูลเรียบร้อยแล้ว');
+      .then((result) => {  
+        update_room_Uncco();
+        update_room_Unpaid();
+        alert('แก้ไขข้อมูลเรียบร้อยแล้ว');
         window.location.href = 'roomStatus.html'
       }
     )
       .catch((error) => console.error(error));    
+}
+var update_room_Unpaid = function(){
+    var input_ID = document.getElementById('user_RoomID_edit').value;
+
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    const raw = JSON.stringify({
+      "RoomID": input_ID,
+      "Status": "Unpaid"
+    });
+
+    const requestOptions = {
+      method: "PATCH",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow"
+    };
+
+    fetch("http://localhost:3000/api/update/room/"+input_ID, requestOptions)
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.error(error));
+
+}
+var update_room_Uncco = function(){
+
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    const raw = JSON.stringify({
+      "RoomID": rooID,
+      "Status": "Unoccupied"
+    });
+
+    const requestOptions = {
+      method: "PATCH",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow"
+    };
+
+    fetch("http://localhost:3000/api/update/room/"+rooID, requestOptions)
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.error(error));
+
 }

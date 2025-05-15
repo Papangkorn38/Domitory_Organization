@@ -238,7 +238,6 @@
   min-height: 600px;
   padding: 50px 80px;
 }
-
 .tab {           
     margin: 30px 35px;
     display: flex;
@@ -308,5 +307,13 @@
   margin-left: 60px;
 }
 
-
+.accept{
+  width: 100px;
+  height: 40px;
+  background-color: #1c2c42;
+  color: white;
+  margin-left: 328px;
+  margin-bottom: 50px;
+  border-radius: 6px;
+}
 

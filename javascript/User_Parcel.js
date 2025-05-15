@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const params = new URLSearchParams(window.location.search);
   const id = params.get('id');
   client_RoomID = id;
+  document.querySelector('.parcelRoomID').innerHTML = client_RoomID;
 
   fetch(`http://localhost:3000/api/read/parcel/${id}/unreceived`)
     .then(res => res.json())

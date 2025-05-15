@@ -47,7 +47,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
       const latest = data[data.length - 1];
 
-      const roomDisplay = "A" + latest.RoomID;
+      const roomDisplay = latest.RoomID;
       document.getElementById("user-id-box").textContent = roomDisplay;
       document.getElementById("box").value = roomDisplay;
 
@@ -59,7 +59,7 @@ window.addEventListener("DOMContentLoaded", () => {
         d.toTimeString().split(" ")[0];
       document.getElementById("date-box").value = formattedDate;
 
-      const parcelDisplay = "A" + latest.PID;
+      const parcelDisplay = latest.PID;
       document.getElementById("parcelbox").value = parcelDisplay;
 
       const imgEl = document.querySelector("#upload-box img");
